@@ -12,25 +12,65 @@ require '../database/connection.php';
 
 $message = ' ';
 
-if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name'])):
+if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
     
     //Enter the new user in the database
     $sql = "INSERT INTO users (email,username, password, name, registerDate) VALUES (:email, :username, :password, :name, :registerDate)";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':email', $_POST['email']);
-    $stmt->bindParam(':username', $_POST['username']);
+    $PW = $_POST['password'];
+    $PWC = $_POST['confirm_password'];
+    $UserName = $_POST['username'];
+    $email = $_POST['email'];
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':username', $UserName);
     $PWHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $stmt->bindParam(':password', $PWHashed);
     $stmt->bindParam(':name', $_POST['name']);
     $date = date('Y-m-d H:i:s');
     $stmt->bindParam(':registerDate',  $date);
 
-    if($stmt->execute()):
-        $message = 'Sucessfully created new user';
-    else:
-        $message = 'Sorry there must have been an issue creating your account';
-    endif;
+    $errorFound = false;
+
+    if (strlen($PW) < '8') {
+        $message = "Your Password Must Contain At Least 8 Characters!";
+        $errorFound = true;
+    }
+    elseif(!preg_match("#[0-9]+#",$PW)) {
+        $message = "Your Password Must Contain At Least 1 Number!";
+        $errorFound = true;
+    }
+    elseif(!preg_match("#[A-Z]+#",$PW)) {
+        $message = "Your Password Must Contain At Least 1 Capital Letter!";
+        $errorFound = true;
+    }
+    elseif(!preg_match("#[a-z]+#",$PW)) {
+        $message = "Your Password Must Contain At Least 1 Lowercase Letter!";
+        $errorFound = true;
+    }
+    elseif($PW != $PWC)
+    {
+        $message = "The two passwords don't match";
+        $errorFound = true;
+    }
+
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        $message = "Invalid Email";
+        $errorFound = true;
+    }
+
+    if(strlen($UserName) < '8')
+    {
+        $message = "Your Username Must Contain At Least 8 Characters!";
+        $errorFound = true;
+    }
+
+    if(!$errorFound)
+    {
+        if($stmt->execute())
+            $message = 'Sucessfully created new user';
+    }
 endif;
 ?>
 
