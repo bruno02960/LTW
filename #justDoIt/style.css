@@ -1,0 +1,83 @@
+header h1 {
+    text-align: center;
+    font-family: Arial Black;
+    text-transform: capitalize;
+    /* font-kerning: none; */
+}
+
+header > a {
+    text-decoration: none;
+    color: black;
+    /* text-align: center; */
+    /* padding-right: 1em; */
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.header {
+    /* text-decoration: none; */
+}
+
+.header > a {
+    text-decoration: none;
+    color: black;
+}
+
+header > div > a:nth-child(1) {
+    padding-right: 1em;
+    border-right: 1px solid black;
+}
+
+header > div > a:nth-child(2) {
+    padding-left: 1em;
+}
+
+aside#lists {
+    float: right;
+    width: 30%;
+    /* font-family: Calibri; */
+}
+
+html {
+    font-family: Calibri;
+}
+
+#menu > ul {
+    list-style: none;
+    /* text-decoration: none; */
+}
+
+#menu > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+#menu > ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    padding: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+nav#menu > ul > li {
+    width: 100%;
+    text-align: center;
+}
+
+nav#menu {
+    width: 40%;
+    margin: auto;
+    padding: 1em;
+}
+
+.header {
+    padding: 1e;
+}
