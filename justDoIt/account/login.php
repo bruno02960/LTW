@@ -10,10 +10,10 @@ endif;
 
 require '../database/connection.php';
 
-if(!empty($_POST['email']) && !empty($_POST['password'])):
+if(!empty($_POST['username']) && !empty($_POST['password'])):
     
-    $records = $conn->prepare('SELECT id, email,password FROM users WHERE email = :email');
-    $records->bindParam(':email', $_POST['email']);
+    $records = $conn->prepare('SELECT id, username,password FROM users WHERE username = :username');
+    $records->bindParam(':username', $_POST['username']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
 
@@ -52,7 +52,7 @@ endif;
 
 
     <form action "login.php" method = "POST">
-        <input type = "text" placeholder = "email" name = "email">
+        <input type = "text" placeholder = "username" name = "username">
         <input type = "password" placeholder = "password" name = "password">
         <input type = "submit">
     </form>
