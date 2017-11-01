@@ -70,6 +70,8 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['passw
     {
         if($stmt->execute())
             $message = 'Sucessfully created new user';
+        else
+            $message = 'Email or Username already in use';
     }
 endif;
 ?>
