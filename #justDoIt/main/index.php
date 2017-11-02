@@ -7,7 +7,7 @@ require '../database/connection.php';
 if(isset($_SESSION['user_id']))
   {
     $records = $conn->prepare('SELECT id, username,password FROM users WHERE id = :id');
-    $records->bindParam('id:', $_SESSION['user_id']);
+    $records->bindParam(':id', $_SESSION['user_id']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
 
@@ -40,7 +40,8 @@ if(isset($_SESSION['user_id']))
         <br /> <br /> You are sucessfully logged in!
         <br /><br />
 
-        <a href = "../account/logout.php"> Logout? </a>
+        <a href = "../account/logout.php"> Logout? </a> <br />
+        <a href = "../account/profile.php"> Profile </a>
 
       <?php else: ?>
 
