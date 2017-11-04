@@ -39,8 +39,11 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    float: right;
     width: 30%;
+    display: inline-block;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
     /* font-family: Calibri; */
 }
 
@@ -80,4 +83,14 @@ nav#menu {
 
 .header {
     padding: 1e;
+}
+
+#list {
+    display: inline-block;
+    vertical-align: top;
+    width: 69%;
+}
+
+#list > h1 {
+  font-family: Arial;
 }

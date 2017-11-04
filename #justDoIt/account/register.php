@@ -13,7 +13,7 @@ require '../database/connection.php';
 $message = ' ';
 
 if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
-    
+
     //Enter the new user in the database
     $sql = "INSERT INTO users (email,username, password, name, registerDate) VALUES (:email, :username, :password, :name, :registerDate)";
     $stmt = $conn->prepare($sql);
@@ -74,35 +74,22 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['passw
             $message = 'Email or Username already in use';
     }
 endif;
+
+  include('../templates/header.php');
+  include('../templates/footer.php');
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title> Register Below </title>
-</head>
-<body>
-
-    <div class = "header">
-        <a href = "../main"> Your app Name </a>
-    </div>
 
     <?php if(!empty($message)): ?>
         <p><?= $message ?> </p>
     <?php endif; ?>
 
     <h1> Register </h1>
-    <span> or <a href = "login.php"> login here </a> </span>
-    
-
 
     <form action "register.php" method = "POST">
-        <input type = "text" placeholder = "email" name = "email">
-        <input type = "text" placeholder = "username" name = "username">
-        <input type = "text" placeholder = "name" name = "name">
-        <input type = "password" placeholder = "password" name = "password">
-        <input type = "password" placeholder = "confirm password" name = "confirm_password">
+        <input type = "text" placeholder = "email" name = "email"> <br> <br>
+        <input type = "text" placeholder = "username" name = "username"> <br> <br>
+        <input type = "text" placeholder = "name" name = "name"> <br> <br>
+        <input type = "password" placeholder = "password" name = "password"> <br> <br>
+        <input type = "password" placeholder = "confirm password" name = "confirm_password"> <br> <br>
         <input type = "submit">
     </form>
-</body>
-</html>
