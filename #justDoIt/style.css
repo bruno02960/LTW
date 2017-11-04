@@ -1,15 +1,10 @@
-header h1 {
-    text-align: center;
-    font-family: Arial Black;
-    text-transform: capitalize;
-    /* font-kerning: none; */
+html {
+  background-color: #222222;
 }
 
 header > a {
     text-decoration: none;
     color: black;
-    /* text-align: center; */
-    /* padding-right: 1em; */
 }
 
 header {
@@ -17,21 +12,25 @@ header {
 }
 
 header h1 {
+    text-align: center;
+    font-family: Arial Black;
+    text-transform: capitalize;
     margin: 0;
+    background-color: #f20069;
 }
 
 .header {
-    /* text-decoration: none; */
+background-color: black;
 }
 
 .header > a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 header > div > a:nth-child(1) {
     padding-right: 1em;
-    border-right: 1px solid black;
+    border-right: 1px solid white;
 }
 
 header > div > a:nth-child(2) {
@@ -39,12 +38,12 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    width: 30%;
+    width: 25%;
     display: inline-block;
     padding-top: 1em;
     padding-bottom: 1em;
+    padding-right: 1em;
     text-align: center;
-    /* font-family: Calibri; */
 }
 
 html {
@@ -53,7 +52,6 @@ html {
 
 #menu > ul {
     list-style: none;
-    /* text-decoration: none; */
 }
 
 #menu > ul > li > a {
@@ -70,15 +68,26 @@ html {
     width: 100%;
 }
 
-nav#menu > ul > li {
+nav#menu > ul > li:last-child {
     width: 100%;
     text-align: center;
+    font-weight: bold;
+    padding: 0.2em;
+    background-color: #f20069;
+}
+
+nav#menu > ul > li:nth-child(-n+2) {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.2em;
+    border-right: 1px solid white;
+    background-color: #f20069;
 }
 
 nav#menu {
-    width: 40%;
     margin: auto;
-    padding: 1em;
+    background-color: black;
 }
 
 .header {
@@ -89,8 +98,24 @@ nav#menu {
     display: inline-block;
     vertical-align: top;
     width: 69%;
+    padding-left: 1em;
 }
 
 #list > h1 {
   font-family: Arial;
+}
+
+body {
+  margin-left: 1em;
+  margin-right: 1em;
+  background-color: white;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    padding-left: 1em;
+    padding-right: 1em;
 }
