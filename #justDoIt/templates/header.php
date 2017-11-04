@@ -17,6 +17,7 @@
         <br /> <br /> You are sucessfully logged in!
         <br /><br />
 
+        <a href = "../account/profile.php"> Profile </a>
         <a href = "../account/logout.php"> Logout? </a>
 
       <?php else: ?>
