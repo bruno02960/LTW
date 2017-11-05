@@ -28,7 +28,7 @@ header h1 {
 }
 
 .header {
-background-color: black;
+background-color: #1E000D;
 }
 
 .header > a {
@@ -112,7 +112,7 @@ nav#menu > ul > li:nth-child(-n+2) {
 
 nav#menu {
     margin: auto;
-    background-color: black;
+    background-color: #1E000D;
 }
 
 .header {
@@ -137,7 +137,7 @@ body {
 }
 
 footer {
-    background-color: black;
+    background-color: #1E000D;
     color: white;
     padding-top: 0.1em;
     padding-bottom: 0.1em;
@@ -162,7 +162,7 @@ button#registerSubmit {
     padding-right: 1em;
     padding-left: 1em;
     font-weight: bold;
-    background-color: black;
+    background-color: #1E000D;
     border: 0;
 }
 
@@ -183,7 +183,7 @@ button#loginSubmit {
     padding-right: 1em;
     padding-left: 1em;
     font-weight: bold;
-    background-color: black;
+    background-color: #1E000D;
     border: 0;
 }
 
@@ -203,7 +203,7 @@ button#editProfileSubmit {
     padding-right: 1em;
     padding-left: 1em;
     font-weight: bold;
-    background-color: black;
+    background-color: #1E000D;
     border: 0;
 }
 
@@ -254,7 +254,7 @@ div#pic {
     padding-right: 1em;
     padding-left: 1em;
     font-weight: bold;
-    background-color: black;
+    background-color: #1E000D;
     text-decoration: none;
 }
 
