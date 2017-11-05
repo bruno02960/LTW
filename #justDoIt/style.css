@@ -163,6 +163,7 @@ button#registerSubmit {
     padding-left: 1em;
     font-weight: bold;
     background-color: black;
+    border: 0;
 }
 
 #login h1 {
@@ -183,6 +184,7 @@ button#loginSubmit {
     padding-left: 1em;
     font-weight: bold;
     background-color: black;
+    border: 0;
 }
 
 #editProfile h1 {
@@ -202,6 +204,7 @@ button#editProfileSubmit {
     padding-left: 1em;
     font-weight: bold;
     background-color: black;
+    border: 0;
 }
 
 input {
@@ -218,4 +221,47 @@ input:focus {
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+#profile h1 {
+  font-family: Arial;
+}
+
+#profile {
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+
+div#info {
+    border-left: 1px solid black;
+    padding-left: 1em;
+    display: inline-block;
+}
+
+#info p {
+    margin: 0;
+}
+
+div#pic {
+    width: 30%;
+    float: left;
+}
+
+#profile a {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: black;
+    text-decoration: none;
+}
+
+ div#editProfileButton {
+    margin-top: 2em;
+}
+
+#profile h4 {
+  margin: 0;
 }
