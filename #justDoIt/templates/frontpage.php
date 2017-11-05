@@ -1,5 +1,3 @@
-
-
     <nav id="menu">
       <ul>
         <li><a href="index.html">Completed</a></li>
@@ -8,10 +6,7 @@
       </ul>
     </nav>
     <section id="list">
-
-
       <?php if(isset($user)): ?>
-
       <?php else: ?>
 
         <h1> Please Login Or Register </h1>

@@ -1,0 +1,54 @@
+html {
+  background-color: #222222;
+}
+
+header > a {
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    text-align: center;
+}
+
+.header {
+  color: white;
+}
+
+.header p{
+  margin: 0;
+}
+
+header h1 {
+    text-align: center;
+    font-family: Arial Black;
+    text-transform: capitalize;
+    margin: 0;
+    background-color: #f20069;
+}
+
+.header {
+background-color: black;
+}
+
+.header > a {
+    text-decoration: none;
+    color: white;
+}
+
+header > div > a:nth-child(1) {
+    padding-right: 1em;
+    border-right: 1px solid white;
+}
+
+header > div > a:nth-child(2) {
+    padding-left: 1em;
+}
+
+body {
+  background-color: white;
+}
+
+html {
+  font-family: Calibri;
+}
