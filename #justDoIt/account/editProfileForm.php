@@ -63,7 +63,7 @@
 
         $.ajax({
             type: "POST",
-            url: "CheckIfExists.php",
+            url: "checkDuplicatesEditing.php",
             data: {
                 'username': username,
                 'email': email

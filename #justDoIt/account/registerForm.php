@@ -75,7 +75,7 @@
 
         $.ajax({
             type: "POST",
-            url: "CheckIfExists.php",
+            url: "checkDuplicatesRegister.php",
             data: {
                 'username': username,
                 'email': email
