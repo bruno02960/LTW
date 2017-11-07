@@ -21,7 +21,7 @@
         $query->bindParam(':email', $Email);
         $query->execute();
         
-        $queryResults = $query->fetchAll();  
+        $queryResults = $query->fetchAll();
         
         if(count($queryResults) > 0)
         {
