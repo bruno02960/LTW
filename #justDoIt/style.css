@@ -280,3 +280,14 @@ tbody tr:nth-child(2n+1) {
     font-weight: bold;
     text-align: center;
 }
+
+.error {
+    color: #f20069;
+    font-weight: bold;
+    padding-left: 1em;
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}

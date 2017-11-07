@@ -51,7 +51,7 @@
 
         if(!regex.test(PW))
         {
-            var message = "Your password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number";
+            var message = "Your password must contain a minimum of 8 characters, at least 1 uppercase letter, 1 lowercase letter 1 one number";
             $('#errorMessage').text(message);
             $('#errorMessage').removeClass('hidden');
             return;

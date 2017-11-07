@@ -28,7 +28,7 @@
         }
     });
 
-    $('#editorSubmit').click(function(e)
+    $('#editProfileSubmit').click(function(e)
     {
         $('#errorMessage').text('');
         $('#errorMessage').addClass('hidden');
@@ -45,7 +45,7 @@
             return;
         }
 
-        if(email.length = '0')
+        if(email.length == '0')
         {
             var message = "Email can't be empty"
             $('#errorMessage').text(message);
@@ -53,7 +53,7 @@
             return;
         }
 
-        if(name.length = '0')
+        if(name.length == '0')
         {
             var message = "Name can't be empty"
             $('#errorMessage').text(message);
