@@ -39,7 +39,7 @@
         var name = $('#nameInput').val();
         var PW = $('#passwordInput').val();
         var CPW = $('#confirmPasswordInput').val();
-        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,72}$");
 
         if(username.length < '8')
         {
@@ -56,6 +56,14 @@
             $('#errorMessage').removeClass('hidden');
             return;
         }
+/*
+        if(PW.length > 72)
+        {
+            var message = "Your password must have a minimum size of eight characters and a maximum of 72";
+            $('#errorMessage').text(message);
+            $('#errorMessage').removeClass('hidden');
+            return;
+        }*/
 
         if(PW != CPW)
         {
