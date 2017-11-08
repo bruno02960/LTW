@@ -121,6 +121,7 @@ nav#menu {
     vertical-align: top;
     width: 60%;
     padding-left: 1em;
+    padding-bottom: 1em;
 }
 
 #list > h1 {
@@ -263,13 +264,23 @@ div#editProfileButton {
     margin: 0;
 }
 
-th {
+.tasks tbody th {
     background-color: #1E000D;
     color: white;
 }
 
 .tasks tbody tr:nth-child(2n+1) {
     background-color: #FDDFEC;
+}
+
+.lists tbody th {
+  background-color: #1E000D;
+  color: white;
+}
+
+.lists tbody tr {
+  background-color: #FCBFD9;
+  font-weight: bold;
 }
 
 #welcome {
@@ -306,7 +317,42 @@ button#deleteListButton {
     border: 0;
 }
 
-
 #lists > h1 {
   font-family: Arial;
+}
+
+button#addTask {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+}
+
+input#newTask {
+  padding: 0;
+      color: #f20069;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      padding-right: 1em;
+      padding-left: 1em;
+      font-weight: bold;
+      background-color: #1E000D;
+      border: 0;
+      margin: 0;
+}
+
+
+button#addList {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
 }

@@ -44,6 +44,7 @@ if(!empty($_POST['name']))
             $user['name'] = $name;
 }
 
+
   include('../templates/header.php');
   include('editProfileForm.php');
   include('../templates/footer.php');

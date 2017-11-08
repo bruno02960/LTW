@@ -1,5 +1,3 @@
-
-
 </body>
     <?php if(!empty($message)): ?>
         <p class="error"><?= $message ?> </p>
@@ -56,14 +54,6 @@
             $('#errorMessage').removeClass('hidden');
             return;
         }
-/*
-        if(PW.length > 72)
-        {
-            var message = "Your password must have a minimum size of eight characters and a maximum of 72";
-            $('#errorMessage').text(message);
-            $('#errorMessage').removeClass('hidden');
-            return;
-        }*/
 
         if(PW != CPW)
         {

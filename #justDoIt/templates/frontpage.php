@@ -10,62 +10,63 @@
         <h1> Selected list name </h1>
         <table class="tasks">
   <tr>
-    <th>Status</th>
-    <th>Task</th>
+    <th class="status">Status</th>
+    <th class="task">Task</th>
   </tr>
   <tr>
-    <td>incomplete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">incomplete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td>complete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">complete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td>incomplete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">incomplete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td>complete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">complete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td>incomplete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">incomplete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td>complete</td>
-    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="status">complete</td>
+    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
-    <tr class="addTask">
-      <td> + </td>
-      <td> Add a task </td>
-    </tr>
 </table>
+ <button id = "addTask" type = "button"> + </button>
+ <input id = "newTask" type="text" name="newTask" placeholder="New task name"><br>
+ <br>
 <br>
 <button id = "deleteListButton" type = "button"> Delete list </button>
 </section>
 <aside id="lists">
 <h1> To-do lists </h1>
-<ul>
-<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-<li>Aliquam tincidunt mauris eu risus.</li>
-<li>Vestibulum auctor dapibus neque.</li>
-<li>Nunc dignissim risus id metus.</li>
-<li>Cras ornare tristique elit.</li>
-<li>Vivamus vestibulum nulla nec ante.</li>
-<li>Praesent placerat risus quis eros.</li>
-<li>Fusce pellentesque suscipit nibh.</li>
-<li>Integer vitae libero ac risus egestas placerat.</li>
-<li>Vestibulum commodo felis quis tortor.</li>
-<li>Ut aliquam sollicitudin leo.</li>
-<li>Cras iaculis ultricies nulla.</li>
-<li>Donec quis dui at dolor tempor interdum.</li>
-<li>Vivamus molestie gravida turpis.</li>
-<li>Fusce lobortis lorem at ipsum semper sagittis.</li>
-<li>Nam convallis pellentesque nisl.</li>
-<li>Integer malesuada commodo nulla.</li>
-</ul>
+<table class="lists">
+<tr>
+<td class="list">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</td>
+</tr>
+<tr>
+<td class="list">Aliquam tincidunt mauris eu risus.</td>
+</tr>
+<tr>
+<td class="list">Vestibulum auctor dapibus neque.</td>
+</tr>
+<tr>
+<td class="list">Nunc dignissim risus id metus.</td>
+</tr>
+<tr>
+<td class="list">Cras ornare tristique elit.</td>
+</tr>
+<tr>
+<td class="list">Vivamus vestibulum nulla nec ante.</td>
+</tr>
+</table>
+ <button id = "addList" type = "button"> + </button>
 </aside>
       <?php else: ?>
         <section id="welcome">

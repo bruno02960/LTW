@@ -13,25 +13,27 @@
     </head>
     <body>
     <header>
-      <a href="../main"> <h1>#justDoIt</h1> </a>
+      <a href="../main">
+        <h1>#justDoIt</h1>
+      </a>
+
       <div class="header">
         <?php if(isset($user)): ?>
 
-          <?php
-          if (strpos($_SERVER['HTTP_REFERER'], 'login') == true){
-                  echo "<p> Welcome " . $user['username'] . "</p> <p> You are sucessfully logged in! </p>";
-          } ?>
+        <?php
+        if (strpos($_SERVER['HTTP_REFERER'], 'login') == true){
+          echo "<p> Welcome " . $user['username'] . "</p> <p> You are sucessfully logged in! </p>";
+        }
+        ?>
 
-      <a href = "../account/profile.php"> Profile </a>
-      <a href = "../account/logout.php"> Logout </a>
+        <a href = "../account/profile.php"> Profile </a>
+        <a href = "../account/logout.php"> Logout </a>
 
-    <?php else: ?>
+        <?php else: ?>
 
-      <a href="../account/register.php">Register</a>
-      <a href="../account/login.php">Login</a>
+        <a href="../account/register.php">Register</a>
+        <a href="../account/login.php">Login</a>
 
-    <?php endif; ?>
-
-    </div>
-
+        <?php endif; ?>
+      </div>
     </header>
