@@ -46,16 +46,13 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    width: 25%;
+    width: 30%;
     display: inline-block;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-right: 1em;
-    text-decoration: underline;
 }
 
 aside#lists > ul {
     list-style: square;
+    text-decoration: underline;
 }
 
 html {
@@ -122,7 +119,7 @@ nav#menu {
 #list {
     display: inline-block;
     vertical-align: top;
-    width: 69%;
+    width: 60%;
     padding-left: 1em;
 }
 
@@ -258,7 +255,7 @@ div#pic {
     text-decoration: none;
 }
 
- div#editProfileButton {
+div#editProfileButton {
     margin-top: 2em;
 }
 
@@ -271,7 +268,7 @@ th {
     color: white;
 }
 
-tbody tr:nth-child(2n+1) {
+.tasks tbody tr:nth-child(2n+1) {
     background-color: #FDDFEC;
 }
 
@@ -290,4 +287,26 @@ tbody tr:nth-child(2n+1) {
 
 .hidden {
     display: none;
+}
+
+.tasks tr.addTask {
+    background-color: #8E707D;
+    font-weight: bold;
+    color: white;
+}
+
+button#deleteListButton {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+}
+
+
+#lists > h1 {
+  font-family: Arial;
 }

@@ -8,38 +8,45 @@
         </nav>
           <section id="list">
         <h1> Selected list name </h1>
-        <table class="tg">
+        <table class="tasks">
   <tr>
-    <th class="tg-yw4l">Status</th>
-    <th class="tg-yw4l">Task</th>
+    <th>Status</th>
+    <th>Task</th>
   </tr>
   <tr>
-    <td class="tg-yw4l">incomplete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>incomplete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td class="tg-yw4l">complete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>complete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td class="tg-yw4l">incomplete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>incomplete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td class="tg-yw4l">complete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>complete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td class="tg-yw4l">incomplete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>incomplete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
   <tr>
-    <td class="tg-yw4l">complete</td>
-    <td class="tg-yw4l">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td>complete</td>
+    <td>ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
   </tr>
+    <tr class="addTask">
+      <td> + </td>
+      <td> Add a task </td>
+    </tr>
 </table>
+<br>
+<button id = "deleteListButton" type = "button"> Delete list </button>
 </section>
 <aside id="lists">
+<h1> To-do lists </h1>
 <ul>
 <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
 <li>Aliquam tincidunt mauris eu risus.</li>
