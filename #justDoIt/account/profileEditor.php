@@ -20,9 +20,9 @@
         {
             $user['username'] = $username;
             $user['email'] = $email;
-            $user['name'] = $name;
+            $user['name'] = $name; 
+            header("Location: ../account/profile.php");
         }
-        header("Location: ../account/profile.php");
     }
 
     include('../templates/header.php');
