@@ -1,5 +1,5 @@
 <?php
-    require '../database/connection.php';
+    include('../database/connection.php');
 
     $Email = $_POST['email'];
     $Username = $_POST['username'];

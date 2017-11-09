@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('../includes/session.php');
 
 if(isset($_SESSION['user_id'])):
     {
@@ -8,7 +8,7 @@ if(isset($_SESSION['user_id'])):
     }
 endif;
 
-require '../database/connection.php';
+include('../database/connection.php');
 
 if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
 
@@ -29,7 +29,15 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['passw
     $stmt->bindParam(':registerDate',  $date);
 
     if($stmt->execute())
+    {
             $message = 'Sucessfully created new user';
+            $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
+            $records->bindParam(':username', $UserName);
+            $records->execute();
+            $results = $records->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['user_id'] = $results['id'];
+            header("Location: ../main/index.php");
+    }
     else
             $message = 'Unexpected error';
 
