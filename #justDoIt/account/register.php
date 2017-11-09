@@ -36,16 +36,16 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['locat
 
     if($stmt->execute())
     {
-            $message = 'Sucessfully created new user';
-            $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
-            $records->bindParam(':username', $UserName);
-            $records->execute();
-            $results = $records->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user_id'] = $results['id'];
-            header("Location: ../main/index.php");
+        $message = 'Sucessfully created new user';
+        $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
+        $records->bindParam(':username', $UserName);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['user_id'] = $results['id'];
+        header("Location: ../main/index.php");
     }
     else
-            $message = 'Unexpected error';
+        $message = 'Unexpected error';
 
 }
 
