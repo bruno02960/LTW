@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('../includes/session.php');
 
 require '../database/connection.php';
 

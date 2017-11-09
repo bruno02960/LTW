@@ -22,6 +22,7 @@
             $user['email'] = $email;
             $user['name'] = $name;
         }
+        header("Location: profileInfo.php");
     }
 
     include('../templates/header.php');

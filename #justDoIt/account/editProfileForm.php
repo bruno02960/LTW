@@ -69,7 +69,6 @@
                 'email': email
             },
             success: function(response) {
-                console.log(response);
                 if(response == -1) {
                     var message = "This username is already in use!";
                     $('#errorMessage').text(message);
