@@ -8,7 +8,7 @@
         </nav>
           <section id="list">
         <h1> Selected list name </h1>
-        <table class="tasks">
+        <table class="tasks" id="taskTable">
   <tr>
     <th class="status">Status</th>
     <th class="task">Task</th>
@@ -67,6 +67,27 @@
 </tr>
 </table>
  <button id = "addList" type = "button"> + </button>
+
+    <script>
+
+        var childs = $("table#taskTable").find("tr").length;
+
+        for(let i = 1;i<childs;++i){
+          $("table#taskTable").find('tr:eq('+i+') td:eq(1)').mousedown(function(){
+
+            let curr = $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text();
+            if(curr=="complete"){
+              $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text("incomplete");
+            }else{
+              $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text("complete");
+            }
+
+          })
+
+        }
+
+    </script>
+
 </aside>
       <?php else: ?>
         <section id="welcome">
