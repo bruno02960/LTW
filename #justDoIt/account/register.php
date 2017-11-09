@@ -13,7 +13,7 @@ include('../database/connection.php');
 if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
 
     //Enter the new user in the database
-    $sql = "INSERT INTO users (email,username, password, name, registerDate) VALUES (:email, :username, :password, :name, :registerDate)";
+    $sql = "INSERT INTO users (email,username, password, name, registerDate, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :profilePicture)";
     $stmt = $conn->prepare($sql);
 
     $PW = $_POST['password'];
@@ -27,6 +27,8 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['passw
     $stmt->bindParam(':name', $_POST['name']);
     $date = date('Y-m-d H:i:s');
     $stmt->bindParam(':registerDate',  $date);
+    $PPicDirectory = '../account/ProfilePictures/Default.PNG';
+    $stmt->bindParam(':profilePicture', $PPicDirectory);
 
     if($stmt->execute())
     {
