@@ -2,21 +2,24 @@
     include('../includes/session.php');
     include('../database/connection.php');
 
-    if(!empty($_POST['completed']))
+    if(!empty($_POST['completed']) && !empty($_POST['task_id']))
     {
-    $q = $_POST['completed'];
+        $completedBool = $_POST['completed'];
+        $id = $_POST['task_id'];
 
-    $sql = "UPDATE task SET completed = :completed WHERE id = :id";
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(':completed', $q);
-    $stmt->bindParam(':id', 1);
-    if($stmt->execute())
-        {echo 1;
-        return;}
-    else
-        {echo 2;
-            return;}
+        $sql = "UPDATE task SET completed = :completed WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bindParam(':completed', $completedBool);
+        $stmt->bindParam(':id',$id );
+        
+        if($stmt->execute())
+        {
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
-
 ?>

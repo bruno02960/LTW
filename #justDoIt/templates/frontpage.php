@@ -1,14 +1,15 @@
-      <?php if(isset($user)): ?>
-        <nav id="menu">
-          <ul>
-            <li><a href="index.html">Completed</a></li>
-            <li><a href="index.html">To Complete</a></li>
-            <li><a href="index.html">Expiring</a></li>
-          </ul>
-        </nav>
-          <section id="list">
-        <h1> Selected list name </h1>
-        <table class="tasks" id="taskTable">
+<?php if(isset($user)): ?>
+  <nav id="menu">
+    <ul>
+      <li><a href="index.html">Completed</a></li>
+      <li><a href="index.html">To Complete</a></li>
+      <li><a href="index.html">Expiring</a></li>
+    </ul>
+  </nav>
+    <p id = "message" class = "hidden"> </p>
+    <section id="list">
+  <h1> Selected list name </h1>
+  <table class="tasks" id="taskTable">
   <tr>
     <th class="status">Status</th>
     <th class="task">Task</th>
@@ -69,23 +70,35 @@
  <button id = "addList" type = "button"> + </button>
 
     <script>
+      document.querySelector('#taskTable').onclick = function(ev) 
+      {
+        // ev.target <== td element
+        // ev.target.parentElement <== tr
+        var index = ev.target.parentElement.rowIndex;
+        var table = document.getElementById("taskTable");
+        items = table.getElementsByClassName("status");
+        if(items[index].innerHTML == "incomplete") 
+          {
+            items[index].innerHTML = "complete";
 
-        var childs = $("table#taskTable").find("tr").length;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() 
+            {
+              if (this.readyState == 4 && this.status == 200) 
+              {
+                if(this.responseText == 0)
+                {
+                  document.getElementById("message").innerHTML = "Completed Task";
+                  document.getElementById("message").classList.remove('hidden');
+                }
+              }
+            };
 
-        for(let i = 1;i<childs;++i){
-          $("table#taskTable").find('tr:eq('+i+') td:eq(1)').mousedown(function(){
-
-            let curr = $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text();
-            if(curr=="complete"){
-              $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text("incomplete");
-            }else{
-              $("table#taskTable").find('tr:eq('+i+') td:eq(0)').text("complete");
-            }
-
-          })
-
-        }
-
+            xhttp.open("POST", "../account/changeTaskBool.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("completed=" + true + "&task_id=" + index);
+          }
+      }
     </script>
 
 </aside>
