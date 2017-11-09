@@ -2,7 +2,7 @@
 
 include('../includes/session.php');
 
-require '../database/connection.php';
+include('../database/connection.php');
 
 if(isset($_SESSION['user_id']))
   {

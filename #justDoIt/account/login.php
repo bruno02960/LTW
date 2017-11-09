@@ -6,7 +6,7 @@
         header("Location: ../main/index.php");
     }
 
-    require '../database/connection.php';
+    include('../database/connection.php');
 
     if(!empty($_POST['username']) && !empty($_POST['password'])):
 
