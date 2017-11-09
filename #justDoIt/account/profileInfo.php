@@ -3,7 +3,14 @@
     <section id="profile">
       <h1> <?= $user['username']; ?> </h1>
       <div id="pic">
-      <img src="<?=$user['profilePicture']?>" alt="Defaul Profile Picture" style="width:138px;height:200px;">
+      <p> <img src="<?=$user['profilePicture']?>" alt="Defaul Profile Picture" style="width:138px;height:200px;"> </p>
+
+      <form action="upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+      </form>
+      
       </div>
       <div id="info">
         <h4> Email </h4>
