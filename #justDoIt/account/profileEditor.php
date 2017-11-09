@@ -25,8 +25,8 @@
             $user['name'] = $name;
             $user['birthday'] = $birthday;
             $user['location'] = $location;
+            header("Location: ../account/profile.php");
         }
-        header("Location: ../account/profile.php");
     }
 
     include('../templates/header.php');

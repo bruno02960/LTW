@@ -9,11 +9,11 @@
 
     <form id = "editorForm" action="profileEditor.php" method = "POST">
         <label for="UsernameLabel">Username:</label> <br>
-        <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = <?= $user['username'] ?>> <br>
+        <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = "<?= $user['username'] ?>"> <br>
         <label for="EmailLabel">Email:</label> <br>
-        <input id = "emailInput" type = "text" placeholder = "Email" name = "email" value = <?= $user['email'] ?>> <br>
+        <input id = "emailInput" type = "text" placeholder = "Email" name = "email" value = "<?= $user['email'] ?>"> <br>
         <label for="NameLabel">Name:</label> <br>
-        <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = <?= $user['name'] ?>> <br>
+        <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = "<?= $user['name'] ?>"> <br>
         <input id = "sendForm" type = "submit" class = "hidden"> <br>
         <button id = "editProfileSubmit" type = "button"> Submit </button>
     </form>
