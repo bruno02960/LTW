@@ -10,6 +10,10 @@
         <p> <?= $user['email']; ?> </p>
         <h4> Name </h4>
         <p> <?= $user['name']; ?> </p>
+        <h4> Birthday </h4>
+        <p> <?= date("d/m/Y", $user['birthday']/1000) ?> </p>
+        <h4> Location </h4>
+        <p> <?= $user['location']; ?> </p>
         <h4> Register Date </h4>
         <p> <?= $user['registerDate']; ?> </p>
       </div>

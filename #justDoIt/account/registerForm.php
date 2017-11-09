@@ -11,6 +11,8 @@
         <input id = "emailInput" type = "email" placeholder = "email" required name = "email"> <br>
         <input id = "usernameInput" type = "text" placeholder = "username" name = "username"> <br>
         <input id = "nameInput" type = "text" placeholder = "name" name = "name"> <br>
+        <input id = "dateInput" type = "text" placeholder = "birthday (dd/mm/year)" name = "birthday"> <br>
+        <input id = "locationInput" type = "text" placeholder = "location" name = "location"> <br>
         <input id = "passwordInput" type = "password" placeholder = "password" name = "password"> <br>
         <input id = "confirmPasswordInput" type = "password" placeholder = "confirm password" name = "confirm_password"> <br>
         <input id = "sendForm" type = "submit" class = "hidden"> <br>
@@ -35,6 +37,8 @@
         var email = $('#emailInput').val();
         var username = $('#usernameInput').val();
         var name = $('#nameInput').val();
+        var birthday = $('#dateInput').val();
+        var location = $('#locationInput').val();
         var PW = $('#passwordInput').val();
         var CPW = $('#confirmPasswordInput').val();
         var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,72}$");
@@ -42,6 +46,29 @@
         if(username.length < '8')
         {
             var message = "Your Username Must Contain At Least 8 Characters!";
+            $('#errorMessage').text(message);
+            $('#errorMessage').removeClass('hidden');
+            return;
+        }
+
+        if(name.length == '0')
+        {
+            var message = "Name can't be empty";
+            $('#errorMessage').text(message);
+            $('#errorMessage').removeClass('hidden');
+            return;
+        }
+
+        if(!Date.parse(birthday)) {
+            var message = "Incorrect birthday";
+            $('#errorMessage').text(message);
+            $('#errorMessage').removeClass('hidden');
+            return;
+        }
+
+        if(location.length == '0')
+        {
+            var message = "Location can't be empty";
             $('#errorMessage').text(message);
             $('#errorMessage').removeClass('hidden');
             return;

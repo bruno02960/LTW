@@ -10,10 +10,10 @@ endif;
 
 include('../database/connection.php');
 
-if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
+if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['location']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
 
     //Enter the new user in the database
-    $sql = "INSERT INTO users (email,username, password, name, registerDate) VALUES (:email, :username, :password, :name, :registerDate)";
+    $sql = "INSERT INTO users (email,username, password, name, registerDate) VALUES (:email, :username, :password, :name, :registerDate, :location, :birthday)";
     $stmt = $conn->prepare($sql);
 
     $PW = $_POST['password'];
@@ -25,6 +25,9 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['passw
     $PWHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $stmt->bindParam(':password', $PWHashed);
     $stmt->bindParam(':name', $_POST['name']);
+    $stmt->bindParam(':location', $_POST['location']);
+    $birthday = Date.parse($_POST['birthday']);
+    $stmt->bindParam(':birthday', $birthday);
     $date = date('Y-m-d H:i:s');
     $stmt->bindParam(':registerDate',  $date);
 
