@@ -1,7 +1,5 @@
 <body>
 
-  <?php include('../templates/userinfo.php'); ?>
-
     <section id="profile">
       <h1> <?= $user['username']; ?> </h1>
       <div id="pic">
