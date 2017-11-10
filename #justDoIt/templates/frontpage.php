@@ -50,11 +50,13 @@
 <h1> To-do lists </h1>
 <table class="lists">
   <?php
+    if($lists!=NULL){
     foreach( $lists as $list) {
       echo '<tr>
             <td class="list"> ' . $list['name']. '</td>
             </tr>';
     }
+  }
     ?>
 <td class="list"><input type="text" name="listName" placeholder="list name"><br></td>
 </tr>
