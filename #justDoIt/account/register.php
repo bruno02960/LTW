@@ -10,7 +10,8 @@ endif;
 
 include('../database/connection.php');
 
-if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['location']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name'])):
+if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['location']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
+{
 
     //Enter the new user in the database
     $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
@@ -35,18 +36,18 @@ if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['locat
 
     if($stmt->execute())
     {
-            $message = 'Sucessfully created new user';
-            $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
-            $records->bindParam(':username', $UserName);
-            $records->execute();
-            $results = $records->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['user_id'] = $results['id'];
-            header("Location: ../main/index.php");
+        $message = 'Sucessfully created new user';
+        $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
+        $records->bindParam(':username', $UserName);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['user_id'] = $results['id'];
+        header("Location: ../main/index.php");
     }
     else
-            $message = 'Unexpected error';
+        $message = 'Unexpected error';
 
-endif;
+}
 
   include('../templates/header.php');
   include('registerForm.php');
