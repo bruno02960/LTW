@@ -356,3 +356,28 @@ button#addList {
     background-color: #1E000D;
     border: 0;
 }
+
+label#fileToUploadLabel {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+}
+
+input#submitPhoto {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    font-family: Calibri;
+    font-size: 1em;
+    width: 6.8em;
+}

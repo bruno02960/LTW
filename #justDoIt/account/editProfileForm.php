@@ -17,6 +17,17 @@
         <input id = "sendForm" type = "submit" class = "hidden"> <br>
         <button id = "editProfileSubmit" type = "button"> Submit </button>
     </form>
+
+    <br>
+
+    <h1> Edit Profile </h1>
+    <div id="uploadPhoto">
+          <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
+            <label id="fileToUploadLabel" for="fileToUpload">New photo</label>
+            <input id="submitPhoto" type="submit" value="Upload" name="submit">
+          </form>
+        </div>
   </section>
 </body>
 <script>
