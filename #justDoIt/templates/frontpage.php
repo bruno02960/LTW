@@ -41,7 +41,11 @@
 <h1> To-do lists </h1>
 <table class="lists" id="listsTable">
   <?php
+<<<<<<< HEAD
   if($lists!=NULL) {
+=======
+    if($lists!=NULL){
+>>>>>>> aaff42d13869153a49fd6efaa6e49f57a54387ee
     foreach( $lists as $list) {
       echo '<tr>
             <td class="list">' . $list['name']. '</td>
