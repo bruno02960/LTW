@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id']))
       $user = $results;
     }
 
-    $records = $conn->prepare('SELECT name FROM toDoList WHERE userid = :id');
+    $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userid = :id');
     $records->bindParam(':id', $_SESSION['user_id']);
     $records->execute();
     $results = $records->fetchAll();
@@ -28,6 +28,20 @@ if(isset($_SESSION['user_id']))
     if(count($results) > 0)
     {
       $lists = $results;
+    }
+
+    $selectedList = $lists[0];
+
+    $records = $conn->prepare('SELECT title, completed, expiring FROM task WHERE toDoListId = :id');
+    $records->bindParam(':id', $selectedList['id']);
+    $records->execute();
+    $results = $records->fetchAll();
+
+    $tasks = NULL;
+
+    if(count($results) > 0)
+    {
+      $tasks = $results;
     }
   }
 
