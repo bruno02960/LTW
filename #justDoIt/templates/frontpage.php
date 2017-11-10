@@ -35,7 +35,7 @@
  <a id = "addTask"> + </a>
  <br>
 <br>
-<button id = "deleteListButton" type = "button"> Delete list </button>
+<button id = "deleteListButton" type = "button" onclick="deleteList()"> Delete list </button>
 </section>
 <aside id="lists">
 <h1> To-do lists </h1>
@@ -69,7 +69,7 @@
           document.getElementById("message").classList.remove('hidden');
       }
 
-      document.querySelector('#deleteListButton').onclick = function(ev)
+      function deleteList()
       {
           <?php $records = $conn->prepare('DELETE FROM toDoList WHERE id = :id');
           $records->bindParam(':id', $selectedList['id']);
