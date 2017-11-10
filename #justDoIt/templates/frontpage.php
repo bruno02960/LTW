@@ -16,6 +16,7 @@
     <th class="expDate">Expiration Date </th>
   </tr>
   <?php
+  if($tasks!=NULL) {
     foreach( $tasks as $task) {
       echo '<tr>
               <td class="status">' . $task['completed']. '</td>
@@ -23,6 +24,7 @@
               <td class="expDate">' . date('d/m/Y', $task['expiring']) .'</td>
             </tr>';
     }
+  }
     ?>
   <tr>
     <th class="status"></th>
@@ -39,11 +41,13 @@
 <h1> To-do lists </h1>
 <table class="lists" id="listsTable">
   <?php
+  if($lists!=NULL) {
     foreach( $lists as $list) {
       echo '<tr>
             <td class="list">' . $list['name']. '</td>
             </tr>';
     }
+  }
     ?>
 <td class="list"><input type="text" name="listName" placeholder="list name"><br></td>
 </tr>
@@ -67,9 +71,11 @@
 
       document.querySelector('#deleteListButton').onclick = function(ev)
       {
+          <?php $records = $conn->prepare('DELETE FROM toDoList WHERE id = :id');
+          $records->bindParam(':id', $selectedList['id']);
+          $records->execute(); ?>
 
-          document.getElementById("message").innerHTML = "Deleted List";
-          document.getElementById("message").classList.remove('hidden');
+          location.reload();
       }
 
       document.querySelector('#taskTable').onclick = function(ev)
