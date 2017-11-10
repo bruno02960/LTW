@@ -11,7 +11,7 @@
         <input id = "emailInput" type = "email" placeholder = "email" required name = "email"> <br>
         <input id = "usernameInput" type = "text" placeholder = "username" name = "username"> <br>
         <input id = "nameInput" type = "text" placeholder = "name" name = "name"> <br>
-        <input id = "dateInput" type = "text" placeholder = "birthday (dd/mm/year)" name = "birthday"> <br>
+        <input id = "dateInput" type = "text" placeholder = "birthday (mm/dd/year)" name = "birthday"> <br>
         <input id = "locationInput" type = "text" placeholder = "location" name = "location"> <br>
         <input id = "passwordInput" type = "password" placeholder = "password" name = "password"> <br>
         <input id = "confirmPasswordInput" type = "password" placeholder = "confirm password" name = "confirm_password"> <br>
@@ -41,7 +41,8 @@
         var location = $('#locationInput').val();
         var PW = $('#passwordInput').val();
         var CPW = $('#confirmPasswordInput').val();
-        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,72}$");
+        var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,72}$");
+        var regexBDay = new RegExp("^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$");
 
         if(username.length < '8')
         {
@@ -59,13 +60,6 @@
             return;
         }
 
-        if(!Date.parse(birthday)) {
-            var message = "Incorrect birthday";
-            $('#errorMessage').text(message);
-            $('#errorMessage').removeClass('hidden');
-            return;
-        }
-
         if(location.length == '0')
         {
             var message = "Location can't be empty";
@@ -74,7 +68,15 @@
             return;
         }
 
-        if(!regex.test(PW))
+        if(!regexBDay.test(birthday))
+        {
+            var message = "Invalid birthday format [MM/DD/YYYY]";
+            $('#errorMessage').text(message);
+            $('#errorMessage').removeClass('hidden');
+            return;
+        }
+
+        if(!regexPW.test(PW))
         {
             var message = "Your password must contain a minimum of 8 characters, at least 1 uppercase letter, 1 lowercase letter 1 one number";
             $('#errorMessage').text(message);
