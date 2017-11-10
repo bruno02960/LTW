@@ -1,7 +1,6 @@
 CREATE TABLE task (
     id              INTEGER PRIMARY KEY,
     title           VARCHAR,
-    details         VARCHAR,
     expirationDate  INTEGER,
     completed       BOOLEAN,
     toDoListId      INTEGER REFERENCES toDoList (id)

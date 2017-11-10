@@ -13,34 +13,35 @@
   <tr>
     <th class="status">Status</th>
     <th class="task">Task</th>
-  </tr>
-  <tr>
-    <td class="status">incomplete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <th class="expDate">Expiration Date </th>
   </tr>
   <tr>
     <td class="status">complete</td>
     <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="expDate">10/11/2017</td>
   </tr>
   <tr>
     <td class="status">incomplete</td>
     <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="expDate">10/11/2017</td>
   </tr>
   <tr>
     <td class="status">complete</td>
     <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="expDate">10/11/2017</td>
   </tr>
   <tr>
     <td class="status">incomplete</td>
     <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <td class="expDate">10/11/2017</td>
   </tr>
   <tr>
-    <td class="status">complete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
+    <th class="status"></th>
+    <td class="task"><input type="text" name="taskName" placeholder="task name"></td>
+    <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
   </tr>
 </table>
- <button id = "addTask" type = "button"> + </button>
- <input id = "newTask" type="text" name="newTask" placeholder="New task name"><br>
+ <a href="addTask.php" id = "addTask"> + </a>
  <br>
 <br>
 <button id = "deleteListButton" type = "button"> Delete list </button>
@@ -48,43 +49,34 @@
 <aside id="lists">
 <h1> To-do lists </h1>
 <table class="lists">
-<tr>
-<td class="list">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</td>
-</tr>
-<tr>
-<td class="list">Aliquam tincidunt mauris eu risus.</td>
-</tr>
-<tr>
-<td class="list">Vestibulum auctor dapibus neque.</td>
-</tr>
-<tr>
-<td class="list">Nunc dignissim risus id metus.</td>
-</tr>
-<tr>
-<td class="list">Cras ornare tristique elit.</td>
-</tr>
-<tr>
-<td class="list">Vivamus vestibulum nulla nec ante.</td>
+  <?php
+    foreach( $lists as $list) {
+      echo '<tr>
+            <td class="list"> ' . $list['name']. '</td>
+            </tr>';
+    }
+    ?>
+<td class="list"><input type="text" name="listName" placeholder="list name"><br></td>
 </tr>
 </table>
- <button id = "addList" type = "button"> + </button>
+ <a href="addList.php" id = "addList"> + </a>
 
     <script>
-      document.querySelector('#taskTable').onclick = function(ev) 
+      document.querySelector('#taskTable').onclick = function(ev)
       {
         // ev.target <== td element
         // ev.target.parentElement <== tr
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
-        if(items[index].innerHTML == "incomplete") 
+        if(items[index].innerHTML == "incomplete")
           {
             items[index].innerHTML = "complete";
 
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() 
+            xhttp.onreadystatechange = function()
             {
-              if (this.readyState == 4 && this.status == 200) 
+              if (this.readyState == 4 && this.status == 200)
               {
                 if(this.responseText == 0)
                 {

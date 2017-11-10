@@ -17,6 +17,18 @@ if(isset($_SESSION['user_id']))
     {
       $user = $results;
     }
+
+    $records = $conn->prepare('SELECT name FROM toDoList WHERE userid = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetchAll();
+
+    $lists = NULL;
+
+    if(count($results) > 0)
+    {
+      $lists = $results;
+    }
   }
 
   include('../templates/header.php');

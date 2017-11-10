@@ -321,7 +321,7 @@ button#deleteListButton {
   font-family: Arial;
 }
 
-button#addTask {
+a#addTask {
     color: #f20069;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -330,6 +330,8 @@ button#addTask {
     font-weight: bold;
     background-color: #1E000D;
     border: 0;
+    display: inline-block;
+    text-decoration: none;
 }
 
 input#newTask {
@@ -346,7 +348,7 @@ input#newTask {
 }
 
 
-button#addList {
+a#addList {
     color: #f20069;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -354,7 +356,9 @@ button#addList {
     padding-left: 1em;
     font-weight: bold;
     background-color: #1E000D;
+    text-decoration: none;
     border: 0;
+    display: inline-block;
 }
 
 label#fileToUploadLabel {
@@ -380,4 +384,20 @@ input#submitPhoto {
     font-family: Calibri;
     font-size: 1em;
     width: 6.8em;
+}
+
+.lists input {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: #FCBFD9;
+}
+
+.tasks input {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: transparent;
 }

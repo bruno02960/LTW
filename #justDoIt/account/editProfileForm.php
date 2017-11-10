@@ -20,7 +20,7 @@
 
     <br>
 
-    <h1> Edit Profile </h1>
+    <h1> Photo </h1>
     <div id="uploadPhoto">
           <form action="upload.php" method="post" enctype="multipart/form-data">
             <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
