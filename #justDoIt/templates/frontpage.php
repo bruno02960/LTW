@@ -1,9 +1,9 @@
 <?php if(isset($user)): ?>
   <nav id="menu">
     <ul>
-      <li><a href="index.html">Completed</a></li>
-      <li><a href="index.html">To Complete</a></li>
-      <li><a href="index.html">Expiring</a></li>
+      <li><a href="index.php">Completed</a></li>
+      <li><a href="index.php">To Complete</a></li>
+      <li><a href="index.php">Expiring</a></li>
     </ul>
   </nav>
     <p id = "message" class = "hidden"> </p>
@@ -15,45 +15,34 @@
     <th class="task">Task</th>
     <th class="expDate">Expiration Date </th>
   </tr>
-  <tr>
-    <td class="status">complete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
-    <td class="expDate">10/11/2017</td>
-  </tr>
-  <tr>
-    <td class="status">incomplete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
-    <td class="expDate">10/11/2017</td>
-  </tr>
-  <tr>
-    <td class="status">complete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
-    <td class="expDate">10/11/2017</td>
-  </tr>
-  <tr>
-    <td class="status">incomplete</td>
-    <td class="task">ABCDEFGHIJKLMNOPQRSTUVWXYZ</td>
-    <td class="expDate">10/11/2017</td>
-  </tr>
+  <?php
+    foreach( $tasks as $task) {
+      echo '<tr>
+              <td class="status">' . $task['completed']. '</td>
+              <td class="task">' . $task['title']. '</td>
+              <td class="expDate">' . date('d/m/Y', $task['expiring']) .'</td>
+            </tr>';
+    }
+    ?>
   <tr>
     <th class="status"></th>
     <td class="task"><input type="text" name="taskName" placeholder="task name"></td>
     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
   </tr>
 </table>
- <a href="addTask.php" id = "addTask"> + </a>
+ <a id = "addTask"> + </a>
  <br>
 <br>
 <button id = "deleteListButton" type = "button"> Delete list </button>
 </section>
 <aside id="lists">
 <h1> To-do lists </h1>
-<table class="lists">
+<table class="lists" id="listsTable">
   <?php
     if($lists!=NULL){
     foreach( $lists as $list) {
       echo '<tr>
-            <td class="list"> ' . $list['name']. '</td>
+            <td class="list">' . $list['name']. '</td>
             </tr>';
     }
   }
@@ -61,9 +50,30 @@
 <td class="list"><input type="text" name="listName" placeholder="list name"><br></td>
 </tr>
 </table>
- <a href="addList.php" id = "addList"> + </a>
+ <a id = "addList"> + </a>
 
     <script>
+      document.querySelector('#addList').onclick = function(ev)
+      {
+
+          document.getElementById("message").innerHTML = "Added list";
+          document.getElementById("message").classList.remove('hidden');
+      }
+
+      document.querySelector('#addTask').onclick = function(ev)
+      {
+
+          document.getElementById("message").innerHTML = "Added task";
+          document.getElementById("message").classList.remove('hidden');
+      }
+
+      document.querySelector('#deleteListButton').onclick = function(ev)
+      {
+
+          document.getElementById("message").innerHTML = "Deleted List";
+          document.getElementById("message").classList.remove('hidden');
+      }
+
       document.querySelector('#taskTable').onclick = function(ev)
       {
         // ev.target <== td element
@@ -71,9 +81,9 @@
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
-        if(items[index].innerHTML == "incomplete")
+        if(items[index].innerHTML == "false")
           {
-            items[index].innerHTML = "complete";
+            items[index].innerHTML = "true";
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function()
