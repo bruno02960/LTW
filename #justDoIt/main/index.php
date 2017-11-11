@@ -45,6 +45,13 @@ if(isset($_SESSION['user_id']))
     }
   }
 
+  if (isset($_POST['deleteListButton'])) {
+    $records = $conn->prepare('DELETE FROM toDoList WHERE id = :id');
+    $records->bindParam(':id', $selectedList['id']);
+    $records->execute();
+    header("Refresh:0");
+  }
+
   include('../templates/header.php');
   include('../templates/frontpage.php');
   include('../templates/footer.php');

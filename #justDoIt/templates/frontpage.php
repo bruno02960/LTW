@@ -35,13 +35,15 @@
  <a id = "addTask"> + </a>
  <br>
 <br>
-<button id = "deleteListButton" type = "button" onclick="deleteList()"> Delete list </button>
+<form action"index.php" method="post">
+<input type="submit" name = "deleteListButton" value="Delete list">
+</form>
 </section>
 <aside id="lists">
 <h1> To-do lists </h1>
 <table class="lists" id="listsTable">
   <?php
-    if($lists!=NULL){
+  if($lists!=NULL) {
     foreach( $lists as $list) {
       echo '<tr>
             <td class="list">' . $list['name']. '</td>
@@ -67,15 +69,6 @@
 
           document.getElementById("message").innerHTML = "Added task";
           document.getElementById("message").classList.remove('hidden');
-      }
-
-      function deleteList()
-      {
-          <?php $records = $conn->prepare('DELETE FROM toDoList WHERE id = :id');
-          $records->bindParam(':id', $selectedList['id']);
-          $records->execute(); ?>
-
-          location.reload();
       }
 
       document.querySelector('#taskTable').onclick = function(ev)
