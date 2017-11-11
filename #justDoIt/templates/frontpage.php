@@ -60,20 +60,28 @@
 </table>
 
     <script>
+
+      var addList = document.querySelector('#addList');
+      if(addList!=null){ 
       document.querySelector('#addList').onclick = function(ev)
       {
-
           document.getElementById("message").innerHTML = "Added list";
           document.getElementById("message").classList.remove('hidden');
       }
+      }
 
+      var addTask = document.querySelector('#addTask');
+      if(addTask!=null){ 
       document.querySelector('#addTask').onclick = function(ev)
       {
 
           document.getElementById("message").innerHTML = "Added task";
           document.getElementById("message").classList.remove('hidden');
       }
+      }
 
+      var taskTable = document.querySelector('#taskTable');
+      if(taskTable!=null){
       document.querySelector('#taskTable').onclick = function(ev)
       {
         // ev.target <== td element
@@ -102,6 +110,7 @@
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("completed=" + true + "&task_id=" + index);
           }
+      }
       }
     </script>
 
