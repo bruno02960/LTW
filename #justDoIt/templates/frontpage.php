@@ -18,10 +18,14 @@
   <?php
   if($tasks!=NULL) {
     foreach( $tasks as $task) {
+      $data = "";
+      if($task['expiring']!=NULL){
+        $data = date('d/m/Y', $task['expiring']);
+      }
       echo '<tr>
               <td class="status">' . $task['completed']. '</td>
               <td class="task">' . $task['title']. '</td>
-              <td class="expDate">' . date('d/m/Y', $task['expiring']) .'</td>
+              <td class="expDate">' . $data .'</td>
             </tr>';
     }
   }
