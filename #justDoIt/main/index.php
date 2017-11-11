@@ -52,6 +52,28 @@ if(isset($_SESSION['user_id']))
     header("Refresh:0");
   }
 
+  if (isset($_POST['addListButton'])) {
+    if($_POST['listName']!="") {
+      $records = $conn->prepare('INSERT INTO toDoList (name, userid) VALUES (:name, :userid)');
+      $records->bindParam(':userid', $_SESSION['user_id']);
+      $records->bindParam(':name', $_POST['listName']);
+      $records->execute();
+      header("Refresh:0");
+    }
+  }
+
+  if (isset($_POST['addTaskButton'])) {
+    if($_POST['taskName']!="") {
+      $records = $conn->prepare('INSERT INTO task (title, completed, toDoListId, expiring) VALUES (:title, "false", :toDoListId, :expiring)');
+      $records->bindParam(':toDoListId', $selectedList['id']);
+      $records->bindParam(':title', $_POST['taskName']);
+      $expiring = strtotime($_POST['taskDate']);
+      $records->bindParam(':expiring', $expiring);
+      $records->execute();
+      header("Refresh:0");
+    }
+  }
+
   include('../templates/header.php');
   include('../templates/frontpage.php');
   include('../templates/footer.php');

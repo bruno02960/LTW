@@ -306,6 +306,22 @@ div#editProfileButton {
     color: white;
 }
 
+#registerForm input{
+    width: 20%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+#loginForm input{
+    width: 20%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
 input[name="deleteListButton"] {
     color: #f20069;
     padding-top: 0.5em;
@@ -347,18 +363,24 @@ input#newTask {
       margin: 0;
 }
 
-
-a#addList {
+input[name="addListButton"] {
     color: #f20069;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    padding-right: 1em;
-    padding-left: 1em;
     font-weight: bold;
     background-color: #1E000D;
-    text-decoration: none;
     border: 0;
-    display: inline-block;
+    width: 100%;
+}
+
+input[name="addTaskButton"] {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    width: 100%;
 }
 
 label#fileToUploadLabel {
@@ -386,7 +408,7 @@ input#submitPhoto {
     width: 6.8em;
 }
 
-.lists input {
+.lists input[name="listName"] {
     border: 0;
     padding: 0;
     margin: 0;
@@ -394,7 +416,7 @@ input#submitPhoto {
     background-color: #FCBFD9;
 }
 
-.tasks input {
+.tasks .task input {
     border: 0;
     padding: 0;
     margin: 0;

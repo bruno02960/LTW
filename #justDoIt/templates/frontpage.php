@@ -27,12 +27,13 @@
   }
     ?>
   <tr>
-    <th class="status"></th>
-    <td class="task"><input type="text" name="taskName" placeholder="task name"></td>
+    <form action"index.php" method="post">
+    <td><input type="submit" name = "addTaskButton" value="Add task"></td>
+    <td class="task"><input type="text" name="taskName" placeholder="task name">
     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
+      </form>
   </tr>
 </table>
- <a id = "addTask"> + </a>
  <br>
 <br>
 <form action"index.php" method="post">
@@ -51,10 +52,12 @@
     }
   }
     ?>
-<td class="list"><input type="text" name="listName" placeholder="list name"><br></td>
+<td class="list"><form action"index.php" method="post">
+  <input type="text" name="listName" placeholder="list name"><br>
+  <input type="submit" name = "addListButton" value="Add list">
+  </form></td>
 </tr>
 </table>
- <a id = "addList"> + </a>
 
     <script>
       document.querySelector('#addList').onclick = function(ev)
