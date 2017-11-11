@@ -32,7 +32,7 @@ if(isset($_SESSION['user_id']))
 
     $selectedList = $lists[0];
 
-    $records = $conn->prepare('SELECT title, completed, expiring FROM task WHERE toDoListId = :id');
+    $records = $conn->prepare('SELECT id, title, completed, expiring FROM task WHERE toDoListId = :id');
     $records->bindParam(':id', $selectedList['id']);
     $records->execute();
     $results = $records->fetchAll();

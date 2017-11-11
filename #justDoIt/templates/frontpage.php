@@ -11,6 +11,7 @@
   <h1> Selected list name </h1>
   <table class="tasks" id="taskTable">
   <tr>
+    <th class="id">ID</th>
     <th class="status">Status</th>
     <th class="task">Task</th>
     <th class="expDate">Expiration Date </th>
@@ -23,6 +24,7 @@
         $data = date('d/m/Y', $task['expiring']);
       }
       echo '<tr>
+              <td class="id">' . $task['id']. '</td>
               <td class="status">' . $task['completed']. '</td>
               <td class="task">' . $task['title']. '</td>
               <td class="expDate">' . $data .'</td>
@@ -51,7 +53,8 @@
   if($lists!=NULL) {
     foreach( $lists as $list) {
       echo '<tr>
-            <td class="list">' . $list['name']. '</td>
+            <td class="id">' . $list['id']. '</td>
+            <td class="name">' . $list['name']. '</td>
             </tr>';
     }
   }
@@ -66,7 +69,7 @@
     <script>
 
       var addList = document.querySelector('#addList');
-      if(addList!=null){ 
+      if(addList!=null){
       document.querySelector('#addList').onclick = function(ev)
       {
           document.getElementById("message").innerHTML = "Added list";
@@ -75,7 +78,7 @@
       }
 
       var addTask = document.querySelector('#addTask');
-      if(addTask!=null){ 
+      if(addTask!=null){
       document.querySelector('#addTask').onclick = function(ev)
       {
 
@@ -110,11 +113,14 @@
               }
             };
 
+            items = table.getElementsByClassName("id");
+
             xhttp.open("POST", "../account/changeTaskBool.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("completed=" + true + "&task_id=" + index);
+            xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
           }
       }
+    }
       }
     </script>
 
