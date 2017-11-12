@@ -4,6 +4,8 @@ include('../includes/session.php');
 
 include('../database/connection.php');
 
+include('passing.php');
+
 if(isset($_SESSION['user_id']))
   {
     $records = $conn->prepare('SELECT id, username,password FROM users WHERE id = :id');
@@ -27,6 +29,7 @@ if(isset($_SESSION['user_id']))
 
     if(count($results) > 0)
     {
+      $allList = $results;
       $lists = $results;
     }
 

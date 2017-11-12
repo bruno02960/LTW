@@ -59,6 +59,9 @@
     }
   }
     ?>
+    <script>
+      var currList = 0;
+    </script>
 <td class="list"><form action"index.php" method="post">
   <input type="text" name="listName" placeholder="list name"><br>
   <input type="submit" name = "addListButton" value="Add list">
@@ -67,6 +70,21 @@
 </table>
 
     <script>
+
+      var listTable = document.querySelector("#listsTable");
+      if(listTable!=null){
+        document.querySelector('#listsTable').onclick = function(ev){
+          var index = ev.target.parentElement.rowIndex;
+          if(index==null){
+            console.log("NULL row");
+          }else{
+            console.log("clicked on:"+index + " current list was:"+currList);
+            currList = index;
+            //send ajax request for the list
+            //change values of current list
+          }
+        }
+      }
 
       var addList = document.querySelector('#addList');
       if(addList!=null){
