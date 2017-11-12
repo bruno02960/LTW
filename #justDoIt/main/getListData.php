@@ -38,7 +38,12 @@
     {
         $tasks = $results;
 
-        $arr = object_to_array($tasks);
+        $arr = array();
+        foreach($tasks as $task){
+            $toEncode = object_to_array($task);
+            $encoded = json_encode($toEncode);
+            array_push($arr,$encoded);
+        }
         if($arr != $tasks){
             echo json_encode($arr);
             return;

@@ -80,6 +80,26 @@
           }else{
             console.log("clicked on:"+index + " current list was:"+currList);
             currList = index;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
+            {
+              if (this.readyState == 4 && this.status == 200)
+              {
+                if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
+                {
+                  document.getElementById("message").innerHTML = "Error";
+                  document.getElementById("message").classList.remove('hidden');
+                }else{
+                  var tasks = JSON.parse(this.responseText);
+                  console.log(tasks.size());
+                }
+              }
+            };
+
+            xhttp.open("POST", "../main/getListData.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("index=" + currList);
             //send ajax request for the list
             //change values of current list
           }
