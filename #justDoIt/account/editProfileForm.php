@@ -1,97 +1,103 @@
 <body>
-  <section id="editProfile">
-  <h1> Edit Profile </h1>
-    <?php if(!empty($message)): ?>
-        <p class="error"><?= $message ?> </p>
-    <?php endif; ?>
+    <section id="editProfile">
+        <h1> Edit Profile </h1>
 
-    <p id = "errorMessage"  class = "hidden error"> </p>
+        <p id = "errorMessage"> </p>
 
-    <form id = "editorForm" action="profileEditor.php" method = "POST">
-        <label for="UsernameLabel">Username:</label> <br>
-        <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = "<?= $user['username'] ?>"> <br>
-        <label for="EmailLabel">Email:</label> <br>
-        <input id = "emailInput" type = "text" placeholder = "Email" name = "email" value = "<?= $user['email'] ?>"> <br>
-        <label for="NameLabel">Name:</label> <br>
-        <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = "<?= $user['name'] ?>"> <br>
-        <input id = "sendForm" type = "submit" class = "hidden"> <br>
-        <button id = "editProfileSubmit" type = "button"> Submit </button>
-    </form>
+        <form id = "editorForm" action="profileEditor.php" method = "POST">
+            <label for="UsernameLabel">Username:</label> <br>
+            <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = "<?= $user['username'] ?>"> <br>
+            <label for="EmailLabel">Email:</label> <br>
+            <input id = "emailInput" type = "text" placeholder = "Email" name = "email" value = "<?= $user['email'] ?>"> <br>
+            <label for="NameLabel">Name:</label> <br>
+            <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = "<?= $user['name'] ?>"> <br>
+            <input id = "sendForm" type = "submit" class = "hidden"> <br>
+            <button id = "editProfileSubmit" type = "button"> Submit </button>
+        </form>
 
-    <br>
+        <br>
 
-    <h1> Photo </h1>
-    <div id="uploadPhoto">
-          <form action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
-            <label id="fileToUploadLabel" for="fileToUpload">New photo</label>
-            <input id="submitPhoto" type="submit" value="Upload" name="submit">
-          </form>
+        <h1> Photo </h1>
+        <div id="uploadPhoto">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
+                <label id="fileToUploadLabel" for="fileToUpload">New photo</label>
+                <input id="submitPhoto" type="submit" value="Upload" name="submit">
+            </form>
         </div>
-  </section>
+    </section>
 </body>
+
 <script>
 
-    $('#editorForm input').keypress(function(e) {
-        if (e.which == 13) {
-            $('#editorSubmit').trigger('click');
+    var submitButton = document.getElementById("editProfileSubmit");
+    var form = document.getElementById("editorForm");
+
+    function keyListener(e) 
+    {
+        if (e.keyCode == 13) 
+        {
+            submitButton.click();
             return false;
         }
-    });
+    }
 
-    $('#editProfileSubmit').click(function(e)
+    submitButton.addEventListener("click", function(event) 
     {
-        $('#errorMessage').text('');
-        $('#errorMessage').addClass('hidden');
+        event.preventDefault();
+        document.getElementById("errorMessage").classList.value = '';
+        document.getElementById("errorMessage").classList.add('hidden');
+        document.getElementById("errorMessage").classList.add('error');
 
-        var email = $('#emailInput').val();
-        var username = $('#usernameInput').val();
-        var name = $('#nameInput').val();
+        var email = document.getElementById("emailInput").value;
+        var username = document.getElementById("usernameInput").value;
+        var name = document.getElementById("nameInput").value;
 
         if(username.length < '8')
         {
             var message = "Your Username Must Contain At Least 8 Characters!";
-            $('#errorMessage').text(message);
-            $('#errorMessage').removeClass('hidden');
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("errorMessage").classList.remove('hidden');
             return;
         }
 
         if(email.length == '0')
         {
             var message = "Email can't be empty"
-            $('#errorMessage').text(message);
-            $('#errorMessage').removeClass('hidden');
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("errorMessage").classList.remove('hidden');
             return;
         }
 
         if(name.length == '0')
         {
             var message = "Name can't be empty"
-            $('#errorMessage').text(message);
-            $('#errorMessage').removeClass('hidden');
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("errorMessage").classList.remove('hidden');
             return;
         }
 
-        $.ajax({
-            type: "POST",
-            url: "checkDuplicatesEditing.php",
-            data: {
-                'username': username,
-                'email': email
-            },
-            success: function(response) {
-                if(response == -1) {
-                    var message = "This username is already in use!";
-                    $('#errorMessage').text(message);
-                    $('#errorMessage').removeClass('hidden');
-                    return;
-                } else if(response == -2) {
-                    var message = "This email is already in use!";
-                    $('#errorMessage').text(message);
-                    $('#errorMessage').removeClass('hidden');
-                    return;
-                } else $('#sendForm').trigger('click');
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() 
+        {
+            if (xhttp.readyState == 4 && xhttp.status == 200) 
+            {
+            if(xhttp.responseText == -1) {
+                var message = "This username is already in use!";
+                document.getElementById("errorMessage").innerHTML = message;
+                document.getElementById("errorMessage").classList.remove('hidden');
+                return;
+            } else if(xhttp.responseText == -2) {
+                var message = "This email is already in use!";
+                document.getElementById("errorMessage").innerHTML = message;
+                document.getElementById("errorMessage").classList.remove('hidden');
+                return;
+            } else document.getElementById("sendForm").click();
             }
-        });
-    })
+        }
+
+        xhttp.open("POST", "checkDuplicatesEditing.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username=" + username + "&email=" + email);
+    });
 </script>
