@@ -1,5 +1,5 @@
 <?php
 
-    $allList;
+    global $allList;
 
 ?>

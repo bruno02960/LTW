@@ -1,5 +1,6 @@
 <?php
     include('../database/connection.php');
+    include('../includes/session.php');
     include("passing.php");
 
     function object_to_array($data)
@@ -19,8 +20,8 @@
     }
 
     $index = $_POST['index'];
-
-    if($allList[$index]==NULL){
+    $allList = $_SESSION['allLists'];
+    if(!array_key_exists($index,$allList)){
         echo -1;
         return;
     }
@@ -34,25 +35,15 @@
     
     $tasks = NULL;
     
-    if(count($results) > 0)
-    {
         $tasks = $results;
 
         $arr = array();
         foreach($tasks as $task){
-            $toEncode = object_to_array($task);
-            $encoded = json_encode($toEncode);
+            //$toEncode = object_to_array($task);
+            $encoded = json_encode($task);
             array_push($arr,$encoded);
         }
-        if($arr != $tasks){
             echo json_encode($arr);
             return;
-        }else{
-            echo -2;
-            return;
-        }
-    }else{
-        echo -3;
-        return;
-    }
+
 ?>

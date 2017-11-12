@@ -29,6 +29,7 @@ if(isset($_SESSION['user_id']))
 
     if(count($results) > 0)
     {
+      $_SESSION['allLists'] = $results;
       $allList = $results;
       $lists = $results;
     }

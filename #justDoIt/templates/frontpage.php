@@ -86,13 +86,14 @@
             {
               if (this.readyState == 4 && this.status == 200)
               {
+                console.log("Server Response:"+this.responseText);
                 if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
                 {
                   document.getElementById("message").innerHTML = "Error";
                   document.getElementById("message").classList.remove('hidden');
                 }else{
                   var tasks = JSON.parse(this.responseText);
-                  console.log(tasks.size());
+                  console.log(tasks.length);
                 }
               }
             };
