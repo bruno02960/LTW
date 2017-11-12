@@ -94,6 +94,12 @@
                 }else{
                   var tasks = JSON.parse(this.responseText);
                   console.log(tasks.length);
+                  for(var i = 0;i<tasks.length;++i){
+                    console.log("Task "+i);
+                    console.log("Task Raw:"+tasks[i]);
+                    var task = JSON.parse(tasks[i]);
+                    console.log("id "+task.title);
+                  }
                 }
               }
             };
