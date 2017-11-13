@@ -21,8 +21,10 @@
     var submitButton = document.getElementById("registerSubmit");
     var form = document.getElementById("registerForm");
 
-    function keyListener(e) {
-        if (e.keyCode == 13) {
+    function keyListener(e) 
+    {
+        if (e.keyCode == 13) 
+        {
             submitButton.click();
             return false;
         }

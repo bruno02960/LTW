@@ -1,11 +1,12 @@
 <?php
-include('../includes/session.php');
+    include('../includes/session.php');
 
-include('../database/connection.php');
+    include('../database/connection.php');
 
     $Email = $_POST['email'];
     $Username = $_POST['username'];
-	$ID = $_SESSION['user_id'];
+    $ID = $_SESSION['user_id'];
+    
     if(!empty($Email) && !empty($Username) && isset($ID))
     {
         $query = $conn->prepare('SELECT * FROM users WHERE username = :username AND id != :id');

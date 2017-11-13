@@ -1,20 +1,21 @@
 <?php
+    include('../includes/session.php');
 
     include('../templates/userinfo.php');
 
-    if(!empty($_POST['username']) && !empty($_POST['username']) && !empty($_POST['username']))
+    if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']) && !empty($_POST['location']))
     {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
+        $location = $_POST['location'];
 
-        $sql = "UPDATE users SET username = :username, email = :email, name = :name WHERE id = :id";
+        $sql = "UPDATE users SET username = :username, email = :email, name = :name, location = :location WHERE id = :id";
         $stmt = $conn->prepare($sql);
 
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':birthday', $birthday);
         $stmt->bindParam(':location', $location);
         $stmt->bindParam(':id', $_SESSION['user_id']);
 

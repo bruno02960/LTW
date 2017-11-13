@@ -4,13 +4,15 @@
 
         <p id = "errorMessage"> </p>
 
-        <form id = "editorForm" action="profileEditor.php" method = "POST">
+        <form id = "editorForm" action="profileEditor.php" method = "POST" onkeypress="return keyListener(event)">
             <label for="UsernameLabel">Username:</label> <br>
             <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = "<?= $user['username'] ?>"> <br>
             <label for="EmailLabel">Email:</label> <br>
-            <input id = "emailInput" type = "text" placeholder = "Email" name = "email" value = "<?= $user['email'] ?>"> <br>
+            <input id = "emailInput" type = "email" placeholder = "Email" name = "email" value = "<?= $user['email'] ?>"> <br>
             <label for="NameLabel">Name:</label> <br>
             <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = "<?= $user['name'] ?>"> <br>
+            <label for="LocationLabel">Location:</label> <br>
+            <input id = "locationInput" type = "text" placeholder = "Location" name = "location" value = "<?= $user['location'] ?>"> <br>
             <input id = "sendForm" type = "submit" class = "hidden"> <br>
             <button id = "editProfileSubmit" type = "button"> Submit </button>
         </form>
@@ -29,7 +31,6 @@
 </body>
 
 <script>
-
     var submitButton = document.getElementById("editProfileSubmit");
     var form = document.getElementById("editorForm");
 
@@ -52,6 +53,7 @@
         var email = document.getElementById("emailInput").value;
         var username = document.getElementById("usernameInput").value;
         var name = document.getElementById("nameInput").value;
+        var location = document.getElementById("locationInput").value;
 
         if(username.length < '8')
         {
@@ -77,27 +79,40 @@
             return;
         }
 
+        if(location.length == '0')
+        {
+            var message = "Location can't be empty"
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("errorMessage").classList.remove('hidden');
+            return;
+        }
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() 
         {
             if (xhttp.readyState == 4 && xhttp.status == 200) 
             {
-            if(xhttp.responseText == -1) {
-                var message = "This username is already in use!";
-                document.getElementById("errorMessage").innerHTML = message;
-                document.getElementById("errorMessage").classList.remove('hidden');
-                return;
-            } else if(xhttp.responseText == -2) {
-                var message = "This email is already in use!";
-                document.getElementById("errorMessage").innerHTML = message;
-                document.getElementById("errorMessage").classList.remove('hidden');
-                return;
-            } else document.getElementById("sendForm").click();
+                if(xhttp.responseText == -1) 
+                {
+                    var message = "This username is already in use!";
+                    document.getElementById("errorMessage").innerHTML = message;
+                    document.getElementById("errorMessage").classList.remove('hidden');
+                    return;
+                } 
+                else if(xhttp.responseText == -2) 
+                {
+                    var message = "This email is already in use!";
+                    document.getElementById("errorMessage").innerHTML = message;
+                    document.getElementById("errorMessage").classList.remove('hidden');
+                    return;
+                } 
+                else 
+                    document.getElementById("sendForm").click();
             }
         }
 
         xhttp.open("POST", "checkDuplicatesEditing.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("username=" + username + "&email=" + email);
+        xhttp.send("username=" + username + "&email=" + email + "&location=" + location);
     });
 </script>
