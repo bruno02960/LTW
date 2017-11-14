@@ -100,7 +100,13 @@
                   }
                 }
                 let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
-                let htmlString = '<tr> <th class="id">ID</th>\n<th class="status">Status</th>\n<th class="task">Task</th>\n<th class="expDate">Expiration Date </th>\n</tr>';
+                let htmlString = `
+                <tr> 
+                  <th class="id">ID</th>
+                  <th class="status">Status</th>
+                  <th class="task">Task</th>
+                  <th class="expDate">Expiration Date </th>
+                </tr>`;
                 if(tasklist.length!=0){
                   for(let i=0;i<tasklist.length;++i){
                     htmlString = htmlString + "\n" + "<tr>";
@@ -115,7 +121,14 @@
                     htmlString = htmlString + "\n" + "</tr>";
                   }
                 }
-                htmlString = htmlString + '  <tr><form action"index.php" method="post"><td><input type="submit" name = "addTaskButton" value="Add task"></td><td class="task"><input type="text" name="taskName" placeholder="task name"><td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td></form></tr>';
+                htmlString = htmlString + `
+                <tr>
+                  <form action"index.php" method="post">
+                    <td><input type="submit" name = "addTaskButton" value="Add task"></td>
+                    <td class="task"><input type="text" name="taskName" placeholder="task name">
+                    <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
+                  </form>
+                </tr>`;
                 console.log("HTML TO SUBS IN:\n"+htmlString);
                 tableHTML.innerHTML = htmlString;
                 tasklist.length = 0;
