@@ -94,6 +94,7 @@
                     var tasks = JSON.parse(this.responseText);
                     console.log(tasks.length);
                     for(let i=0;i<tasks.length;++i){
+                      console.log(tasks[i]);
                       tasklist.push(JSON.parse(tasks[i]));
                     }
                   }
@@ -106,11 +107,16 @@
                     htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
                     htmlString = htmlString + "\n" + '<td class="status">' +  tasklist[i].completed +'</td>';
                     htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
-                    htmlString = htmlString + "\n" + '<td class="expDate">' +  tasklist[i].data +'</td>';
+                    let data = ""
+                    if(tasklist[i].expiring!=null){
+                      data = tasklist[i].expiring;
+                    }
+                    htmlString = htmlString + "\n" + '<td class="expDate">' +  data +'</td>';
                     htmlString = htmlString + "\n" + "</tr>";
                   }
                 }
-                htmlString = htmlString + '<tr><form action"index.php" method="post"><td><input type="submit" name = "addTaskButton" value="Add task"></td><td class="task"><input type="text" name="taskName" placeholder="task name"><td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td></form></tr>';
+                htmlString = htmlString + '  <tr><form action"index.php" method="post"><td><input type="submit" name = "addTaskButton" value="Add task"></td><td class="task"><input type="text" name="taskName" placeholder="task name"><td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td></form></tr>';
+                console.log("HTML TO SUBS IN:\n"+htmlString);
                 tableHTML.innerHTML = htmlString;
                 tasklist.length = 0;
               }
