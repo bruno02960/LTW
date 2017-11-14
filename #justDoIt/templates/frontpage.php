@@ -70,7 +70,7 @@
 </table>
 
     <script>
-
+      var tasklist = [];
       var listTable = document.querySelector("#listsTable");
       if(listTable!=null){
         document.querySelector('#listsTable').onclick = function(ev){
@@ -86,32 +86,43 @@
             {
               if (this.readyState == 4 && this.status == 200)
               {
-                console.log("Server Response:"+this.responseText);
                 if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
                 {
                   document.getElementById("message").innerHTML = "Error";
                   document.getElementById("message").classList.remove('hidden');
                 }else{
-                  var tasks = JSON.parse(this.responseText);
-                  console.log(tasks.length);
-                  for(var i = 0;i<tasks.length;++i){
-                    console.log("Task "+i);
-                    console.log("Task Raw:"+tasks[i]);
-                    var task = JSON.parse(tasks[i]);
-                    console.log("id "+task.title);
+                    var tasks = JSON.parse(this.responseText);
+                    console.log(tasks.length);
+                    for(let i=0;i<tasks.length;++i){
+                      tasklist.push(JSON.parse(tasks[i]));
+                    }
                   }
                 }
+                let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
+                let htmlString = '<tr> <th class="id">ID</th>\n<th class="status">Status</th>\n<th class="task">Task</th>\n<th class="expDate">Expiration Date </th>\n</tr>';
+                if(tasklist.length!=0){
+                  for(let i=0;i<tasklist.length;++i){
+                    htmlString = htmlString + "\n" + "<tr>";
+                    htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
+                    htmlString = htmlString + "\n" + '<td class="status">' +  tasklist[i].completed +'</td>';
+                    htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
+                    htmlString = htmlString + "\n" + '<td class="expDate">' +  tasklist[i].data +'</td>';
+                    htmlString = htmlString + "\n" + "</tr>";
+                  }
+                }
+                htmlString = htmlString + '<tr><form action"index.php" method="post"><td><input type="submit" name = "addTaskButton" value="Add task"></td><td class="task"><input type="text" name="taskName" placeholder="task name"><td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td></form></tr>';
+                tableHTML.innerHTML = htmlString;
+                tasklist.length = 0;
               }
             };
 
             xhttp.open("POST", "../main/getListData.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("index=" + currList);
-            //send ajax request for the list
-            //change values of current list
+            
           }
         }
-      }
+      
 
       var addList = document.querySelector('#addList');
       if(addList!=null){
