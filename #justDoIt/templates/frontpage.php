@@ -73,7 +73,7 @@
       var tasklist = [];
       var listTable = document.querySelector("#listsTable");
       if(listTable!=null){
-        document.querySelector('#listsTable').onclick = function(ev){
+        listTable.onclick = function(ev){
           var index = ev.target.parentElement.rowIndex;
           if(index==null){
             console.log("NULL row");
