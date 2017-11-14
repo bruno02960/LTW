@@ -33,7 +33,7 @@
   }
     ?>
   <tr>
-    <form action"index.php" method="post">
+    <form action"index.php" method="POST">
     <td><input type="submit" name = "addTaskButton" value="Add task"></td>
     <td class="task"><input type="text" name="taskName" placeholder="task name">
     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
@@ -42,7 +42,7 @@
 </table>
  <br>
 <br>
-<form action"index.php" method="post">
+<form action"index.php" method="POST">
 <input type="submit" name = "deleteListButton" value="Delete list">
 </form>
 </section>
@@ -62,7 +62,7 @@
     <script>
       var currList = 0;
     </script>
-<td class="list"><form action"index.php" method="post">
+<td class="list"><form action"index.php" method="POSt">
   <input type="text" name="listName" placeholder="list name"><br>
   <input type="submit" name = "addListButton" value="Add list">
   </form></td>
@@ -123,7 +123,7 @@
                 }
                 htmlString = htmlString + `
                 <tr>
-                  <form action"../main/index.php" method="post">
+                  <form action"index.php" method="POST">
                     <td><input type="submit" name = "addTaskButton" value="Add task"></td>
                     <td class="task"><input type="text" name="taskName" placeholder="task name">
                     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
@@ -169,6 +169,7 @@
         // ev.target <== td element
         // ev.target.parentElement <== tr
         var index = ev.target.parentElement.rowIndex;
+        console.log("clicked on row:"+index);
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
         if(items[index]!=null){
