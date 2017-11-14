@@ -123,7 +123,7 @@
                 }
                 htmlString = htmlString + `
                 <tr>
-                  <form action"index.php" method="post">
+                  <form action"../main/index.php" method="post">
                     <td><input type="submit" name = "addTaskButton" value="Add task"></td>
                     <td class="task"><input type="text" name="taskName" placeholder="task name">
                     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
@@ -171,6 +171,7 @@
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
+        if(items[index]!=null){
         if(items[index].innerHTML == "false")
           {
             items[index].innerHTML = "true";
@@ -194,6 +195,7 @@
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
           }
+        }
       }
     }
     </script>
