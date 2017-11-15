@@ -7,8 +7,9 @@
     }
 
     include('../database/connection.php');
-
-    if(!empty($_POST['username']) && !empty($_POST['password'])):
+    
+    if(!empty($_POST['username']) && !empty($_POST['password']))
+    {
 
         $records = $conn->prepare('SELECT id, username,password FROM users WHERE username = :username');
         $records->bindParam(':username', $_POST['username']);
@@ -17,16 +18,17 @@
 
         $message = '';
 
-        if(count($results) > 0 && password_verify($_POST['password'], $results['password'])):
+        if(count($results) > 0 && password_verify($_POST['password'], $results['password']))
         {
             $_SESSION['user_id'] = $results['id'];
             header("Location: ../main/index.php");
         }
-        else:
+        else
+        {
             $message = 'Sorry, those credentials do not match';
-        endif;
-
-    endif;
+            
+        }
+    }
 
         include('../templates/header.php');
         include('loginForm.php');

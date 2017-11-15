@@ -267,6 +267,7 @@ div#editProfileButton {
 .tasks tbody th {
     background-color: #1E000D;
     color: white;
+	min-width: 174px;
 }
 
 .tasks tbody tr:nth-child(2n+1) {
@@ -304,6 +305,7 @@ div#editProfileButton {
     background-color: #8E707D;
     font-weight: bold;
     color: white;
+	min-width: 356px;
 }
 
 #registerForm input{

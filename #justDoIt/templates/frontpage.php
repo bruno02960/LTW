@@ -10,42 +10,46 @@
     <section id="list">
   <h1> Selected list name </h1>
   <table class="tasks" id="taskTable">
-  <tbody>
-    <tr>
-      <th class="id">ID</th>
-      <th class="status">Status</th>
-      <th class="task">Task</th>
-      <th class="expDate">Expiration Date </th>
-    </tr>
-
-    <?php
-      if($tasks!=NULL) 
-      {
-        foreach( $tasks as $task) 
-        {
-          $data = "";
-          if($task['expiring']!=NULL)
-          {
-            $data = date('m/d/Y', $task['expiring']);
-          }
-          echo '<tr>
-                  <td class="id">' . $task['id']. '</td>
-                  <td class="status">' . $task['completed']. '</td>
-                  <td class="task">' . $task['title']. '</td>
-                  <td class="expDate">' . $data .'</td>
-                </tr>';
-        }
-      }
-    ?>
-  </tbody>
-
-  <?php 
-    if($_SESSION['allLists'] != null)
-    { 
-  ?>
-    <tfooter>
+    <tbody>
       <tr>
-        <form id = "taskSubmit" action="addTask.php" method="POST">
+        <th class="id">ID</th>
+        <th class="status">Status</th>
+        <th class="task">Task</th>
+        <th class="expDate">Expiration Date </th>
+      </tr>
+
+      <?php
+        if($tasks!=NULL) 
+        {
+          foreach( $tasks as $task) 
+          {
+            $data = "";
+            if($task['expiring']!=NULL)
+            {
+              $data = date('m/d/Y', $task['expiring']);
+            }
+            echo '<tr>
+                    <td class="id">' . $task['id']. '</td>
+                    <td class="status">' . $task['completed']. '</td>
+                    <td class="task">' . $task['title']. '</td>
+                    <td class="expDate">' . $data .'</td>
+                  </tr>';
+          }
+        }
+      ?>
+    </tbody>
+
+    <?php 
+      if($_SESSION['allLists'] == null)
+      { 
+        $toHide = "hidden";
+      }
+      else
+        $toHide = " ";
+    ?>
+    <tfooter>
+      <tr class = "<?= $toHide ?>">
+        <form action="addTask.php" method="POST">
           <td><input type="submit" name = "addTaskButton" value="Add task"></td>
           <td class="task"><input type="text" name="taskName" placeholder="task name">
           <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
@@ -53,42 +57,38 @@
         </form>
       </tr>
     </tfooter>
-  <?php 
-    } 
-  ?>
-
-</table>
- <br>
-<br>
-  <form action = "deleteList.php" method="POST">
-    <input type="submit" name = "deleteListButton" value="Delete list">
-    <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>"> 
-  </form>
-</section>
-<aside id="lists">
-<h1> To-do lists </h1>
-<table class="lists" id="listsTable">
-  <?php
-  if($lists!=NULL) 
-  {
-    foreach( $lists as $list) 
-    {
-      echo '<tr>
-            <td class="id">' . $list['id']. '</td>
-            <td class="name">' . $list['name']. '</td>
-            </tr>';
-    }
-  }
-  ?>
-  <td class="list">
-    <form action = "addList.php" method="POST">
-      <input type="text" name="listName" placeholder="list name"><br>
-      <input type="submit" name = "addListButton" value="Add list">
+  </table>
+  <br>
+  <br>
+    <form action = "deleteList.php" method="POST">
+      <input type="submit" name = "deleteListButton" value="Delete list">
       <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>"> 
     </form>
-  </td>
-</tr>
-</table>
+  </section>
+  <aside id="lists">
+  <h1> To-do lists </h1>
+  <table class="lists" id="listsTable">
+    <?php
+    if($lists!=NULL) 
+    {
+      foreach( $lists as $list) 
+      {
+        echo '<tr>
+              <td class="id">' . $list['id']. '</td>
+              <td class="name">' . $list['name']. '</td>
+              </tr>';
+      }
+    }
+    ?>
+    <td class="list">
+      <form action = "addList.php" method="POST">
+        <input type="text" name="listName" placeholder="list name"><br>
+        <input type="submit" name = "addListButton" value="Add list">
+        <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>"> 
+      </form>
+    </td>
+  </tr>
+  </table>
 
     <script>
     var currList = 0;
@@ -179,11 +179,6 @@
       //var addTask = document.get('#addTask');
       //console.log(addTask);
       
-      function addTaskFunc()
-      {
-        document.getElementById("taskSubmit").submit();
-      }
-
       /*if(addTask!=null){
       document.querySelector('#addTask').onclick = function(ev)
       {
