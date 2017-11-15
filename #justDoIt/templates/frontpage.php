@@ -10,6 +10,7 @@
     <section id="list">
   <h1> Selected list name </h1>
   <table class="tasks" id="taskTable">
+  <tbody>
   <tr>
     <th class="id">ID</th>
     <th class="status">Status</th>
@@ -21,7 +22,7 @@
     foreach( $tasks as $task) {
       $data = "";
       if($task['expiring']!=NULL){
-        $data = date('d/m/Y', $task['expiring']);
+        $data = date('m/d/Y', $task['expiring']);
       }
       echo '<tr>
               <td class="id">' . $task['id']. '</td>
@@ -32,13 +33,17 @@
     }
   }
     ?>
+  </tbody>
+  <tfooter>
   <tr>
-    <form action"index.php" method="POST">
+    <form id = "taskSubmit" action="index.php" method="POST">
     <td><input type="submit" name = "addTaskButton" value="Add task"></td>
     <td class="task"><input type="text" name="taskName" placeholder="task name">
     <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
+   <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>"> 
       </form>
   </tr>
+  </tfooter>
 </table>
  <br>
 <br>
@@ -59,10 +64,7 @@
     }
   }
     ?>
-    <script>
-      var currList = 0;
-    </script>
-<td class="list"><form action"index.php" method="POSt">
+<td class="list"><form action"index.php" method="POST">
   <input type="text" name="listName" placeholder="list name"><br>
   <input type="submit" name = "addListButton" value="Add list">
   </form></td>
@@ -70,15 +72,18 @@
 </table>
 
     <script>
+    var currList = 0;
       var tasklist = [];
       var listTable = document.querySelector("#listsTable");
       if(listTable!=null){
         listTable.onclick = function(ev){
+          var clicked = ev.target.parentElement.querySelector('.id').innerText;
+          document.getElementById('idList').value = clicked;
           var index = ev.target.parentElement.rowIndex;
           if(index==null){
             console.log("NULL row");
           }else{
-            console.log("clicked on:"+index + " current list was:"+currList);
+            //console.log("clicked on:"+index + " current list was:"+currList);
             currList = index;
 
             var xhttp = new XMLHttpRequest();
@@ -92,9 +97,9 @@
                   document.getElementById("message").classList.remove('hidden');
                 }else{
                     var tasks = JSON.parse(this.responseText);
-                    console.log(tasks.length);
+                    //console.log(tasks.length);
                     for(let i=0;i<tasks.length;++i){
-                      console.log(tasks[i]);
+                      //console.log(tasks[i]);
                       tasklist.push(JSON.parse(tasks[i]));
                     }
                   }
@@ -117,18 +122,18 @@
                     if(tasklist[i].expiring!=null){
                       data = tasklist[i].expiring;
                     }
-                    htmlString = htmlString + "\n" + '<td class="expDate">' +  data +'</td>';
+                    var taskDate = new Date(data* 1000);
+                    var taskDateMonth = taskDate.getMonth() + 1;
+                    var taskDateDay = taskDate.getDate() + 1;
+                    function pad(n) {
+                        return (n < 10) ? ("0" + n) : n;
+                    }
+                    htmlString = htmlString + "\n" + '<td class="expDate">' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
                     htmlString = htmlString + "\n" + "</tr>";
+
+                    console.log(new Date(data * 1000));
                   }
-                }
-                htmlString = htmlString + `
-                <tr>
-                  <form action"index.php" method="POST">
-                    <td><input type="submit" name = "addTaskButton" value="Add task"></td>
-                    <td class="task"><input type="text" name="taskName" placeholder="task name">
-                    <td class="task"><input type="text" name="taskDate" placeholder="expiring (mm/dd/yyyy)"></td>
-                  </form>
-                </tr>`;
+                };
                 console.log("HTML TO SUBS IN:\n"+htmlString);
                 tableHTML.innerHTML = htmlString;
                 tasklist.length = 0;
@@ -152,8 +157,15 @@
       }
       }
 
-      var addTask = document.querySelector('#addTask');
-      if(addTask!=null){
+      //var addTask = document.get('#addTask');
+      //console.log(addTask);
+      
+      function addTaskFunc()
+      {
+        document.getElementById("taskSubmit").submit();
+      }
+
+      /*if(addTask!=null){
       document.querySelector('#addTask').onclick = function(ev)
       {
 
@@ -161,6 +173,7 @@
           document.getElementById("message").classList.remove('hidden');
       }
       }
+      */
 
       var taskTable = document.querySelector('#taskTable');
       if(taskTable!=null){

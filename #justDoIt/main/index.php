@@ -36,7 +36,7 @@ if(isset($_SESSION['user_id']))
 
     $selectedList = $lists[0];
 
-    $records = $conn->prepare('SELECT id, title, completed, expiring FROM task WHERE toDoListId = :id');
+    $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
     $records->bindParam(':id', $selectedList['id']);
     $records->execute();
     $results = $records->fetchAll();
@@ -69,7 +69,7 @@ if(isset($_SESSION['user_id']))
   if (isset($_POST['addTaskButton'])) {
     if($_POST['taskName']!="") {
       $records = $conn->prepare('INSERT INTO task (title, completed, toDoListId, expiring) VALUES (:title, "false", :toDoListId, :expiring)');
-      $records->bindParam(':toDoListId', $selectedList['id']);
+      $records->bindParam(':toDoListId', $_POST['listID']);
       $records->bindParam(':title', $_POST['taskName']);
       $expiring = strtotime($_POST['taskDate']);
       $records->bindParam(':expiring', $expiring);
