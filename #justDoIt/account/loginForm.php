@@ -1,6 +1,6 @@
 <body>
     <?php if(!empty($message)): ?>
-        <p><?= $message ?> </p>
+        <p id = "errorMessage"><?= $message ?> </p>
     <?php endif; ?>
 
     <section id="login">

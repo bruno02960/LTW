@@ -1,13 +1,72 @@
+@media screen and (max-width: 992px) {
+  .tasks tbody th {
+      min-width: 140px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div#pic {
+      width: 35%;
+  }
+
+  .tasks tbody th {
+      min-width: 120px;
+  }
+
+  aside#lists {
+    width: 90%;
+  }
+
+  #list {
+    width: 90%;
+  }
+
+  .tasks tbody th {
+    font-size:12px;
+  }
+
+  #list > h1 {
+    font-size: 23px;
+  }
+
+  #editProfile input {
+    width: 30%;
+  }
+
+  #login input {
+      width: 30%;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .tasks tbody th {
     font-size:12px;
   }
-}
 
-@media screen and (max-width: 992px) {
+  div#pic {
+      float: none;
+  }
+
+  #lists > h1 {
+    font-size: 18px;
+  }
+
   .tasks tbody th {
-      background-color: #1E000D;
-      color: white;
-      min-width: 125px;
+      min-width: 75px;
+  }
+
+  #list > h1 {
+    font-size: 18px;
+  }
+
+  #editProfile input {
+    width: 50%;
+  }
+
+  div#info {
+    border-left: none;
+    border-top: 1px solid black;
+    padding-left: 0;
+    padding-top: 1em;
   }
 }

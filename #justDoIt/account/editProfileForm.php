@@ -23,7 +23,7 @@
         <div id="uploadPhoto">
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
-                <label id="fileToUploadLabel" for="fileToUpload">New photo</label>
+                <label id="fileToUploadLabel" for="fileToUpload">Browse...</label>
                 <input id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
         </div>
@@ -34,16 +34,16 @@
     var submitButton = document.getElementById("editProfileSubmit");
     var form = document.getElementById("editorForm");
 
-    function keyListener(e) 
+    function keyListener(e)
     {
-        if (e.keyCode == 13) 
+        if (e.keyCode == 13)
         {
             submitButton.click();
             return false;
         }
     }
 
-    submitButton.addEventListener("click", function(event) 
+    submitButton.addEventListener("click", function(event)
     {
         event.preventDefault();
         document.getElementById("errorMessage").classList.value = '';
@@ -88,25 +88,25 @@
         }
 
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() 
+        xhttp.onreadystatechange = function()
         {
-            if (xhttp.readyState == 4 && xhttp.status == 200) 
+            if (xhttp.readyState == 4 && xhttp.status == 200)
             {
-                if(xhttp.responseText == -1) 
+                if(xhttp.responseText == -1)
                 {
                     var message = "This username is already in use!";
                     document.getElementById("errorMessage").innerHTML = message;
                     document.getElementById("errorMessage").classList.remove('hidden');
                     return;
-                } 
-                else if(xhttp.responseText == -2) 
+                }
+                else if(xhttp.responseText == -2)
                 {
                     var message = "This email is already in use!";
                     document.getElementById("errorMessage").innerHTML = message;
                     document.getElementById("errorMessage").classList.remove('hidden');
                     return;
-                } 
-                else 
+                }
+                else
                     document.getElementById("sendForm").click();
             }
         }

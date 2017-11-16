@@ -169,7 +169,6 @@
       }
     }
     </script>
-
 </aside>
 <section id="list">
 <h1> Selected list name </h1>
