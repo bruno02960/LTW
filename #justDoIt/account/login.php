@@ -10,7 +10,6 @@
     
     if(!empty($_POST['username']) && !empty($_POST['password']))
     {
-
         $records = $conn->prepare('SELECT id, username,password FROM users WHERE username = :username');
         $records->bindParam(':username', $_POST['username']);
         $records->execute();
@@ -26,11 +25,10 @@
         else
         {
             $message = 'Sorry, those credentials do not match';
-            
         }
     }
 
-        include('../templates/header.php');
-        include('loginForm.php');
-        include('../templates/footer.php');
+    include('../templates/header.php');
+    include('loginForm.php');
+    include('../templates/footer.php');
 ?>

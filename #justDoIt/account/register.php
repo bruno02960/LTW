@@ -11,7 +11,6 @@
 
     if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['location']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
     {
-
         //Enter the new user in the database
         $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
         $stmt = $conn->prepare($sql);
