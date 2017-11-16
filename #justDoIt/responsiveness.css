@@ -1,0 +1,13 @@
+@media screen and (max-width: 480px) {
+  .tasks tbody th {
+    font-size:12px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .tasks tbody th {
+      background-color: #1E000D;
+      color: white;
+      min-width: 125px;
+  }
+}

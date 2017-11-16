@@ -21,7 +21,7 @@ header {
 
 header h1 {
     text-align: center;
-    font-family: Arial Black;
+    font-family: Montserrat;
     text-transform: capitalize;
     margin: 0;
     background-color: #f20069;
@@ -46,8 +46,10 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    width: 30%;
+    width: 33%;
     display: inline-block;
+    padding-bottom: 1em;
+    padding-left: 1em;
 }
 
 aside#lists > ul {
@@ -121,11 +123,12 @@ nav#menu {
     vertical-align: top;
     width: 60%;
     padding-left: 1em;
+    padding-right: 1em;
     padding-bottom: 1em;
 }
 
 #list > h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 body {
@@ -144,7 +147,7 @@ footer {
 }
 
 #register h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 #register {
@@ -165,7 +168,7 @@ button#registerSubmit {
 }
 
 #login h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 #login {
@@ -186,7 +189,7 @@ button#loginSubmit {
 }
 
 #editProfile h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 #editProfile {
@@ -222,7 +225,7 @@ input:-webkit-autofill {
 }
 
 #profile h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 #profile {
@@ -267,7 +270,7 @@ div#editProfileButton {
 .tasks tbody th {
     background-color: #1E000D;
     color: white;
-	min-width: 174px;
+    min-width: 174px;
 }
 
 .tasks tbody tr:nth-child(2n+1) {
@@ -336,7 +339,7 @@ input[name="deleteListButton"] {
 }
 
 #lists > h1 {
-  font-family: Arial;
+  font-family: Montserrat;
 }
 
 a#addTask {
