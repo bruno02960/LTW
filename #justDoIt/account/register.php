@@ -1,11 +1,8 @@
 <?php
     include('../includes/session.php');
 
-    if(isset($_SESSION['user_id'])):
-        {
-            header("Location: ../main/index.php");
-        }
-    endif;
+    if(isset($_SESSION['user_id']))
+        header("Location: ../main/index.php");
 
     include('../database/connection.php');
 
@@ -34,7 +31,6 @@
 
         if($stmt->execute())
         {
-            $message = 'Sucessfully created new user';
             $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
             $records->bindParam(':username', $UserName);
             $records->execute();
@@ -43,7 +39,10 @@
             header("Location: ../main/index.php");
         }
         else
-            $message = 'Unexpected error';
+        {
+            header("Location: ../account/register.php");
+            echo('Unexpected error');
+        }
 
     }
 

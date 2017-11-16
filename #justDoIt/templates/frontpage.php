@@ -194,62 +194,37 @@
         }
       }
 
-
-    var addList = document.querySelector('#addList');
-    if(addList!=null){
-    document.querySelector('#addList').onclick = function(ev)
-    {
-        document.getElementById("message").innerHTML = "Added list";
-        document.getElementById("message").classList.remove('hidden');
-    }
-    }
-
-    //var addTask = document.get('#addTask');
-    //console.log(addTask);
-
-    /*if(addTask!=null){
-    document.querySelector('#addTask').onclick = function(ev)
-    {
-
-        document.getElementById("message").innerHTML = "Added task";
-        document.getElementById("message").classList.remove('hidden');
-    }
-    }
-    */
-
     var taskTable = document.querySelector('#taskTable');
     if(taskTable!=null){
     document.querySelector('#taskTable').onclick = function(ev)
     {
-      // ev.target <== td element
-      // ev.target.parentElement <== tr
-      var index = ev.target.parentElement.rowIndex;
-      console.log("clicked on row:"+index);
-      var table = document.getElementById("taskTable");
-      items = table.getElementsByClassName("status");
-      if(items[index]!=null){
-      if(items[index].innerHTML == "false")
-        {
-          items[index].innerHTML = "true";
-
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function()
+      if (confirm("Press a button!") == true) 
+      {
+        // ev.target <== td element
+        // ev.target.parentElement <== tr
+        var index = ev.target.parentElement.rowIndex;
+        var table = document.getElementById("taskTable");
+        items = table.getElementsByClassName("status");
+        if(items[index]!=null){
+        if(items[index].innerHTML == "false")
           {
-            if (this.readyState == 4 && this.status == 200)
+            items[index].innerHTML = "true";
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
             {
-              if(this.responseText == 0)
+              if (this.readyState == 4 && this.status == 200)
               {
-                document.getElementById("message").innerHTML = "Completed Task";
-                document.getElementById("message").classList.remove('hidden');
+                  console.log("good");
               }
-            }
-          };
+            };
 
-          items = table.getElementsByClassName("id");
+            items = table.getElementsByClassName("id");
 
-          xhttp.open("POST", "../account/changeTaskBool.php", true);
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
+            xhttp.open("POST", "../account/changeTaskBool.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
+          }
         }
       }
     }
