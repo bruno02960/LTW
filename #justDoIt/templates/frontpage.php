@@ -31,8 +31,68 @@
     </td>
   </tr>
   </table>
+  </aside>
 
-    <script>
+  <?php
+    if($_SESSION['allLists'] == null)
+    {
+      $toHide = "hidden";
+    }
+    else
+      $toHide = " ";
+  ?>
+
+  <section id="list">
+  <h1 class = "<?= $toHide ?>"> Selected list name </h1>
+  <table class="tasks <?= $toHide ?>" id="taskTable">
+  <tbody>
+    <tr>
+      <th class="id">ID</th>
+      <th class="status">Status</th>
+      <th class="task">Task</th>
+      <th class="expDate">Expiration Date </th>
+    </tr>
+
+    <?php
+      if($tasks!=NULL)
+      {
+        foreach( $tasks as $task)
+        {
+          $data = "";
+          if($task['expiring']!=NULL)
+          {
+            $data = date('m/d/Y', $task['expiring']);
+          }
+          echo '<tr>
+                  <td class="id">' . $task['id']. '</td>
+                  <td class="status">' . $task['completed']. '</td>
+                  <td class="task">' . $task['title']. '</td>
+                  <td class="expDate">' . $data .'</td>
+                </tr>';
+        }
+      }
+    ?>
+  </tbody>
+
+  <tfooter>
+    <tr class = "<?= $toHide ?>">
+      <form action="addTask.php" method="POST">
+        <td><input type="submit" name = "addTaskButton" value="Add task"></td>
+        <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
+        <input id = "idList2" type="hidden"  name = "listID">
+        <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
+      </form>
+    </tr>
+  </tfooter>
+  </table>
+  <br>
+  <br>
+  <form action = "deleteList.php" method="POST">
+    <input type="submit" name = "deleteListButton" value="Delete list">
+    <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
+  </form>
+
+  <script>
     var currList = 0;
       var tasklist = [];
       var listTable = document.querySelector("#listsTable");
@@ -170,92 +230,34 @@
     }
     </script>
 
-</aside>
-<section id="list">
-<h1> Selected list name </h1>
-<table class="tasks" id="taskTable">
-<tbody>
-  <tr>
-    <th class="id">ID</th>
-    <th class="status">Status</th>
-    <th class="task">Task</th>
-    <th class="expDate">Expiration Date </th>
-  </tr>
+  </section>
+        <?php else: ?>
+          <section id="welcome">
+              <p>Do it <br>
+    Just do it<br>
 
-  <?php
-    if($tasks!=NULL)
-    {
-      foreach( $tasks as $task)
-      {
-        $data = "";
-        if($task['expiring']!=NULL)
-        {
-          $data = date('m/d/Y', $task['expiring']);
-        }
-        echo '<tr>
-                <td class="id">' . $task['id']. '</td>
-                <td class="status">' . $task['completed']. '</td>
-                <td class="task">' . $task['title']. '</td>
-                <td class="expDate">' . $data .'</td>
-              </tr>';
-      }
-    }
-  ?>
-</tbody>
+    Don't let your dreams be dreams<br>
+    Yesterday you said tomorrow<br>
+    So just do it<br>
+    Make your dreams come true<br>
+    Just do it<br>
 
-<?php
-  if($_SESSION['allLists'] == null)
-  {
-    $toHide = "hidden";
-  }
-  else
-    $toHide = " ";
-?>
-<tfooter>
-  <tr class = "<?= $toHide ?>">
-    <form action="addTask.php" method="POST">
-      <td><input type="submit" name = "addTaskButton" value="Add task"></td>
-      <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
-      <input id = "idList2" type="hidden"  name = "listID">
-      <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
-    </form>
-  </tr>
-</tfooter>
-</table>
-<br>
-<br>
-<form action = "deleteList.php" method="POST">
-  <input type="submit" name = "deleteListButton" value="Delete list">
-  <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
-</form>
-</section>
-      <?php else: ?>
-        <section id="welcome">
-            <p>Do it <br>
-  Just do it<br>
+    Some people dream of success<br>
+    While you're gonna wake up and work hard at it<br>
+    Nothing is impossible<br>
 
-  Don't let your dreams be dreams<br>
-  Yesterday you said tomorrow<br>
-  So just do it<br>
-  Make your dreams come true<br>
-  Just do it<br>
+    You should get to the point<br>
+    Where anyone else would quit<br>
+    And you're not going to stop there<br>
+    No, what are you waiting for?<br>
 
-  Some people dream of success<br>
-  While you're gonna wake up and work hard at it<br>
-  Nothing is impossible<br>
-
-  You should get to the point<br>
-  Where anyone else would quit<br>
-  And you're not going to stop there<br>
-  No, what are you waiting for?<br>
-
-  Do it<br>
-  Just do it<br>
-  Yes you can<br>
-  Just do it<br>
-  If you're tired of starting over<br>
-  Stop giving up <br> <br>
-- Shia LaBeouf</p>
-</section>
-      <?php endif; ?>
-    </section>
+    Do it<br>
+    Just do it<br>
+    Yes you can<br>
+    Just do it<br>
+    If you're tired of starting over<br>
+    Stop giving up <br> <br>
+  - Shia LaBeouf</p>
+  </section>
+        <?php endif; ?>
+      </section>
