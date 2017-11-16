@@ -26,7 +26,7 @@
       <form action = "addList.php" method="POST">
         <input type="text" name="listName" placeholder="list name"><br>
         <input type="submit" name = "addListButton" value="Add list">
-        <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
+        <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
       </form>
     </td>
   </tr>
@@ -39,7 +39,7 @@
       if(listTable!=null){
         listTable.onclick = function(ev){
           var clicked = ev.target.parentElement.querySelector('.id').innerText;
-          document.getElementById('idList').value = clicked;
+          document.getElementById('idList2').value = clicked;
           var index = ev.target.parentElement.rowIndex;
           if(index==null){
             console.log("NULL row");
@@ -92,10 +92,10 @@
                     htmlString = htmlString + "\n" + '<td class="expDate">' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
                     htmlString = htmlString + "\n" + "</tr>";
 
-                    console.log(new Date(data * 1000));
+                    //console.log(new Date(data * 1000));
                   }
                 };
-                console.log("HTML TO SUBS IN:\n"+htmlString);
+                //console.log("HTML TO SUBS IN:\n"+htmlString);
                 tableHTML.innerHTML = htmlString;
                 tasklist.length = 0;
               }
@@ -215,9 +215,9 @@
   <tr class = "<?= $toHide ?>">
     <form action="addTask.php" method="POST">
       <td><input type="submit" name = "addTaskButton" value="Add task"></td>
-      <td class="task"><input type="text" name="taskName" placeholder="task name">
+      <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
+      <input id = "idList2" type="hidden"  name = "listID">
       <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
-      <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
     </form>
   </tr>
 </tfooter>
@@ -226,7 +226,7 @@
 <br>
 <form action = "deleteList.php" method="POST">
   <input type="submit" name = "deleteListButton" value="Delete list">
-  <input id = "idList" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
+  <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
 </form>
 </section>
       <?php else: ?>
