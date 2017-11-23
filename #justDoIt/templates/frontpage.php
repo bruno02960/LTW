@@ -208,7 +208,7 @@
         {
           if(items[index].innerHTML == "false")
           {
-            if (confirm("Press a button!") == true) 
+            if (confirm("Are you sure?") == true) 
             {
               items[index].innerHTML = "true";
 

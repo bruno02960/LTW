@@ -7,15 +7,10 @@
     $records->bindParam(':id', $_SESSION['user_id']);
 
     if($records->execute())
-    {   
+    {
         $results = $records->fetchAll();
-        $lists = NULL;
-
-        // if(count($results) > 0)
-        //{
         $_SESSION['allLists'] = $results;
         $lists = $results;
-        //}
 
         if(count($lists) != 0)
         {
