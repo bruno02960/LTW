@@ -15,11 +15,11 @@
         
         if($stmt->execute())
         {
-            return 0;
+            echo 0;
         }
         else
         {
-            return -1;
+            echo -1;
         }
     }
 ?>

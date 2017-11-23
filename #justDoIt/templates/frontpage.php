@@ -152,13 +152,13 @@
                 for(let i=0;i<tasklist.length;++i)
 				{
 				  if(tasklist[i].completed == "true")
-					$checkMark = '&#10003;';
+					  var checkMark = '&#10003;';
 				  else
-					$checkMark = '&#10008;';
+					  var checkMark = '&#10008;';
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
-                  htmlString = htmlString + "\n" + '<td class="status">' +  $checkMark +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="status">' +  checkMark +'</td>';
                   htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
                   let data = ""
                   if(tasklist[i].expiring!=null){
@@ -230,6 +230,7 @@
               {
                 if (this.readyState == 4 && this.status == 200)
                 {
+                  if(this.responseText == 0)
                     console.log("good");
                 }
               };
