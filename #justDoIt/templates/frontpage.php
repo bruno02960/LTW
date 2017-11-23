@@ -64,10 +64,10 @@
             $data = date('m/d/Y', $task['expiring']);
           }
 
-		  if($task['completed'] == true)
-			$checkMark = '&#10003;';
+		  if($task['completed'] == "true")
+			  $checkMark = '&#10003;';
 		  else
-			$checkMark = '&#10008;';
+			  $checkMark = '&#10008;';
 
           echo '<tr>
                   <td class="id">' . $task['id']. '</td>
@@ -151,7 +151,7 @@
 			  {
                 for(let i=0;i<tasklist.length;++i)
 				{
-				  if(tasklist[i].completed == true)
+				  if(tasklist[i].completed == "true")
 					$checkMark = '&#10003;';
 				  else
 					$checkMark = '&#10008;';
@@ -219,11 +219,11 @@
         items = table.getElementsByClassName("status");
         if(items[index]!=null)
         {
-          if(items[index].innerHTML == "false")
+          if(items[index].innerHTML == "\u2718")
           {
-            if (confirm("Press a button!") == true) 
+            if (confirm("Mark this task as completed?") == true) 
             {
-              items[index].innerHTML = "true";
+              items[index].innerHTML = "\u2713";
 
               var xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function()
