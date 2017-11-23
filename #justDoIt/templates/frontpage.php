@@ -26,7 +26,7 @@
       <form action = "addList.php" method="POST">
         <input type="text" name="listName" placeholder="list name"><br>
         <input type="submit" name = "addListButton" value="Add list">
-        <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
+        <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
     </td>
   </tr>
@@ -43,7 +43,7 @@
   ?>
 
   <section id="list">
-  <h1 id = "ListName" class = "<?= $toHide ?>"> <?= $lists[0]['name']?> </h1>
+  <h1 id = "ListName" class = "<?= $toHide ?>"> <?= $lists[$index]['name']?> </h1>
   <table class="tasks <?= $toHide ?>" id="taskTable">
   <tbody>
     <tr>
@@ -79,7 +79,7 @@
       <form action="addTask.php" method="POST">
         <td><input type="submit" name = "addTaskButton" value="Add task"></td>
         <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
-        <input id = "idList2" type="hidden"  name = "listID">
+        <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
       </form>
     </tr>
@@ -89,7 +89,7 @@
   <br>
   <form class = "<?= $toHide ?>" action = "deleteList.php" method="POST">
     <input type="submit" name = "deleteListButton" value="Delete list">
-    <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[0]['id'] ?>">
+    <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
 
   <script>
@@ -172,47 +172,6 @@
           xhttp.open("POST", "../main/getListData.php", true);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
           xhttp.send("index=" + currList);
-          }
-        }
-      }
-
-
-    var addList = document.querySelector('#addList');
-    if(addList!=null){
-    document.querySelector('#addList').onclick = function(ev)
-    {
-        document.getElementById("message").innerHTML = "Added list";
-        document.getElementById("message").classList.remove('hidden');
-    }
-    }
-
-    //var addTask = document.get('#addTask');
-    //console.log(addTask);
-
-    /*if(addTask!=null){
-    document.querySelector('#addTask').onclick = function(ev)
-    {
-
-        document.getElementById("message").innerHTML = "Added task";
-        document.getElementById("message").classList.remove('hidden');
-    }
-    }
-    */
-
-    var taskTable = document.querySelector('#taskTable');
-    if(taskTable!=null){
-    document.querySelector('#taskTable').onclick = function(ev)
-    {
-      // ev.target <== td element
-      // ev.target.parentElement <== tr
-      var index = ev.target.parentElement.rowIndex;
-      console.log("clicked on row:"+index);
-      var table = document.getElementById("taskTable");
-      items = table.getElementsByClassName("status");
-      if(items[index]!=null){
-      if(items[index].innerHTML == "false")
-        {
-          items[index].innerHTML = "true";
 
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function()
@@ -227,14 +186,50 @@
             }
           };
 
-          items = table.getElementsByClassName("id");
-
-          xhttp.open("POST", "../account/changeTaskBool.php", true);
+          xhttp.open("POST", "../main/getListIndex.php", true);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
+          xhttp.send("listID=" + clickedID);
+          console.log("this");
+          }
         }
       }
-    }
+
+    var taskTable = document.querySelector('#taskTable');
+    if(taskTable!=null)
+    {
+      document.querySelector('#taskTable').onclick = function(ev)
+      {
+        // ev.target <== td element
+        // ev.target.parentElement <== tr
+        var index = ev.target.parentElement.rowIndex;
+        var table = document.getElementById("taskTable");
+        items = table.getElementsByClassName("status");
+        if(items[index]!=null)
+        {
+          if(items[index].innerHTML == "false")
+          {
+            if (confirm("Press a button!") == true) 
+            {
+              items[index].innerHTML = "true";
+
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function()
+              {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    console.log("good");
+                }
+              };
+
+              items = table.getElementsByClassName("id");
+
+              xhttp.open("POST", "../account/changeTaskBool.php", true);
+              xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
+            }
+          }
+        }
+      }
     }
   </script>
 

@@ -1,17 +1,13 @@
 <?php
     include('../includes/session.php');
 
-    if(isset($_SESSION['user_id'])):
-        {
-            header("Location: ../main/index.php");
-        }
-    endif;
+    if(isset($_SESSION['user_id']))
+        header("Location: ../main/index.php");
 
     include('../database/connection.php');
 
     if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['location']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
     {
-
         //Enter the new user in the database
         $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
         $stmt = $conn->prepare($sql);
@@ -35,7 +31,6 @@
 
         if($stmt->execute())
         {
-            $message = 'Sucessfully created new user';
             $records = $conn->prepare('SELECT id FROM users WHERE username = :username');
             $records->bindParam(':username', $UserName);
             $records->execute();
@@ -44,7 +39,10 @@
             header("Location: ../main/index.php");
         }
         else
-            $message = 'Unexpected error';
+        {
+            header("Location: ../account/register.php");
+            echo('Unexpected error');
+        }
 
     }
 

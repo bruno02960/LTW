@@ -1,7 +1,7 @@
 <body>
-    <?php if(!empty($message)): ?>
+    <?php if(!empty($message)){ ?>
         <p id = "errorMessage"><?= $message ?> </p>
-    <?php endif; ?>
+    <?php }; ?>
 
     <section id="login">
     <h1> Login </h1>
