@@ -1,5 +1,9 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS toDoList;
+DROP TABLE IF EXISTS user;
+
 CREATE TABLE task (
     id         INTEGER PRIMARY KEY,
     title      VARCHAR,
