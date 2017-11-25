@@ -11,9 +11,9 @@
         //Enter the new user in the database
         $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
         $stmt = $conn->prepare($sql);
-        if($records != null)
+        if($stmt != null)
         {
-
+            
             $PW = $_POST['password'];
             $PWC = $_POST['confirm_password'];
             $UserName = $_POST['username'];
