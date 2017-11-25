@@ -121,7 +121,7 @@
       {
         if(items[index].innerHTML == "\u2718")
         {
-          if (confirm("Are you sure?") == true)
+          if (confirm("Mark this task as completed?") == true)
           {
             items[index].innerHTML = "\u2713";
 
