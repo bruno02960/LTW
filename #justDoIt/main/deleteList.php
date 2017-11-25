@@ -12,5 +12,10 @@
                 $_SESSION['index']--;
             header("Location: ../main/index.php");
         }
+
+        $records = $conn->prepare('DELETE FROM task WHERE toDoListId = :id');
+        if($records != null)
+        $records->bindParam(':id', $_POST['listID']);
+        $records->execute();
     }
 ?>
