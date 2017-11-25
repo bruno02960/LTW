@@ -8,14 +8,14 @@
         if(is_array($data) || is_object($data))
         {
             $result = array();
-     
+
             foreach($data as $key => $value) {
                 $result[$key] = $this->object_to_array($value);
             }
-     
+
             return $result;
         }
-     
+
         return $data;
     }
 
@@ -27,19 +27,18 @@
     }
 
     $selectedList = $allList[$index];
-    
+
     $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
     $records->bindParam(':id', $selectedList['id']);
     $records->execute();
     $results = $records->fetchAll();
-    
+
     $tasks = NULL;
-    
+
         $tasks = $results;
 
         $arr = array();
         foreach($tasks as $task){
-            //$toEncode = object_to_array($task);
             $encoded = json_encode($task);
             array_push($arr,$encoded);
         }

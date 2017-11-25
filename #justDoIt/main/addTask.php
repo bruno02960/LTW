@@ -7,7 +7,7 @@
     {
         $ListID = $_POST['listID'];
 
-        if($_POST['taskName']!="") 
+        if($_POST['taskName']!="" && $_POST['taskDate']!="") 
         {
             $records = $conn->prepare('INSERT INTO task (title, completed, toDoListId, expiring) VALUES (:title, "false", :toDoListId, :expiring)');
             $records->bindParam(':toDoListId', $ListID);
@@ -17,5 +17,5 @@
             $records->execute();
         }
         header("Location: ../main/index.php");
-    }      
+    }
 ?>
