@@ -4,29 +4,32 @@
     include('passing.php');
 
     $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userID = :id');
-    $records->bindParam(':id', $_SESSION['user_id']);
-
-    if($records->execute())
+    if($records != null)
     {
-        $results = $records->fetchAll();
-        $_SESSION['allLists'] = $results;
-        $lists = $results;
+        $records->bindParam(':id', $_SESSION['user_id']);
 
-        if(count($lists) != 0)
+        if($records->execute())
         {
-            $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
-            $records->bindParam(':id', $lists[$index]['id']);
-            $records->execute();
             $results = $records->fetchAll();
+            $_SESSION['allLists'] = $results;
+            $lists = $results;
 
-            $tasks = NULL;
-
-            if(count($results) > 0)
+            if(count($lists) != 0)
             {
-                $tasks = $results;
+                $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
+                $records->bindParam(':id', $lists[$index]['id']);
+                $records->execute();
+                $results = $records->fetchAll();
+
+                $tasks = NULL;
+
+                if(count($results) > 0)
+                {
+                    $tasks = $results;
+                }
             }
+            else
+                $tasks = null;
         }
-        else
-            $tasks = null;
     }
 ?>

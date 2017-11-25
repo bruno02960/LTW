@@ -2,7 +2,7 @@
 
   try
   {
-    $conn = new PDO("sqlite:../database/database.db");
+    $conn = new PDO("sqlite:../database/clean_database.db");
   }   
     catch(PDOexception $e)
     {

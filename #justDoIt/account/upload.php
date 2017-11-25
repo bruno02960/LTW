@@ -29,15 +29,19 @@
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
         {
             $sql = "UPDATE users SET profilePicture = :profilePicture WHERE id = :id";
+
             $stmt = $conn->prepare($sql);
-        
-            $stmt->bindParam(':profilePicture', $target_file);
-            $stmt->bindParam(':id', $_SESSION['user_id']);
-        
-            if($stmt->execute())
+            
+            if($stmt != null)
             {
-                $user['profilePicture'] = $target_file;
-                header("Location: ../account/profile.php");
+                $stmt->bindParam(':profilePicture', $target_file);
+                $stmt->bindParam(':id', $_SESSION['user_id']);
+            
+                if($stmt->execute())
+                {
+                    $user['profilePicture'] = $target_file;
+                    header("Location: ../account/profile.php");
+                }
             }
         } 
         else 

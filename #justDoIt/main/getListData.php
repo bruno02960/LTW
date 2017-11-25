@@ -29,20 +29,22 @@
     $selectedList = $allList[$index];
 
     $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
-    $records->bindParam(':id', $selectedList['id']);
-    $records->execute();
-    $results = $records->fetchAll();
+    if($records != null)
+    {
+        $records->bindParam(':id', $selectedList['id']);
+        $records->execute();
+        $results = $records->fetchAll();
 
-    $tasks = NULL;
+        $tasks = NULL;
 
-        $tasks = $results;
+            $tasks = $results;
 
-        $arr = array();
-        foreach($tasks as $task){
-            $encoded = json_encode($task);
-            array_push($arr,$encoded);
-        }
-            echo json_encode($arr);
-            return;
-
+            $arr = array();
+            foreach($tasks as $task){
+                $encoded = json_encode($task);
+                array_push($arr,$encoded);
+            }
+                echo json_encode($arr);
+                return;
+    }
 ?>

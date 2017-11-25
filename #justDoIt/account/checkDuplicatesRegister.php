@@ -6,29 +6,32 @@
     if(!empty($Email) && !empty($Username))
     {
         $query = $conn->prepare('SELECT * FROM users WHERE username = :username');
-        $query->bindParam(':username', $Username);
-        $query->execute();
-        
-        $queryResults = $query->fetchAll();
-
-        if(count($queryResults) > 0)
+        if($query != null)
         {
-            echo -1;
-            return;
-        }
+            $query->bindParam(':username', $Username);
+            $query->execute();
+            
+            $queryResults = $query->fetchAll();
 
-        $query = $conn->prepare('SELECT * FROM users WHERE email = :email');
-        $query->bindParam(':email', $Email);
-        $query->execute();
-        
-        $queryResults = $query->fetchAll();
-        
-        if(count($queryResults) > 0)
-        {
-            echo -2;
-            return;
-        }
+            if(count($queryResults) > 0)
+            {
+                echo -1;
+                return;
+            }
 
-        echo 0; 
+            $query = $conn->prepare('SELECT * FROM users WHERE email = :email');
+            $query->bindParam(':email', $Email);
+            $query->execute();
+            
+            $queryResults = $query->fetchAll();
+            
+            if(count($queryResults) > 0)
+            {
+                echo -2;
+                return;
+            }
+
+            echo 0; 
+        }
     }
 ?>

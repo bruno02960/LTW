@@ -12,21 +12,24 @@
 
         $sql = "UPDATE users SET username = :username, email = :email, name = :name, location = :location WHERE id = :id";
         $stmt = $conn->prepare($sql);
-
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':location', $location);
-        $stmt->bindParam(':id', $_SESSION['user_id']);
-
-        if($stmt->execute())
+        if($stmt != null)
         {
-            $user['username'] = $username;
-            $user['email'] = $email;
-            $user['name'] = $name;
-            $user['birthday'] = $birthday;
-            $user['location'] = $location;
-            header("Location: ../account/profile.php");
+
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':location', $location);
+            $stmt->bindParam(':id', $_SESSION['user_id']);
+
+            if($stmt->execute())
+            {
+                $user['username'] = $username;
+                $user['email'] = $email;
+                $user['name'] = $name;
+                $user['birthday'] = $birthday;
+                $user['location'] = $location;
+                header("Location: ../account/profile.php");
+            }
         }
     }
 

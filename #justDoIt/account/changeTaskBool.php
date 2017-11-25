@@ -9,17 +9,20 @@
 
         $sql = "UPDATE task SET completed = :completed WHERE id = :id";
         $stmt = $conn->prepare($sql);
-
-        $stmt->bindParam(':completed', $completedBool);
-        $stmt->bindParam(':id',$id );
-
-        if($stmt->execute())
+        if($stmt != null)
         {
-            echo 0;
-        }
-        else
-        {
-            echo -1;
+
+            $stmt->bindParam(':completed', $completedBool);
+            $stmt->bindParam(':id',$id );
+
+            if($stmt->execute())
+            {
+                echo 0;
+            }
+            else
+            {
+                echo -1;
+            }
         }
     }
 ?>

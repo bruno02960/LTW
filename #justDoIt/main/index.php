@@ -6,23 +6,26 @@
   if(isset($_SESSION['user_id']))
   {
     $records = $conn->prepare('SELECT id, username,password FROM users WHERE id = :id');
-    $records->bindParam(':id', $_SESSION['user_id']);
-    $records->execute();
-    $results = $records->fetch(PDO::FETCH_ASSOC);
-
-    $user = NULL;
-
-    if(count($results) > 0)
+    if($records != null)
     {
-      $user = $results;
-    }
+      $records->bindParam(':id', $_SESSION['user_id']);
+      $records->execute();
+      $results = $records->fetch(PDO::FETCH_ASSOC);
 
-    if(!empty($_SESSION['index']))
-    {
-      $index = $_SESSION['index'];
+      $user = NULL;
+
+      if(count($results) > 0)
+      {
+        $user = $results;
+      }
+
+      if(!empty($_SESSION['index']))
+      {
+        $index = $_SESSION['index'];
+      }
+      else
+        $index = 0;
     }
-    else
-      $index = 0;
   }
 
   include('updateList.php');
