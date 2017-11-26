@@ -377,3 +377,14 @@ input#submitPhoto {
 .arrowCursor {
 	cursor: default;
 }
+
+#listDisplay h1 {
+    text-transform: capitalize;
+    font-family: Montserrat, Arial;
+}
+
+#listDisplay {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}

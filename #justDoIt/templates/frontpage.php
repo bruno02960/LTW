@@ -1,9 +1,9 @@
 <?php if(isset($user)): ?>
   <nav id="menu">
     <ul>
-      <li><a href="index.php">Completed</a></li>
-      <li><a href="index.php">To Complete</a></li>
-      <li><a href="index.php">Expiring</a></li>
+      <li><a href="../account/showLists.php?list=completed">Completed</a></li>
+      <li><a href="../account/showLists.php?list=to Complete">To Complete</a></li>
+      <li><a href="../account/showLists.php?list=expiring">Expiring</a></li>
     </ul>
   </nav>
     <p id = "message" class = "hidden"> </p>
@@ -83,8 +83,8 @@
         endif;
           $taskRow = $task['id'];
           echo'
-                <td class="delete"> 
-                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a> 
+                <td class="delete">
+                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
                 </td>
                 </tr>';
         }
@@ -123,9 +123,9 @@
         if (this.readyState == 4 && this.status == 200)
         {
           if(this.responseText == 0)
-          { 
+          {
               console.log(task.id.substr(4));
-             location.reload(); 
+             location.reload();
           }
         }
       };
@@ -133,9 +133,9 @@
       xhttp.open("POST", "../main/deleteTask.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("&task_id=" + task.id.substr(4));
-    }      
+    }
 
-   
+
     var tasklist = [];
 
     if(listTable!=null){
@@ -179,7 +179,7 @@
                 <th class="task">Task</th>
                 <th class="expDate">Expiration Date </th>
               </tr>`;
-              
+
               if(tasklist.length!=0)
         {
                 for(let i=0;i<tasklist.length;++i)
