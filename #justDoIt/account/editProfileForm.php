@@ -21,10 +21,9 @@
 
         <h1> Photo </h1>
         <div id="uploadPhoto">
-            <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="fileToUpload" id="fileToUpload" class="hidden">
-                <label id="fileToUploadLabel" for="fileToUpload">Browse...</label>
-                <input id="submitPhoto" type="submit" value="Upload" name="submit">
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                <input class = "buttonCursor" type="file" name="fileToUpload" id="fileToUpload">
+                <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
         </div>
     </section>

@@ -6,8 +6,8 @@
     <section id="login">
     <h1> Login </h1>
     <form id="loginForm" action "login.php" method = "POST">
-        <input type = "text" placeholder = "username" name = "username"> <br>
-        <input type = "password" placeholder = "password" name = "password"> <br> <br>
+        <input type = "text" placeholder = "username" name = "username" required> <br>
+        <input type = "password" placeholder = "password" name = "password" required> <br> <br>
         <button id="loginSubmit" type = "submit"> Submit </button>
     </form>
   </section>

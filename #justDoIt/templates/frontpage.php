@@ -17,7 +17,7 @@
       {
         echo '<tr>
               <td class="id">' . $list['id']. '</td>
-              <td class="name">' . $list['name']. '</td>
+              <td class="name buttonCursor">' . $list['name']. '</td>
               </tr>';
       }
     }
@@ -25,7 +25,7 @@
     <td class="list">
       <form action = "addList.php" method="POST">
         <input type="text" name="listName" placeholder="list name"><br>
-        <input type="submit" name = "addListButton" value="Add list">
+        <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
     </td>
@@ -48,14 +48,15 @@
   <tbody>
     <tr>
       <th class="id">ID</th>
-      <th class="status">Status</th>
-      <th class="task">Task</th>
-      <th class="expDate">Expiration Date </th>
+      <th class="status arrowCursor">Status</th>
+      <th class="task arrowCursor">Task</th>
+      <th class="expDate arrowCursor">Expiration Date </th>
     </tr>
 
     <?php
-      if($tasks!=NULL)
+      if($tasks != null)
       {
+        $row = 0;
         foreach( $tasks as $task)
         {
           $data = "";
@@ -80,17 +81,23 @@
         else:
           echo '<td class="expDate">' . $data . ' </td>';
         endif;
-          echo'<td class="deleteTask"> <input type="submit" name = "deleteTask" value="X"> </td>
+          $taskRow = $task['id'];
+          echo'
+                <td class="delete"> 
+                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a> 
+                </td>
                 </tr>';
         }
       }
+      else
+        $taskRow = null;
     ?>
   </tbody>
 
   <tfooter>
     <tr class = "<?= $toHide ?>">
       <form action="addTask.php" method="POST">
-        <td><input type="submit" name = "addTaskButton" value="Add task"></td>
+        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task"></td>
         <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
@@ -101,14 +108,36 @@
   <br>
   <br>
   <form class = "<?= $toHide ?>" action = "deleteList.php" method="POST">
-    <input type="submit" name = "deleteListButton" value="Delete list">
+    <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
 
   <script>
-    var currList = 0;
-    var tasklist = [];
     var listTable = document.querySelector("#listsTable");
+    var currList = 0;
+    function deleteTask(task)
+    {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function()
+      {
+        if (this.readyState == 4 && this.status == 200)
+        {
+          if(this.responseText == 0)
+          { 
+              console.log(task.id.substr(4));
+             location.reload(); 
+          }
+        }
+      };
+
+      xhttp.open("POST", "../main/deleteTask.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("&task_id=" + task.id.substr(4));
+    }      
+
+   
+    var tasklist = [];
+
     if(listTable!=null){
       listTable.onclick = function(ev){
         if(ev.target.parentElement.querySelector('.id')!=null){
@@ -119,7 +148,6 @@
 
         var clickedName = ev.target.parentElement.querySelector('.name').innerText;
         document.getElementById('ListName').innerHTML = clickedName;
-        console.log(document.getElementById('ListName').value);
 
         var index = ev.target.parentElement.rowIndex;
         if(index==null){
@@ -151,6 +179,7 @@
                 <th class="task">Task</th>
                 <th class="expDate">Expiration Date </th>
               </tr>`;
+              
               if(tasklist.length!=0)
         {
                 for(let i=0;i<tasklist.length;++i)
@@ -174,7 +203,9 @@
                   function pad(n) {
                       return (n < 10) ? ("0" + n) : n;
                   }
+                  let taskRow = tasklist[i].id;
                   htmlString = htmlString + "\n" + '<td class="expDate">' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
               };
@@ -216,6 +247,7 @@
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
+        //console.log(index);
         if(items[index]!=null)
         {
           if(items[index].innerHTML == "\u2718")

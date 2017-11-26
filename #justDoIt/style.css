@@ -153,6 +153,7 @@ button {
     font-weight: bold;
     background-color: #1E000D;
     border: 0;
+	cursor: pointer;
 }
 
 #editProfile h1 {
@@ -351,4 +352,28 @@ input#submitPhoto {
 
 .id {
     display: none;
+}
+
+.delete{
+	text-align: center;
+}
+
+.delete a{
+	color: white;
+	background: #a52a2a;
+	padding: 1px 6px;
+	border-radius: 3px;
+	text-decoration: none;
+}
+
+.centerAlign{
+	text-align: center;
+}
+
+.buttonCursor {
+	cursor: pointer;
+}
+
+.arrowCursor {
+	cursor: default;
 }
