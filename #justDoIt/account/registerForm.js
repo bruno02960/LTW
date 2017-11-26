@@ -25,7 +25,7 @@ submitButton.addEventListener("click", function(event)
     var location = document.getElementById("locationInput").value;
     var PW = document.getElementById("passwordInput").value;
     var CPW = document.getElementById("confirmPasswordInput").value;
-    var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,72}$");
+    var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z!$%^&*_@#~?\\d]{8,72}$");
     var regexBDay = new RegExp("^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$");
 
     if(username.length < '8')
