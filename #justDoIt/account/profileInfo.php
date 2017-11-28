@@ -3,7 +3,7 @@
     <section id="profile">
       <h1> <?= $user['username']; ?> </h1>
       <div id="pic">
-      <p> <img src="<?=$user['profilePicture']?>" alt="Default Profile Picture" style="width:138px;height:200px;"> </p>
+      <p> <img src="<?=$user['profilePicture']?>" alt="Profile Picture" style="width:138px;height:200px;"> </p>
 
       </div>
       <div id="info">

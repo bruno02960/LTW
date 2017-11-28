@@ -1,11 +1,19 @@
 <?php
 
-include('../includes/session.php');
+    include('../includes/session.php');
 
-session_unset();
+    if(isset($_COOKIE[session_name()])):
+        setcookie(session_name(), '', time()-7000000, '/');
+    endif;
 
-session_destroy();
+    if(isset($_COOKIE['login_user'])):
+        setcookie('login_user', '', time()-7000000, '/');
+    endif;
 
-header("Location: ../main");
+    session_unset();
+
+    session_destroy();
+
+    header("Location: ../main");
 
 ?>
