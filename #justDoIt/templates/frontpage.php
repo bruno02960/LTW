@@ -15,9 +15,10 @@
     {
       foreach( $lists as $list)
       {
+        $name = strip_tags($list['name']);
         echo '<tr>
               <td class="id">' . $list['id']. '</td>
-              <td class="name buttonCursor">' . $list['name']. '</td>
+              <td class="name buttonCursor">' . $name. '</td>
               </tr>';
       }
     }
@@ -43,7 +44,7 @@
   ?>
 
   <section id="list">
-  <h1 id = "ListName" class = "<?= $toHide ?>"> <?= $lists[$index]['name']?> </h1>
+  <h1 id = "ListName" class = "<?= $toHide ?>"> <?= strip_tags($lists[$index]['name'])?> </h1>
   <table class="tasks <?= $toHide ?>" id="taskTable">
   <tbody>
     <tr>
@@ -70,12 +71,14 @@
 		  if($task['completed'] == "true")
 			  $checkMark = '&#10003;';
 		  else
-			  $checkMark = '&#10008;';
+        $checkMark = '&#10008;';
+        
+        $title =  strip_tags($task['title']);
 
           echo '<tr>
                   <td class="id">' . $task['id']. '</td>
                   <td class="status">' . $checkMark. '</td>
-                  <td class="task">' . $task['title']. '</td>';
+                  <td class="task">' . $title. '</td>';
         if($diffData > 0 && $task['completed'] != "true"):
           echo '<td class="expDate"> <b>' . $data . '</b> </td>';
         else:

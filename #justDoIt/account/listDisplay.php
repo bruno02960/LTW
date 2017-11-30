@@ -33,7 +33,7 @@
         echo '<tr>
                 <td class="id">' . $task['id']. '</td>
                 <td class="status">' . $checkMark. '</td>
-                <td class="task">' . $task['title']. '</td>';
+                <td class="task">' . strip_tags($task['title']). '</td>';
       if($diffData > 0 && $task['completed'] != "true"):
         echo '<td class="expDate"> <b>' . $data . '</b> </td>';
       else:

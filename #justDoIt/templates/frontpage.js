@@ -58,6 +58,7 @@
 
                 htmlString = htmlString + "\n" + "<tr>";
                 htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
+                //console.log (tasklist[i].id);
                 htmlString = htmlString + "\n" + '<td class="status">' +  $checkMark +'</td>';
                 htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
                 let data = ""
