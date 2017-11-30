@@ -1,20 +1,15 @@
 <?php
-
+    echo $_FILES["fileToUpload"];
     include('../includes/session.php');
     include('../database/connection.php');
     include('../includes/redirectLoggedOut.php');
     $target_dir = "../account/profilePictures/";
-    if($_POST['file'] == null)
-    {
-        return -1;
-    } 
-
-    $target_file = $target_dir . $_POST['file'];
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     // Check if image file is a actual image or fake image
-    $check = $_POST['size'];
-    if($check != null) 
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) 
     {
         $uploadOk = 1;
     } 
@@ -22,19 +17,16 @@
     {
         $uploadOk = 0;
     }
-
     if ($uploadOk == 0) {
-        return -1;
+        echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_POST['file'], $target_file)) 
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
         {
-            //$original = imagecreatefrompng($target_file);
-            //$width = imagesx($original);
-            //$height = imagesy($original);
-
+            $original = imagecreatefromjpeg($originalFileName);
+            $width = imagesx($original);
+            $height = imagesy($original);
             $sql = "UPDATE users SET profilePicture = :profilePicture WHERE id = :id";
-
             $stmt = $conn->prepare($sql);
             
             if($stmt != null)
@@ -45,22 +37,13 @@
                 if($stmt->execute())
                 {
                     $user['profilePicture'] = $target_file;
-                    return 0;
+                    header("Location: ../account/profile.php");
                 }
-                else
-                {
-                    return -1;
-                } 
             }
-            else
-            {
-                return -1;
-            } 
         } 
         else 
         {
-            return -1;
+            echo "Sorry, there was an error uploading your file.";
         }
     }
-    return 0;
 ?>
