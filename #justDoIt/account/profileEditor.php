@@ -1,7 +1,6 @@
 <?php
-
-    include('../includes/redirectLoggedOut.php');
     include('../includes/session.php');
+    include('../includes/redirectLoggedOut.php');
     include('../templates/userinfo.php');
 
     if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']) && !empty($_POST['location']))
