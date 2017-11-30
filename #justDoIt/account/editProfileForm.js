@@ -105,7 +105,7 @@ function checkImage()
     var submitPhoto = document.getElementById("fileToUpload").files[0];
     if(submitPhoto == null)
     {
-        var message = "Insert a Valid Image";
+        var message = "No image selected";
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
         return false;
