@@ -2,14 +2,19 @@
 
     include('../includes/session.php');
     include('../database/connection.php');
-
+    include('../includes/redirectLoggedOut.php');
     $target_dir = "../account/profilePictures/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    if($_POST['file'] == null)
+    {
+        return -1;
+    } 
+
+    $target_file = $target_dir . $_POST['file'];
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) 
+    $check = $_POST['size'];
+    if($check != null) 
     {
         $uploadOk = 1;
     } 
@@ -19,14 +24,14 @@
     }
 
     if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
+        return -1;
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+        if (move_uploaded_file($_POST['file'], $target_file)) 
         {
-            $original = imagecreatefromjpeg($originalFileName);
-            $width = imagesx($original);
-            $height = imagesy($original);
+            //$original = imagecreatefrompng($target_file);
+            //$width = imagesx($original);
+            //$height = imagesy($original);
 
             $sql = "UPDATE users SET profilePicture = :profilePicture WHERE id = :id";
 
@@ -40,13 +45,22 @@
                 if($stmt->execute())
                 {
                     $user['profilePicture'] = $target_file;
-                    header("Location: ../account/profile.php");
+                    return 0;
                 }
+                else
+                {
+                    return -1;
+                } 
             }
+            else
+            {
+                return -1;
+            } 
         } 
         else 
         {
-            echo "Sorry, there was an error uploading your file.";
+            return -1;
         }
     }
+    return 0;
 ?>

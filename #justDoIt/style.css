@@ -261,7 +261,7 @@ div#editProfileButton {
 }
 
 #errorMessage {
-    padding-left: 1em;
+    padding-left: 0em;
     color: #f20069;
     font-weight: bold;
 }

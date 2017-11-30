@@ -1,11 +1,6 @@
 <?php
     include('../includes/session.php');
-
-    if(isset($_SESSION['user_id']))
-    {
-        header("Location: ../main/index.php");
-    }
-
+    include('../includes/redirectLoggedIn.php');
     include('../database/connection.php');
     
     if(!empty($_POST['username']) && !empty($_POST['password']))
