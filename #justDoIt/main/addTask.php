@@ -13,7 +13,8 @@
             if($records != null)
             {
                 $records->bindParam(':toDoListId', $ListID);
-                $records->bindParam(':title', $_POST['taskName']);
+                $taskName = strip_tags($_POST['taskName']);
+                $records->bindParam(':title', $taskName);
                 $expiring = strtotime($_POST['taskDate']);
                 $records->bindParam(':expiring', $expiring);
                 $records->execute();

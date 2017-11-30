@@ -102,7 +102,7 @@ submitButton.addEventListener("click", function(event)
 
 function checkImage()
 {
-    var submitPhoto = document.getElementById("fileToUpload").files;
+    var submitPhoto = document.getElementById("fileToUpload").files[0];
     if(submitPhoto == null)
     {
         var message = "Insert a Valid Image";
@@ -111,6 +111,7 @@ function checkImage()
         return false;
     }
 
+<<<<<<< HEAD
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
@@ -141,4 +142,7 @@ function checkImage()
     console.log(submitPhoto[0].name);
     console.log(submitPhoto[0]);
     return false;
+=======
+    return true;
+>>>>>>> ebec5ef86811d99873e220ef6641a0aa78152610
 }

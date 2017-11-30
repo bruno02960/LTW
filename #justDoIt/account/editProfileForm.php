@@ -19,11 +19,17 @@
 
         <h1> Photo </h1>
         <div id="uploadPhoto">
+<<<<<<< HEAD
             <form method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
               <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
               <label id="uploadLabel" for="fileToUpload"> choose profile picture... (optional) </label> <br> <br>
               <input id = "sendForm" type = "submit" class = "hidden">
               <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
+=======
+            <form action = "upload.php" method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
+                <input class = "buttonCursor" type="file" name="fileToUpload" id="fileToUpload">
+                <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
+>>>>>>> ebec5ef86811d99873e220ef6641a0aa78152610
             </form>
         </div>
     </section>

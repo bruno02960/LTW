@@ -10,8 +10,9 @@
       $records = $conn->prepare('INSERT INTO toDoList (name, userid) VALUES (:name, :userid)');
       if($records != null)
       {
+        $listname = strip_tags($_POST['listName']);
         $records->bindParam(':userid', $_SESSION['user_id']);
-        $records->bindParam(':name', $_POST['listName']);
+        $records->bindParam(':name', $listname);
         $records->execute();
         header("Location: ../main/index.php");
       }

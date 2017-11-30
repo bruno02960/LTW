@@ -41,6 +41,7 @@
 
             $arr = array();
             foreach($tasks as $task){
+                $task['title'] = strip_tags($task['title']);
                 $encoded = json_encode($task);
                 array_push($arr,$encoded);
             }
