@@ -12,7 +12,6 @@ function keyListener(e)
 
 pressed = function(){
     var a = document.getElementById('fileToUpload');
-    console.log("HERE");
     if(a.value == "")
     {
         uploadLabel.innerHTML = "Choose file";
@@ -111,8 +110,6 @@ function checkImage()
         return false;
     }
 
-<<<<<<< HEAD
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
     {
@@ -139,10 +136,5 @@ function checkImage()
     xhttp.open("POST", "upload.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("file=" + submitPhoto[0].name + "&size=" + submitPhoto[0].size);
-    console.log(submitPhoto[0].name);
-    console.log(submitPhoto[0]);
-    return false;
-=======
     return true;
->>>>>>> ebec5ef86811d99873e220ef6641a0aa78152610
 }

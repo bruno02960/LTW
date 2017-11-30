@@ -2,6 +2,19 @@
 var submitButton = document.getElementById("registerSubmit");
 var form = document.getElementById("registerForm");
 
+pressed = function(){
+    var a = document.getElementById('fileToUpload');
+    if(a.value == "")
+    {
+        uploadLabel.innerHTML = "Choose file";
+    }
+    else
+    {
+        var theSplit = a.value.split('\\');
+        uploadLabel.innerHTML = theSplit[theSplit.length-1];
+    }
+}
+
 function keyListener(e)
 {
     if (e.keyCode == 13)
