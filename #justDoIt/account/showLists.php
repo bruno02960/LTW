@@ -37,9 +37,9 @@
         $list = $conn->prepare('SELECT task.id, title, completed, expiring FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND title LIKE :it');
         if($list != null)
         {
-            $search = $_SESSION['user_id'] . "%";
-            $list->bindParam(':id', $search);
-            $list->bindParam(':it', $_GET['list']);
+            $search = "%" . $_GET['list'] . "%";
+            $list->bindParam(':id', $_SESSION['user_id']);
+            $list->bindParam(':it', $search);
             $list->execute();
             $list = $list->fetchAll();
         }
