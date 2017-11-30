@@ -88,7 +88,7 @@ submitButton.addEventListener("click", function(event)
 
 function checkImage()
 {
-    var submitPhoto = document.getElementById("fileToUpload").files;
+    var submitPhoto = document.getElementById("fileToUpload").files[0];
     if(submitPhoto == null)
     {
         var message = "Insert a Valid Image";
@@ -97,34 +97,5 @@ function checkImage()
         return false;
     }
 
-    
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function()
-    {
-        if (xhttp.readyState == 4 && xhttp.status == 200)
-        {
-            if(xhttp.responseText == 0)
-            {          
-                console.log("this");
-                return false;
-            }
-            else if(xhttp.responseText == -1)
-            {
-                var message = "Insert a Valid Image";
-                document.getElementById("errorMessage").innerHTML = message;
-                document.getElementById("errorMessage").classList.remove('hidden');
-               
-                return false;
-            }
-            console.log(xhttp.responseText);
-            return false;
-        }
-    }
-
-    xhttp.open("POST", "upload.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("file=" + submitPhoto[0].name + "&size=" + submitPhoto[0].size);
-    console.log(submitPhoto[0].name);
-    console.log(submitPhoto[0]);
-    return false;
+    return true;
 }

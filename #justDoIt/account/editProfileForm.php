@@ -19,7 +19,7 @@
 
         <h1> Photo </h1>
         <div id="uploadPhoto">
-            <form method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
+            <form action = "upload.php" method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
                 <input class = "buttonCursor" type="file" name="fileToUpload" id="fileToUpload">
                 <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
