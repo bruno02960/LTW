@@ -20,8 +20,10 @@
         <h1> Photo </h1>
         <div id="uploadPhoto">
             <form method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
-                <input class = "buttonCursor" type="file" name="fileToUpload" id="fileToUpload">
-                <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
+              <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
+              <label id="uploadLabel" for="fileToUpload"> choose profile picture... (optional) </label> <br> <br>
+              <input id = "sendForm" type = "submit" class = "hidden">
+              <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
         </div>
     </section>

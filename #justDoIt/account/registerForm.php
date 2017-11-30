@@ -9,17 +9,32 @@
             <input id = "nameInput" type = "text" placeholder = "name" name = "name" required> <br>
             <input id = "dateInput" type = "text" placeholder = "birthday (mm/dd/year)" name = "birthday" required> <br>
             <input id = "locationInput" type = "text" placeholder = "location (optional)" name = "location"> <br>
-            <input id = "passwordInput" type = "password" placeholder = "password" name = "password" required><br>
+            <input id = "passwordInput" type = "password" placeholder = "password" name = "password" required>
+            <p id="strLog">No Password</p> <br>
             <input id = "confirmPasswordInput" type = "password" placeholder = "confirm password" name = "confirm_password" required> <br>
-            <h1> Profile Picture (optional) </h1>
             <div id="uploadPhoto">
-            <input id = "fileToUpload" class = "buttonCursor"  type="file" name="fileToUpload"><br>
-            <p id="strLog">Password Strength=No Password</p>
+            <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
+            <label id="uploadLabel" for="fileToUpload"> choose profile picture... (optional) </label> <br> <br>
             <input id = "sendForm" type = "submit" class = "hidden">
+            </div>
             <button id = "registerSubmit" type = "button"> Submit </button>
         </form>
     </section>
     <script>
+        pressed = function(){
+            var a = document.getElementById('fileToUpload');
+            console.log("HERE");
+            if(a.value == "")
+            {
+                uploadLabel.innerHTML = "Choose file";
+            }
+            else
+            {
+                var theSplit = a.value.split('\\');
+                uploadLabel.innerHTML = theSplit[theSplit.length-1];
+            }
+        };
+
         function passwordStrengthCalc(password){
             var specialChar = "!$%^&*_@#~?";
             var passwordScore =0;
@@ -66,8 +81,8 @@
                 }else{
                     return "Very Low Security";
                 }
-                
-                
+
+
             }else{
                 return "Invalid Password";
             }
@@ -82,13 +97,13 @@
                     let score = passwordStrengthCalc(password);
                     let log =form.querySelector('#strLog');
                     if(log!=null){
-                        log.innerHTML = ("Password Strength="+score);
+                        log.innerHTML = (score);
                     }
                 }
             }
         }
-        
-        
+
+
     </script>
 </body>
 

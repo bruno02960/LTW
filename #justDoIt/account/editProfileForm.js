@@ -10,6 +10,20 @@ function keyListener(e)
     }
 }
 
+pressed = function(){
+    var a = document.getElementById('fileToUpload');
+    console.log("HERE");
+    if(a.value == "")
+    {
+        uploadLabel.innerHTML = "Choose file";
+    }
+    else
+    {
+        var theSplit = a.value.split('\\');
+        uploadLabel.innerHTML = theSplit[theSplit.length-1];
+    }
+};
+
 submitButton.addEventListener("click", function(event)
 {
     event.preventDefault();
@@ -97,14 +111,14 @@ function checkImage()
         return false;
     }
 
-    
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
     {
         if (xhttp.readyState == 4 && xhttp.status == 200)
         {
             if(xhttp.responseText == 0)
-            {          
+            {
                 console.log("this");
                 return false;
             }
@@ -113,7 +127,7 @@ function checkImage()
                 var message = "Insert a Valid Image";
                 document.getElementById("errorMessage").innerHTML = message;
                 document.getElementById("errorMessage").classList.remove('hidden');
-               
+
                 return false;
             }
             console.log(xhttp.responseText);

@@ -1,6 +1,7 @@
 <?php if(isset($user)): ?>
   <nav id="menu">
     <ul>
+      <li><form action="../account/showLists.php"><input type="text" name="list" placeholder="Search Tasks"></form></li>
       <li><a href="../account/showLists.php?list=completed">Completed</a></li>
       <li><a href="../account/showLists.php?list=to Complete">To Complete</a></li>
       <li><a href="../account/showLists.php?list=expiring">Expiring</a></li>

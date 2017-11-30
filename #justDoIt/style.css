@@ -87,7 +87,7 @@ nav#menu > ul >li {
     background-color: #f20069;
 }
 
-nav#menu > ul > li:nth-child(-n+2) {
+nav#menu > ul > li:nth-child(-n+3) {
     border-right: 1px solid white;
 }
 
@@ -153,6 +153,9 @@ button {
     font-weight: bold;
     background-color: #1E000D;
     border: 0;
+    font-family: Calibri;
+    font-size: 1em;
+    width: 6.8em;
 	cursor: pointer;
 }
 
@@ -261,7 +264,7 @@ div#editProfileButton {
 }
 
 #errorMessage {
-    padding-left: 0em;
+    padding-left: 1em;
     color: #f20069;
     font-weight: bold;
 }
@@ -270,12 +273,38 @@ div#editProfileButton {
     display: none;
 }
 
+input[name="list"] {
+    background: none;
+    border: none;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+#loginForm input::placeholder {
+    font-family: Calibri;
+}
+
+#registerForm input::placeholder {
+    font-family: Calibri;
+}
+
 #registerForm input {
     width: 20%;
     border: 0;
     border-bottom: 1px solid black;
     padding: 0.5em;
     margin: 0.5em;
+    text-align: left;
+}
+
+input#passwordInput {
+    width: 10%;
+}
+
+#strLog {
+  width: 10%;
+  display: inline-block;
 }
 
 #loginForm input {
@@ -318,6 +347,17 @@ label#fileToUploadLabel {
     font-weight: bold;
     background-color: #1E000D;
     border: 0;
+}
+
+#uploadLabel {
+    width: 20%;
+    border: 0;
+    border: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+    text-align: left;
+    display: inline-block;
+    font-size: 0.8em;
 }
 
 input#submitPhoto {
