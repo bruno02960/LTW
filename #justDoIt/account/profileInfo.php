@@ -1,7 +1,5 @@
-<body>
-
     <section id="profile">
-      <h1> <?= $user['username']; ?> </h1>
+      <h2> <?= $user['username']; ?> </h2>
       <div id="pic">
       <p> <img src="<?=$user['profilePicture']?>" alt="Profile Picture" style="width:138px;height:200px;"> </p>
 
@@ -24,5 +22,3 @@
     </div>
     <br>
     </section>
-
-</body>

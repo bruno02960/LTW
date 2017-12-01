@@ -1,6 +1,6 @@
 <section id="listDisplay">
 
-<h1> <?php echo $_GET['list'] ?> </h1>
+<h2> <?php echo $_GET['list'] ?> </h2>
 
 <table class="tasks <?= $toHide ?>" id="taskTable">
 <tbody>

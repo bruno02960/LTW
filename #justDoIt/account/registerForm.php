@@ -1,10 +1,9 @@
-<body>
-    <p id = "errorMessage"> </p>
+  <p id = "errorMessage"> </p>
     <section id="register">
-        <h1> Register </h1>
+        <h2> Register </h2>
 
-        <form id = "registerForm" action "register.php" method = "POST" onkeypress="return keyListener(event)" enctype="multipart/form-data">
-            <input id = "emailInput" type = "email" placeholder = "email" required name = "email" required> <br>
+        <form id = "registerForm" action = "register.php" method = "POST" onkeypress="return keyListener(event)" enctype="multipart/form-data">
+            <input id = "emailInput" type = "email" placeholder = "email" name = "email" required> <br>
             <input id = "usernameInput" type = "text" placeholder = "username" name = "username" required> <br>
             <input id = "nameInput" type = "text" placeholder = "name" name = "name" required> <br>
             <input id = "dateInput" type = "text" placeholder = "birthday (mm/dd/year)" name = "birthday" required> <br>
@@ -105,7 +104,5 @@
 
 
     </script>
-</body>
 
 <script src="registerForm.js"></script>
-</html>

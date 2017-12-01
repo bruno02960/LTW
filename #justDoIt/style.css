@@ -124,7 +124,7 @@ footer {
     padding-right: 1em;
 }
 
-#register h1 {
+#register h2 {
   font-family: Montserrat, Arial;
 }
 
@@ -134,7 +134,7 @@ footer {
   text-align: center;
 }
 
-#login h1 {
+#login h2 {
   font-family: Montserrat, Arial;
 }
 
@@ -184,7 +184,7 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
-#profile h1 {
+#profile h2 {
   font-family: Montserrat, Arial;
 }
 
@@ -420,7 +420,7 @@ input#submitPhoto {
 	cursor: default;
 }
 
-#listDisplay h1 {
+#listDisplay h2 {
     text-transform: capitalize;
     font-family: Montserrat, Arial;
 }

@@ -3,7 +3,7 @@
     <ul>
       <li><form action="../account/showLists.php"><input type="text" name="list" placeholder="Search Tasks"></form></li>
       <li><a href="../account/showLists.php?list=completed">Completed</a></li>
-      <li><a href="../account/showLists.php?list=to Complete">To Complete</a></li>
+      <li><a href="../account/showLists.php?list=to&nbsp;Complete">To Complete</a></li>
       <li><a href="../account/showLists.php?list=expiring">Expiring</a></li>
     </ul>
   </nav>
@@ -73,7 +73,7 @@
 			  $checkMark = '&#10003;';
 		  else
         $checkMark = '&#10008;';
-        
+
         $title =  strip_tags($task['title']);
 
           echo '<tr>
@@ -284,7 +284,7 @@
 
   </section>
         <?php else: ?>
-          <section id="welcome">
+          <div id="welcome">
               <p>Do it <br>
     Just do it<br>
 
@@ -310,6 +310,5 @@
     If you're tired of starting over<br>
     Stop giving up <br> <br>
   - Shia LaBeouf</p>
-  </section>
+</div>
         <?php endif; ?>
-      </section>
