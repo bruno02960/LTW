@@ -14,7 +14,7 @@
             <input id = "confirmPasswordInput" type = "password" placeholder = "confirm password" name = "confirm_password" required> <br>
             <div id="uploadPhoto">
             <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
-            <label id="uploadLabel" for="fileToUpload"> choose profile picture... (optional) </label> <br> <br>
+            <label id="uploadLabel" for="fileToUpload"> Choose a profile picture... (optional) </label> <br> <br>
             <input id = "sendForm" type = "submit" class = "hidden">
             </div>
             <button id = "registerSubmit" type = "button"> Submit </button>

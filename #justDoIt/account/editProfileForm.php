@@ -21,7 +21,7 @@
         <div id="uploadPhoto">
             <form method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
               <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
-              <label id="uploadLabel" for="fileToUpload"> choose profile picture... (optional) </label> <br> <br>
+              <label id="uploadLabel" for="fileToUpload"> Choose a profile picture... </label> <br> <br>
               <input id = "sendForm" type = "submit" class = "hidden">
               <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
