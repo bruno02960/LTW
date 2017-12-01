@@ -109,32 +109,5 @@ function checkImage()
         document.getElementById("errorMessage").classList.remove('hidden');
         return false;
     }
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function()
-    {
-        if (xhttp.readyState == 4 && xhttp.status == 200)
-        {
-            if(xhttp.responseText == 0)
-            {
-                console.log("this");
-                return false;
-            }
-            else if(xhttp.responseText == -1)
-            {
-                var message = "Insert a Valid Image";
-                document.getElementById("errorMessage").innerHTML = message;
-                document.getElementById("errorMessage").classList.remove('hidden');
-
-                return false;
-            }
-            console.log(xhttp.responseText);
-            return false;
-        }
-    }
-
-    xhttp.open("POST", "upload.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("file=" + submitPhoto[0].name + "&size=" + submitPhoto[0].size);
     return true;
 }
