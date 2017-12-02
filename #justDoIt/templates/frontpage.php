@@ -1,7 +1,7 @@
 <?php if(isset($user)): ?>
   <nav id="menu">
     <ul>
-      <li><form action="../account/showLists.php"><input type="text" name="list" placeholder="Search Tasks"></form></li>
+      <li><form action="../account/showLists.php" id="searchForm"><input type="text" name="list" id="searchImp" placeholder="Search Tasks"></form></li>
       <li><a href="../account/showLists.php?list=completed">Completed</a></li>
       <li><a href="../account/showLists.php?list=to&nbsp;Complete">To Complete</a></li>
       <li><a href="../account/showLists.php?list=expiring">Expiring</a></li>
@@ -123,6 +123,38 @@
 
 
   <script>
+
+    function XSS_Remove_Tags(string,elementToChange){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function()
+      {
+        if (this.readyState == 4 && this.status == 200)
+        {
+          if(this.responseText==null){
+            elementToChange.value="";
+          }else{
+            elementToChange.value=this.responseText;
+          }
+        }
+      };
+
+      xhttp.open("POST", "../main/removeTags.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("str=" + string);
+    }
+
+    var searchForm = document.querySelector("#searchForm");
+    if(searchForm!=null){
+      var searchInput = searchForm.querySelector("#searchImp");
+      if(searchInput!=null){
+        searchInput.oninput = function(){
+          let str = searchInput.value;
+          str = XSS_Remove_Tags(str,searchInput);
+        }
+      }
+    }
+  
+
     var listTable = document.querySelector("#listsTable");
     var currList = 0;
     function deleteTask(task)
