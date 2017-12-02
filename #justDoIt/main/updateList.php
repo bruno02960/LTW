@@ -2,7 +2,8 @@
     include('../includes/session.php');
     include('../database/connection.php');
 
-    $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userID = :id UNION 
+    $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userID = :id 
+                                UNION
                                 SELECT toDoList.id, toDoList.name || " - " || users.username AS name 
                                 FROM toDoList 
                                 JOIN sharedList ON sharedList.listID = toDoList.id AND sharedList.userID = :id
