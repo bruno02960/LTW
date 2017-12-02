@@ -109,18 +109,18 @@
   </tfooter>
   </table>
   <br>
-  <form class = "<?= $toHide ?> form" action = "deleteList.php" method="POST">
+  <div class = "<?= $toHide; ?>">
+  <form class = " form " action = "deleteList.php" method="POST">
     <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
-  <br> <br>
-    <form class = "<?= $toHide ?> form" action="../account/inviteUsers.php" method="POST">
+    <form class = "form" action="../account/inviteUsers.php" method="POST">
       <input type="text" name="user" placeholder="Invite user">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
-
+  </div>
 
   <script>
     var listTable = document.querySelector("#listsTable");
