@@ -31,12 +31,11 @@
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
     </td>
-  </tr>
   </table>
   </aside>
 
   <?php
-    if($_SESSION['allLists'] == null)
+    if($lists == null)
     {
       $toHide = "hidden";
     }
@@ -117,7 +116,7 @@
   </form>
   <br>
   <br>
-  <form action="../account/inviteUsers.php" method="POST">
+  <form class = "<?= $toHide ?>" action="../account/inviteUsers.php" method="POST">
     <input type="text" name="list" placeholder="Invite user">
     <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
     <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">

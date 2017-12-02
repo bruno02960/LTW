@@ -34,7 +34,7 @@
     <?php        
         foreach( $users as $user)
         {
-            echo '<form action="poop" method="GET">
+            echo '<form action="../account/shareListWithUser.php" method="POST">
             <tr>
             <td class="id"> <input type = "hidden" name = "userID" value = "' . $user['id'] . '" >  </td>
             <td class="id"> <input type = "hidden" name = "listID" value = "' . $_POST['listID'] . '" >  </td>

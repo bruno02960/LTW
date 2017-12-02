@@ -1,9 +1,13 @@
 <?php
     include('../includes/session.php');
     include('../database/connection.php');
-    include('passing.php');
 
-    $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userID = :id');
+    $records = $conn->prepare('SELECT id, name FROM toDoList WHERE userID = :id UNION 
+                                SELECT toDoList.id, toDoList.name || " - " || users.username AS name 
+                                FROM toDoList 
+                                JOIN sharedList ON sharedList.listID = toDoList.id AND sharedList.userID = :id
+                                JOIN users ON toDoList.userID = users.id
+                                ORDER BY toDoList.id DESC');
     if($records != null)
     {
         $records->bindParam(':id', $_SESSION['user_id']);
