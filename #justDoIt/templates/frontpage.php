@@ -177,7 +177,6 @@
       xhttp.send("&task_id=" + task.id.substr(4));
     }
 
-//nothing
     var tasklist = [];
 
     if(listTable!=null){

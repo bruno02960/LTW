@@ -8,10 +8,8 @@
         $records->bindParam(':id', $_POST['task_id']);
         if($records->execute())
         {
-            echo 0;
-            return;
+            return 0;
         }
     }
-    echo -1;
-    return;
+    return -1;
 ?>

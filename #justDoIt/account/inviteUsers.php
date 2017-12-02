@@ -9,7 +9,7 @@
 
     <?php
         $users = $conn->prepare('SELECT id, username, email FROM users WHERE id != :id AND username LIKE :username');
-        $search = "%" . $_POST['list'] . "%";
+        $search = "%" . $_POST['user'] . "%";
         $users->bindParam(':id', $_SESSION['user_id']);
         $users->bindParam(':username', $search);
         if($users->execute())
