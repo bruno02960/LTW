@@ -17,5 +17,10 @@
         if($records != null)
         $records->bindParam(':id', $_POST['listID']);
         $records->execute();
+
+        $records = $conn->prepare('DELETE FROM sharedList WHERE listID = :id');
+        if($records != null)
+        $records->bindParam(':id', $_POST['listID']);
+        $records->execute();
     }
 ?>

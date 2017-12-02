@@ -99,7 +99,6 @@ nav#menu {
 #list {
     display: inline-block;
     vertical-align: top;
-    width: 50%;
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
@@ -281,6 +280,31 @@ input[name="list"] {
     font-weight: bold;
 }
 
+input[name="deleteListButton"] {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    float: right;
+}
+
+input[name="user"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+        border-bottom-width: 0px;
+        border-bottom-style: none;
+        border-bottom-color: currentcolor;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+
 #loginForm input::placeholder {
     font-family: Calibri;
 }
@@ -400,12 +424,10 @@ input#submitPhoto {
 	text-align: center;
 }
 
-.delete a{
-	color: white;
-	background: #a52a2a;
-	padding: 1px 6px;
-	border-radius: 3px;
-	text-decoration: none;
+.delete a {
+    color: white;
+    background: #1E000D;
+    padding: 1px 6px;
 }
 
 .centerAlign{
