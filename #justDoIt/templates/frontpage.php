@@ -110,18 +110,17 @@
   </table>
   <br>
   <br>
-  <form class = "<?= $toHide ?>" action = "deleteList.php" method="POST">
+  <form class = "<?= $toHide ?> form" action = "deleteList.php" method="POST">
     <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
-  <br>
-  <br>
-  <form class = "<?= $toHide ?>" action="../account/inviteUsers.php" method="POST">
-    <input type="text" name="list" placeholder="Invite user">
-    <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
-    <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-    <input class = "buttonCursor" type = "submit" value = "submit">
-  </form>
+    <form class = "<?= $toHide ?> form" action="../account/inviteUsers.php" method="POST">
+      <input type="text" name="list" placeholder="Invite user">
+      <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
+      <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+      <input class = "buttonCursor" type = "submit" value = "submit">
+    </form>
+
 
   <script>
     var listTable = document.querySelector("#listsTable");
