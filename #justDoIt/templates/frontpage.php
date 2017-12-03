@@ -24,9 +24,9 @@
       }
     }
     ?>
-    <td class="list">
+    <td class="list" id="ftForm">
       <form action = "addList.php" method="POST">
-        <input type="text" name="listName" placeholder="list name"><br>
+        <input type="text" id="listnameID" name="listName" placeholder="list name"><br>
         <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
@@ -97,16 +97,16 @@
     ?>
   </tbody>
 
-  <tfooter>
+  <tfoot id="ft">
     <tr class = "<?= $toHide ?>">
       <form action="addTask.php" method="POST">
         <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task"></td>
-        <td class="task"><input type="text" name="taskName" placeholder="task name"> </td>
+        <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
       </form>
     </tr>
-  </tfooter>
+  </tfoot>
   </table>
   <br>
   <div class = "<?= $toHide; ?>">
@@ -114,8 +114,8 @@
     <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
-    <form class = "form" action="../account/inviteUsers.php" method="POST">
-      <input type="text" name="user" placeholder="Invite user">
+    <form id="userInviteForm" class = "form" action="../account/inviteUsers.php" method="POST">
+      <input type="text" id="usernameInput" name="user" placeholder="Invite user">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       <input class = "buttonCursor" type = "submit" value = "Invite">
@@ -180,6 +180,13 @@
     var tasklist = [];
 
     if(listTable!=null){
+      let listtableform = document.getElementById("ftForm").querySelector("form");
+      let formInput = listtableform.querySelector("#listnameID");
+      formInput.oninput = function(){
+          let str = formInput.value;
+          str = XSS_Remove_Tags(str,formInput);
+      }
+
       listTable.onclick = function(ev){
         if(ev.target.parentElement.querySelector('.id')!=null){
         var clickedID = ev.target.parentElement.querySelector('.id').innerText;
@@ -222,13 +229,13 @@
               </tr>`;
 
               if(tasklist.length!=0)
-        {
+              {
                 for(let i=0;i<tasklist.length;++i)
-        {
-          if(tasklist[i].completed == "true")
-            var checkMark = '&#10003;';
-          else
-            var checkMark = '&#10008;';
+              {
+              if(tasklist[i].completed == "true")
+                var checkMark = '&#10003;';
+              else
+                var checkMark = '&#10008;';
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
@@ -280,9 +287,30 @@
         }
       }
 
+    var inviteUserForm = document.querySelector("#userInviteForm");
+    var userNameInput = inviteUserForm.querySelector("#usernameInput");
+    userNameInput.oninput = function(){
+      let str = userNameInput.value;
+      str = XSS_Remove_Tags(str,userNameInput);
+    }
+
     var taskTable = document.querySelector('#taskTable');
     if(taskTable!=null)
     {
+      let foot = taskTable.tFoot;
+      let form = foot.querySelector("tr").querySelector("form");
+      let formInput = form[1];
+      formInput.oninput = function(){
+          let str = formInput.value;
+          str = XSS_Remove_Tags(str,formInput);
+      }
+
+      let formDateInput = form[3];
+      formDateInput.oninput = function(){
+          let str = formDateInput.value;
+          str = XSS_Remove_Tags(str,formDateInput);
+      }
+
       document.querySelector('#taskTable').onclick = function(ev)
       {
         var index = ev.target.parentElement.rowIndex;
