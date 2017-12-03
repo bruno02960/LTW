@@ -16,12 +16,6 @@
       <div class="header">
         <?php if(isset($user)): ?>
 
-        <?php
-        if (strpos($_SERVER['HTTP_REFERER'], 'login') == true){
-          echo "<p> Welcome " . $user['username'] . "</p> <p> You are sucessfully logged in! </p>";
-        }
-        ?>
-
         <a href = "../account/profile.php"> Profile </a>
         <a href = "../account/logout.php"> Logout </a>
 

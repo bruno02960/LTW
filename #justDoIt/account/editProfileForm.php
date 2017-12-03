@@ -3,7 +3,7 @@
 
         <p id = "errorMessage"> </p>
 
-        <form id = "editorForm" action="profile.php" method = "POST" onkeypress="return keyListener(event)">
+        <form id = "editorForm" action="profileEditor.php" method = "POST" onkeypress="return keyListener(event)">
             <label for="UsernameLabel">Username:</label> <br>
             <input id = "usernameInput" type = "text" placeholder = "Username" name = "username" value = "<?= $user['username'] ?>"> <br>
             <label for="EmailLabel">Email:</label> <br>
@@ -20,8 +20,8 @@
         <div id="uploadPhoto">
             <form action = "upload.php" method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
               <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
-              <label id="uploadLabel" for="fileToUpload"> Choose a profile picture... </label> <br> <br>
-              <input id = "uploadPhoto" type = "submit" class = "hidden">
+              <label id="uploadLabel" for="fileToUpload"> Choose a profile picture... </label>
+              <input id = "uploadPhoto" type = "submit" class = "hidden"> <br> <br>
               <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
         </div>

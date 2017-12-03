@@ -3,12 +3,15 @@
     include('../includes/redirectLoggedOut.php');
     include('../templates/userinfo.php');
 
-    if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']) && !empty($_POST['location']))
+    if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']))
     {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
-        $location = $_POST['location'];
+        if(empty($_POST['location']))
+            $location = null;
+        else
+            $location = $_POST['location'];
 
         $sql = "UPDATE users SET username = :username, email = :email, name = :name, location = :location WHERE id = :id";
         $stmt = $conn->prepare($sql);

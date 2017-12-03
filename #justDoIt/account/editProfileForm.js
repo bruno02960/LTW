@@ -59,14 +59,6 @@ submitButton.addEventListener("click", function(event)
         return;
     }
 
-    if(location.length == '0')
-    {
-        var message = "Location can't be empty"
-        document.getElementById("errorMessage").innerHTML = message;
-        document.getElementById("errorMessage").classList.remove('hidden');
-        return;
-    }
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
     {

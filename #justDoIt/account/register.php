@@ -5,7 +5,7 @@
 
     include('../database/connection.php');
     if(empty($_POST['location']))
-        $_POST['location'] = " ";
+        $_POST['location'] = null;
     if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
     {
         //Enter the new user in the database
