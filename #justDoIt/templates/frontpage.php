@@ -77,21 +77,21 @@
         $title =  strip_tags($task['title']);
 
           echo '<tr>
-                  <td class="id">' . $task['id']. '</td>
-                  <td class="status">' . $checkMark. '</td>
-                  <td class="task">' . $title. '</td>';
+                  <td class="id verticalTop">' . $task['id']. '</td>
+                  <td class="status verticalTop">' . $checkMark. '</td>
+                  <td class="task verticalTop">' . $title. '</td>';
 
         if($diffData > 0 && $task['completed'] != "true"):
-          echo '<td class="expDate"> <b>' . $data . '</b> </td>';
+          echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
         else:
-          echo '<td class="expDate">' . $data . ' </td>';
+          echo '<td class="expDate verticalTop"> <b>' . $data . ' </td>';
         endif;
 
-        echo '<td class="task buttonCursor" id = "description" onclick="hello()">' . $task['description'] . '</td>';
+        echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
 
           $taskRow = $task['id'];
           echo'
-                <td class="delete">
+                <td class="delete verticalTop">
                 <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
                 </td>
                 </tr>';
@@ -103,9 +103,9 @@
   </tbody>
 
   <tfoot id="ft">
-    <tr class = "<?= $toHide ?>">
+    <tr class = "<?= $toHide ?> verticalTop">
       <form action="addTask.php" method="POST">
-        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Quick task"></td>
+        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task"></td>
         <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
@@ -238,7 +238,7 @@
                 <th class="status">Status</th>
                 <th class="task">Task</th>
                 <th class="expDate">Expiration Date </th>
-                <th class="task arrowCursor">Description </th>
+                <th class="arrowCursor">Description </th>
               </tr>`;
 
               if(tasklist.length!=0)
@@ -251,9 +251,9 @@
                 var checkMark = '&#10008;';
 
                   htmlString = htmlString + "\n" + "<tr>";
-                  htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
-                  htmlString = htmlString + "\n" + '<td class="status">' +  checkMark +'</td>';
-                  htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
+                  htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
+                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' +  checkMark +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
                   
                   let data = ""
                   if(tasklist[i].expiring!=null){
@@ -266,9 +266,9 @@
                       return (n < 10) ? ("0" + n) : n;
                   }
                   let taskRow = tasklist[i].id;
-                  htmlString = htmlString + "\n" + '<td class="expDate"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
-                  htmlString = htmlString + "\n" + '<td class="task buttonCursor" id = "description">' + tasklist[i].description + '</td>';
-                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
+                  htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="buttonCursor verticalTop" id = "description"> <div id = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
               };
