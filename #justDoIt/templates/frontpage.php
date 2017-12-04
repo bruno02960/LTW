@@ -87,7 +87,7 @@
           echo '<td class="expDate">' . $data . ' </td>';
         endif;
 
-        echo '<td class="task buttonCursor" id = "description">' . $task['description'] . '</td>';
+        echo '<td class="task buttonCursor" id = "description" onclick="hello()">' . $task['description'] . '</td>';
 
           $taskRow = $task['id'];
           echo'
@@ -129,6 +129,12 @@
   </div>
 
   <script>
+
+  function hello()
+  {
+    console.log("1");
+  }
+
 
     function XSS_Remove_Tags(string,elementToChange){
       var xhttp = new XMLHttpRequest();
@@ -232,6 +238,7 @@
                 <th class="status">Status</th>
                 <th class="task">Task</th>
                 <th class="expDate">Expiration Date </th>
+                <th class="task arrowCursor">Description </th>
               </tr>`;
 
               if(tasklist.length!=0)
@@ -247,6 +254,7 @@
                   htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
                   htmlString = htmlString + "\n" + '<td class="status">' +  checkMark +'</td>';
                   htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
+                  
                   let data = ""
                   if(tasklist[i].expiring!=null){
                     data = tasklist[i].expiring;
@@ -258,7 +266,8 @@
                       return (n < 10) ? ("0" + n) : n;
                   }
                   let taskRow = tasklist[i].id;
-                  htmlString = htmlString + "\n" + '<td class="expDate">' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="expDate"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  htmlString = htmlString + "\n" + '<td class="task buttonCursor" id = "description">' + tasklist[i].description + '</td>';
                   htmlString = htmlString + "\n" + '<td class="delete buttonCursor">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
@@ -322,7 +331,7 @@
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
         items = table.getElementsByClassName("status");
-        //console.log(index);
+        console.log(index);
         if(items[index]!=null)
         {
           if(items[index].innerHTML == "\u2718")

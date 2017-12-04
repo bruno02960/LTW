@@ -28,7 +28,7 @@
 
     $selectedList = $allList[$index];
 
-    $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId, description FROM task WHERE toDoListId = :id');
+    $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId,description FROM task WHERE toDoListId = :id');
     if($records != null)
     {
         $records->bindParam(':id', $selectedList['id']);
