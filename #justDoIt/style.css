@@ -245,6 +245,10 @@ div#editProfileButton {
     min-width: 174px;
 }
 
+.tasks tbody tr {
+	text-align: center;
+}
+
 .tasks tbody tr:nth-child(2n+1) {
     background-color: #FDDFEC;
 }
@@ -468,6 +472,19 @@ input#submitPhoto {
 
 #status{
 	max-width:1px;
+}
+
+#description {
+	max-width: 180px; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+}
+
+#description:Hover{
+	height:100px;
+	overflow: visible;
+	width: 250px;
+    word-wrap: break-word;
 }
 
 

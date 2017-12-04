@@ -87,7 +87,7 @@
           echo '<td class="expDate">' . $data . ' </td>';
         endif;
 
-        echo '<td class="task buttonCursor"  style ="max-width: 120px; overflow: hidden; text-overflow: ellipsis; display:inline-block;">' . $task['description'] . '</td>';
+        echo '<td class="task buttonCursor" id = "description">' . $task['description'] . '</td>';
 
           $taskRow = $task['id'];
           echo'
