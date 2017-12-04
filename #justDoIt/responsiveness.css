@@ -12,15 +12,15 @@
   .tasks tbody th {
       min-width: 40px;
   }
-  
+
   body {
 	  font-size:15px;
   }
-  
+
   h1 {
 	  font-size:20px;
   }
-  
+
   #taskTable
   {
 	  font-size:16px;
@@ -37,7 +37,7 @@
   .tasks tbody th {
     font-size:12px;
   }
-  
+
   #lists > h1 {
     font-size: 17px;
   }
@@ -56,6 +56,19 @@
 }
 
 @media screen and (max-width: 480px) {
+  #menu > ul {
+    display: block;
+  }
+
+  nav#menu > ul > li {
+    width: initial;
+  }
+
+  nav#menu > ul > li:nth-child(-n+3) {
+    border-bottom: 1px solid #1E000D;
+    border-right: none;
+  }
+
   .tasks tbody th {
     font-size:12px;
   }
@@ -63,11 +76,11 @@
   h1 {
 	  font-size:18px;
   }
-  
+
   body {
 	  font-size:12px;
   }
-  
+
   div#pic {
       float: none;
   }
@@ -75,12 +88,12 @@
   #lists > h1 {
     font-size: 14px;
   }
-  
+
   #taskTable
   {
-	  font-size:14px;
+	  font-size:inherit;
   }
-  
+
   input#usernameInput
   {
 	  width:90px;
