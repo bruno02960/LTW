@@ -1,6 +1,6 @@
 @media screen and (max-width: 992px) {
   .tasks tbody th {
-      min-width: 140px;
+      min-width: 80px;
   }
 }
 
@@ -10,7 +10,20 @@
   }
 
   .tasks tbody th {
-      min-width: 120px;
+      min-width: 40px;
+  }
+  
+  body {
+	  font-size:15px;
+  }
+  
+  h1 {
+	  font-size:20px;
+  }
+  
+  #taskTable
+  {
+	  font-size:16px;
   }
 
   aside#lists {
@@ -24,9 +37,13 @@
   .tasks tbody th {
     font-size:12px;
   }
+  
+  #lists > h1 {
+    font-size: 17px;
+  }
 
   #list > h1 {
-    font-size: 23px;
+    font-size: 17px;
   }
 
   #editProfile input {
@@ -43,20 +60,38 @@
     font-size:12px;
   }
 
+  h1 {
+	  font-size:18px;
+  }
+  
+  body {
+	  font-size:12px;
+  }
+  
   div#pic {
       float: none;
   }
 
   #lists > h1 {
-    font-size: 18px;
+    font-size: 14px;
+  }
+  
+  #taskTable
+  {
+	  font-size:14px;
+  }
+  
+  input#usernameInput
+  {
+	  width:90px;
   }
 
   .tasks tbody th {
-      min-width: 75px;
+      min-width: 20px;
   }
 
   #list > h1 {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   #editProfile input {

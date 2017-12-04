@@ -49,7 +49,7 @@
   <tbody>
     <tr>
       <th class="id">ID</th>
-      <th class="status arrowCursor">Status</th>
+      <th class="status arrowCursor" >Status</th>
       <th class="task arrowCursor">Task</th>
       <th class="expDate arrowCursor">Expiration Date </th>
       <th class="task arrowCursor">Description </th>
@@ -87,7 +87,7 @@
           echo '<td class="expDate">' . $data . ' </td>';
         endif;
 
-        echo '<td class="task"  style ="max-width: 168px;  overflow: auto; display:inline-block;">' . $task['description'] . '</td>';
+        echo '<td class="task buttonCursor"  style ="max-width: 120px; overflow: hidden; text-overflow: ellipsis; display:inline-block;">' . $task['description'] . '</td>';
 
           $taskRow = $task['id'];
           echo'
@@ -109,7 +109,7 @@
         <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
-        <td class="task"><textarea style ="max-width: 168px; min-height: 60px;" name="description" placeholder = "Description(optional)"></textarea></td>
+        <td class="task"><textarea id= "descriptionBox" rows ="1" name="description" placeholder = "Description(optional)"></textarea></td>
       </form>
     </tr>
   </tfoot>
