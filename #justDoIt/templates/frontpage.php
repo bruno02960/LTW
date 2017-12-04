@@ -26,7 +26,7 @@
     ?>
     <td class="list" id="ftForm">
       <form action = "addList.php" method="POST">
-        <input type="text" id="listnameID" name="listName" placeholder="list name"><br>
+        <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
         <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
@@ -108,7 +108,7 @@
         <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Quick task"></td>
         <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
+        <td class="task"><input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
         <td class="task"><textarea id= "descriptionBox" rows ="1" name="description" placeholder = "Description(optional)"></textarea></td>
       </form>
     </tr>
