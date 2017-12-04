@@ -52,6 +52,7 @@
       <th class="status arrowCursor">Status</th>
       <th class="task arrowCursor">Task</th>
       <th class="expDate arrowCursor">Expiration Date </th>
+      <th class="task arrowCursor">Description </th>
     </tr>
 
     <?php
@@ -79,11 +80,15 @@
                   <td class="id">' . $task['id']. '</td>
                   <td class="status">' . $checkMark. '</td>
                   <td class="task">' . $title. '</td>';
+
         if($diffData > 0 && $task['completed'] != "true"):
           echo '<td class="expDate"> <b>' . $data . '</b> </td>';
         else:
           echo '<td class="expDate">' . $data . ' </td>';
         endif;
+
+        echo '<td class="task"  style ="max-width: 168px;  overflow: auto; display:inline-block;">' . $task['description'] . '</td>';
+
           $taskRow = $task['id'];
           echo'
                 <td class="delete">
@@ -100,10 +105,11 @@
   <tfoot id="ft">
     <tr class = "<?= $toHide ?>">
       <form action="addTask.php" method="POST">
-        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task"></td>
+        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Quick task"></td>
         <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <td class="task"><input type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
+        <td class="task"><textarea style ="max-width: 168px; min-height: 60px;" name="description" placeholder = "Description(optional)"></textarea></td>
       </form>
     </tr>
   </tfoot>
@@ -115,7 +121,7 @@
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
     <form id="userInviteForm" class = "form" action="../account/inviteUsers.php" method="POST">
-      <input type="text" id="usernameInput" name="user" placeholder="Invite user">
+      <input type="text" id="usernameInput" name="user" placeholder="Search users">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       <input class = "buttonCursor" type = "submit" value = "Invite">

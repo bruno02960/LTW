@@ -21,7 +21,7 @@
 
             if(count($lists) != 0)
             {
-                $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId FROM task WHERE toDoListId = :id');
+                $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId, description FROM task WHERE toDoListId = :id');
                 $records->bindParam(':id', $lists[$index]['id']);
                 $records->execute();
                 $results = $records->fetchAll();

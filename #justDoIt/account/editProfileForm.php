@@ -16,12 +16,12 @@
             <button id = "editProfileSubmit" type = "button"> Submit </button>
         </form>
 
-        <h1> Photo </h1>
+        <h1> Profile Picture </h1>
         <div id="uploadPhoto">
             <form action = "upload.php" method = "POST" onsubmit ="return checkImage()" enctype="multipart/form-data">
               <input class = "hidden" type="file" name="fileToUpload" id="fileToUpload" onchange="pressed()">
               <label id="uploadLabel" for="fileToUpload"> Choose a profile picture... </label>
-              <input id = "uploadPhoto" type = "submit" class = "hidden"> <br> <br>
+              <input id = "uploadPhoto" type = "submit" class = "hidden">
               <input class = "buttonCursor" id="submitPhoto" type="submit" value="Upload" name="submit">
             </form>
         </div>
