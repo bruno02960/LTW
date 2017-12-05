@@ -21,10 +21,6 @@ header {
     color: white;
 }
 
-nav#menu > ul > li:hover {
-    background-color: #F4207C;
-}
-
 .header p {
   margin: 0;
 }
@@ -77,6 +73,11 @@ html {
 #menu > ul > li > a {
     text-decoration: none;
     color: black;
+}
+
+#menu > ul > li > a:hover {
+    text-decoration: none;
+    color: white;
 }
 
 #menu > ul {
