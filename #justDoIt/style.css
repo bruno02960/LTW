@@ -16,6 +16,15 @@ header {
   color: white;
 }
 
+.name.buttonCursor:hover {
+    background-color: #F880B4;
+    color: white;
+}
+
+nav#menu > ul > li:hover {
+    background-color: #F4207C;
+}
+
 .header p {
   margin: 0;
 }
@@ -232,7 +241,7 @@ div#editProfileButton {
 
 #descriptionBox{
 	resize: none;
-	width: 100%; 
+	width: 100%;
 	height: 30px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
@@ -482,11 +491,11 @@ input#submitPhoto {
 }
 
 #descriptionDiv {
-	width: 180px; 
+	width: 180px;
 	max-width:180px;
 	height:20px;
-	overflow: hidden; 
-	text-overflow: ellipsis; 
+	overflow: hidden;
+	text-overflow: ellipsis;
 	transition:all 0.3s linear;
     -moz-transition:all 0.3s linear; /* Firefox 4 */
     -webkit-transition:all 0.3s linear; /* Safari and Chrome */
@@ -512,18 +521,3 @@ input#taskExpDateInput{
 .verticalTop{
 	vertical-align: top;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
