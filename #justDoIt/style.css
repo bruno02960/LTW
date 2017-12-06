@@ -487,14 +487,21 @@ input#submitPhoto {
 	display: inline;
 }
 
-#status{
+.status{
 	max-width:1px;
 }
 
+#descriptionDivNotFilled{
+	width: 220px;
+	max-width:220px;
+}
+
 #descriptionDiv {
-	width: 180px;
-	max-width:180px;
+	width: 220px;
+	max-width:220px;
 	height:20px;
+	padding-left:5px;
+	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	transition:all 0.3s linear;
@@ -505,8 +512,11 @@ input#submitPhoto {
 }
 
 #descriptionDiv:Hover{
-	height:110px;
-	width: 250px;
+	height:100px;
+	max-width:220px;
+	padding-left:5px;
+	text-align: left;
+	white-space: normal;
     word-wrap: break-word;
 	overflow-y: scroll;
 }
@@ -521,4 +531,16 @@ input#taskExpDateInput{
 
 .verticalTop{
 	vertical-align: top;
+}
+
+.closeDate{
+	color:red;
+}
+
+.left_align{
+	float:left;
+}
+
+.editTask{
+	width:5px;
 }

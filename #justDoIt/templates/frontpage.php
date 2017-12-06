@@ -52,7 +52,7 @@
       <th class="status arrowCursor" >Status</th>
       <th class="task arrowCursor">Task</th>
       <th class="expDate arrowCursor">Expiration Date </th>
-      <th class="task arrowCursor">Description </th>
+      <th id="descriptionHead" class="task arrowCursor">Description </th>
     </tr>
 
     <?php
@@ -61,6 +61,7 @@
         $row = 0;
         foreach( $tasks as $task)
         {
+          $taskRow = $task['id'];
           $data = "";
           $diffData = 0;
           if($task['expiring']!=NULL)
@@ -78,18 +79,21 @@
 
           echo '<tr>
                   <td class="id verticalTop">' . $task['id']. '</td>
-                  <td class="status verticalTop">' . $checkMark. '</td>
+                  <td class="status verticalTop">' . $checkMark. '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998  </a> </td>
                   <td class="task verticalTop">' . $title. '</td>';
 
-        if($diffData > 0 && $task['completed'] != "true"):
-          echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
+        if($diffData > 259200 && $task['completed'] != "true"):
+          echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
         else:
-          echo '<td class="expDate verticalTop"> <b>' . $data . ' </td>';
+          echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
         endif;
 
-        echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+        if(!empty($task['description']) && strlen($task['description']) > 30)
+          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+        else
+          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
-          $taskRow = $task['id'];
+          
           echo'
                 <td class="delete verticalTop">
                 <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
@@ -127,6 +131,11 @@
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
   </div>
+
+
+  <form id = "editTaskForm" class = "id" action="../account/editTask.php" method = "POST">
+      <input type="hidden" id = "editTaskID" name = "taskID">
+  </form>
 
   <script>
 
@@ -174,22 +183,32 @@
     var currList = 0;
     function deleteTask(task)
     {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function()
+      if (confirm("Are you sure you want to delete this task?") == true)
       {
-        if (this.readyState == 4 && this.status == 200)
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
         {
-          if(this.responseText == 0)
+          if (this.readyState == 4 && this.status == 200)
           {
-              console.log(task.id.substr(4));
-             location.reload();
+            if(this.responseText == 0)
+            {
+                console.log(task.id.substr(4));
+              location.reload();
+            }
           }
-        }
-      };
+        };
 
-      xhttp.open("POST", "../main/deleteTask.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("&task_id=" + task.id.substr(4));
+        xhttp.open("POST", "../main/deleteTask.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("&task_id=" + task.id.substr(4));
+      }
+    }
+
+    function editTask(task)
+    {
+      let editform = document.getElementById("editTaskForm");
+      document.getElementById("editTaskID").value = task.id.substr(4);
+      editform.submit();
     }
 
     var tasklist = [];
@@ -262,15 +281,26 @@
                   if(tasklist[i].expiring!=null){
                     data = tasklist[i].expiring;
                   }
-                  var taskDate = new Date(data* 1000);
-                  var taskDateMonth = taskDate.getMonth() + 1;
-                  var taskDateDay = taskDate.getDate() + 1;
+                  let taskDate = new Date(data* 1000);
+                  let taskDateMonth = taskDate.getMonth() + 1;
+                  let taskDateDay = taskDate.getDate() + 1;
                   function pad(n) {
                       return (n < 10) ? ("0" + n) : n;
                   }
                   let taskRow = tasklist[i].id;
-                  htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
-                  htmlString = htmlString + "\n" + '<td class="buttonCursor verticalTop" id = "description"> <div id = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+                  let currentDate = new Date();
+                  let diffData = (currentDate.getTime() - (taskDate.getTime()));
+
+                  if(diffData > 259200 && tasklist[i].completed != "true")
+                    htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  else
+                    htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+
+                  if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div id = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+                  else
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
+
                   htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
