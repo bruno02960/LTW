@@ -137,7 +137,10 @@
 
 
     function XSS_Remove_Tags(string,elementToChange){
-      var xhttp = new XMLHttpRequest();
+      
+      var val = string;
+      elementToChange.value = val.replace(/<\/?[^>]+(>|$)/g,"");
+      /*var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function()
       {
         if (this.readyState == 4 && this.status == 200)
@@ -152,7 +155,7 @@
 
       xhttp.open("POST", "../main/removeTags.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("str=" + string);
+      xhttp.send("str=" + string);*/
     }
 
     var searchForm = document.querySelector("#searchForm");
