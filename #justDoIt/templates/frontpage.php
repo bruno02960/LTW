@@ -29,6 +29,7 @@
         <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
         <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+        <input id = "AuthToken" type="hidden" name="AuthenticationToken">
       </form>
     </td>
   </table>
@@ -146,11 +147,34 @@
 
   <script>
 
-  function hello()
-  {
-    console.log("1");
-  }
+    function RequestAuthToken(tokenName,elementToChange,isHtml = true){
+      var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function()
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            if(this.responseText!=-1){
+            if(isHtml){
+              elementToChange.value = this.responseText;
+            }else{
+              elementToChange = this.responseText;
+            }
+            }
+          }
+        };
 
+        xhttp.open("POST", "../main/requestsToken.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("&listName=" + tokenName);
+    }
+
+    window.onload = function(e){
+          let listtableform = document.getElementById("ftForm").querySelector("form");
+          let tokenVal = listtableform.querySelector("#AuthToken");
+          if(tokenVal!=null){
+            RequestAuthToken("ftForm",tokenVal);
+          }
+    }
 
     function XSS_Remove_Tags(string,elementToChange){
       
@@ -206,10 +230,14 @@
 
     if(listTable!=null){
       let listtableform = document.getElementById("ftForm").querySelector("form");
-      let formInput = listtableform.querySelector("#listnameID");
-      formInput.oninput = function(){
-          let str = formInput.value;
-          str = XSS_Remove_Tags(str,formInput);
+
+      if(listtableform!=null){
+        let formInput = listtableform.querySelector("#listnameID");
+        formInput.oninput = function(){
+            let str = formInput.value;
+            console.log(listtableform.querySelector("#AuthToken").value);
+            str = XSS_Remove_Tags(str,formInput);
+        }
       }
 
       listTable.onclick = function(ev){
