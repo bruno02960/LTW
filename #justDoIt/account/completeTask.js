@@ -1,5 +1,6 @@
 function completeTask(task) 
 {
+  console.log(task.id);
   var statusButton = document.getElementById(task.id);
     if (confirm("Mark this task as completed?") == true)
     {
@@ -105,7 +106,7 @@ function completeTask(task)
       }
    
     var listIndex = task.id.split('/')[1].substr(5);
-
+     
     xhttp.open("POST", "../main/getListData.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("index=" + listIndex);

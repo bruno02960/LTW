@@ -103,7 +103,7 @@
           
           echo'
                 <td class="delete verticalTop">
-                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
+                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
                 </td>
                 </tr>';
         }
@@ -200,6 +200,7 @@
     {
       if (confirm("Are you sure you want to delete this task?") == true)
       {
+        var taskID = (task.id.substr(0,task.id.indexOf('/'))).substr(4);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function()
         {
@@ -207,15 +208,14 @@
           {
             if(this.responseText == 0)
             {
-                console.log(task.id.substr(4));
-              location.reload();
+                location.reload();
             }
           }
         };
 
         xhttp.open("POST", "../main/deleteTask.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("&task_id=" + task.id.substr(4));
+        xhttp.send("&task_id=" + taskID);
       }
     }
 
@@ -286,6 +286,7 @@
               {
                 for(let i=0;i<tasklist.length;++i)
               {
+                let taskRow = tasklist[i].id;
                 if(tasklist[i].completed == "true")
                 { 
                   var checkMark = "&#10004";
@@ -297,7 +298,6 @@
                   var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
                 }
 
-                  let taskRow = tasklist[i].id;
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
@@ -330,7 +330,7 @@
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
+                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '/">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
               };
@@ -420,8 +420,8 @@
             }
           }
         }
-      }*/
-    }
+      }
+    }*/
   </script>
 
   <script src='../account/completeTask.js' type='text/javascript'> </script>

@@ -22,7 +22,7 @@
         $diffData = 0;
         if($task['expiring']!=NULL)
         {
-          $data = date('m/d/Y', $task['expiring']);
+          $data = date('d-m-Y', $task['expiring']);
           $diffData = time() - $task['expiring'];
         }
 
@@ -101,6 +101,7 @@
         var taskID = document.getElementById('editTaskID').value;
         var taskTitle = document.getElementById('titleTable').value;
         var taskExpDate = document.getElementById('expDateTable').value;
+        
         var taskDescription = document.getElementById('taskDescriptionTable').value;
 
         var xhttp = new XMLHttpRequest();
@@ -108,7 +109,33 @@
         {
             if (this.readyState == 4 && this.status == 200)
             {
-                if(this.responseText == -1)
+                if(this.responseText == 0)
+                {
+                    window.location.href = "../main/index.php";
+                    return;
+                }
+
+                if(this.responseText == -2)
+                {
+                    var message = "Invalid day";
+                    document.getElementById("message").innerHTML = message;
+                    document.getElementById("message").classList.remove('success');
+                    document.getElementById("message").classList.add('error');
+                    document.getElementById("message").classList.remove('hidden');
+                    return;
+                }
+
+                if(this.responseText == -3)
+                {
+                    var message = "Invalid month";
+                    document.getElementById("message").innerHTML = message;
+                    document.getElementById("message").classList.remove('success');
+                    document.getElementById("message").classList.add('error');
+                    document.getElementById("message").classList.remove('hidden');
+                    return;
+                }
+
+                else
                 {
                     var message = "Error";
                     document.getElementById("message").innerHTML = message;
@@ -116,18 +143,7 @@
                     document.getElementById("message").classList.add('error');
                     document.getElementById("message").classList.remove('hidden');
                     return;
-                }   
-                else
-                {
-                    document.getElementById("completedText").value = this.responseText;
-                    console.log(document.getElementById("completedText").value);
-                    var message = "Task successfully edited";
-                    document.getElementById("message").innerHTML = message;
-                    document.getElementById("message").classList.remove('error');
-                    document.getElementById("message").classList.add('success');
-                    document.getElementById("message").classList.remove('hidden');
-                    return;
-                }
+                } 
             }
         }
         xhttp.open("POST", "../account/checkTaskValidity.php", true);
