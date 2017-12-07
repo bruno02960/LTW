@@ -134,6 +134,7 @@
       <input type="text" id="usernameInput" name="user" placeholder="Search users">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+      <input id ="inviteToken" type="hidden" name="Token" valie="">
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
   </div>
@@ -155,22 +156,6 @@
       
       var val = string;
       elementToChange.value = val.replace(/<\/?[^>]+(>|$)/g,"");
-      /*var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function()
-      {
-        if (this.readyState == 4 && this.status == 200)
-        {
-          if(this.responseText==null){
-            elementToChange.value="";
-          }else{
-            elementToChange.value=this.responseText;
-          }
-        }
-      };
-
-      xhttp.open("POST", "../main/removeTags.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("str=" + string);*/
     }
 
     var searchForm = document.querySelector("#searchForm");
