@@ -96,9 +96,9 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+          echo '<td id = "description"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
         else
-          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+          echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
           
           echo'
