@@ -256,6 +256,10 @@ div#editProfileButton {
 	resize: none;
 }
 
+#descriptionEditBox{
+	resize: none;
+}
+
 .tasks tbody th {
     background-color: #1E000D;
     color: white;
@@ -289,6 +293,12 @@ div#editProfileButton {
 .error {
     padding-left: 1em;
     color: #f20069;
+    font-weight: bold;
+}
+
+.success {
+    padding-left: 1em;
+    color: green;
     font-weight: bold;
 }
 
@@ -543,4 +553,8 @@ input#taskExpDateInput{
 
 .editTask{
 	width:5px;
+}
+
+section#editTask{
+	padding-left:2em;
 }

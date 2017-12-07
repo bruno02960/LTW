@@ -9,6 +9,7 @@
     <th class="status arrowCursor">Status</th>
     <th class="task arrowCursor">Task</th>
     <th class="expDate arrowCursor">Expiration Date </th>
+    <th id="descriptionHead" class="task arrowCursor">Description </th>
   </tr>
 
   <?php
@@ -39,11 +40,14 @@
       else:
         echo '<td class="expDate">' . $data . ' </td>';
       endif;
-        $taskRow = $task['id'];
+
+      if(!empty($task['description']) && strlen($task['description']) > 30)
+        echo '<td class="buttonCursor" id = "description""><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+      else
+        echo '<td class="buttonCursor" id = "description""><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+        
       }
     }
-    else
-      $taskRow = null;
   ?>
 </tbody>
 </table>

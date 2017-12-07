@@ -7,7 +7,7 @@
 
     switch($_GET['list']){
       case "completed":
-        $list = $conn->prepare('SELECT task.id, title, completed, expiring FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "true"');
+        $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "true"');
         if($list != null)
         {
             $list->bindParam(':id', $_SESSION['user_id']);
@@ -16,7 +16,7 @@
         }
         break;
       case "to Complete":
-        $list = $conn->prepare('SELECT task.id, title, completed, expiring FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "false"');
+        $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "false"');
         if($list != null)
         {
             $list->bindParam(':id', $_SESSION['user_id']);
@@ -25,7 +25,7 @@
         }
         break;
       case "expiring":
-        $list = $conn->prepare('SELECT task.id, title, completed, expiring FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "false" AND (expiring - strftime("%s","now")) <= 259200');
+        $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "false" AND (expiring - strftime("%s","now")) <= 259200');
         if($list != null)
         {
             $list->bindParam(':id', $_SESSION['user_id']);
@@ -34,7 +34,7 @@
         }
         break;
       default:
-        $list = $conn->prepare('SELECT task.id, title, completed, expiring FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND title LIKE :it');
+        $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND title LIKE :it');
         if($list != null)
         {
             $seachList = strip_tags($_GET['list']);
