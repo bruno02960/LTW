@@ -29,6 +29,7 @@
         <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
         <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+        <input id = "AuthToken" type="hidden" name="AuthenticationToken">
       </form>
   </aside>
 
@@ -77,7 +78,7 @@
           else
            {
              $checkMark = "";
-             $htmlstring = '<input onclick="completeTask(this);" id="task' . $taskRow . 'list'. $index .'" type="checkbox">';
+             $htmlstring = '<input onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'" type="checkbox">';
            }
 
         $title =  strip_tags($task['title']);
@@ -94,14 +95,14 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+          echo '<td id = "description"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
         else
-          echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+          echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
 
           echo'
                 <td class="delete verticalTop">
-                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
+                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
                 </td>
                 </tr>';
         }
@@ -133,6 +134,7 @@
       <input type="text" id="usernameInput" name="user" placeholder="Search users">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+      <input id ="inviteToken" type="hidden" name="Token" valie="">
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
   </div>
@@ -144,11 +146,34 @@
 
   <script>
 
-  function hello()
-  {
-    console.log("1");
-  }
+    function RequestAuthToken(tokenName,elementToChange,isHtml = true){
+      var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function()
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            if(this.responseText!=-1){
+            if(isHtml){
+              elementToChange.value = this.responseText;
+            }else{
+              elementToChange = this.responseText;
+            }
+            }
+          }
+        };
 
+        xhttp.open("POST", "../main/requestsToken.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("&listName=" + tokenName);
+    }
+
+    window.onload = function(e){
+          let listtableform = document.getElementById("ftForm").querySelector("form");
+          let tokenVal = listtableform.querySelector("#AuthToken");
+          if(tokenVal!=null){
+            RequestAuthToken("ftForm",tokenVal);
+          }
+    }
 
     function XSS_Remove_Tags(string,elementToChange){
 
@@ -174,6 +199,7 @@
     {
       if (confirm("Are you sure you want to delete this task?") == true)
       {
+        var taskID = (task.id.substr(0,task.id.indexOf('/'))).substr(4);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function()
         {
@@ -181,15 +207,14 @@
           {
             if(this.responseText == 0)
             {
-                console.log(task.id.substr(4));
-              location.reload();
+                location.reload();
             }
           }
         };
 
         xhttp.open("POST", "../main/deleteTask.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("&task_id=" + task.id.substr(4));
+        xhttp.send("&task_id=" + taskID);
       }
     }
 
@@ -203,11 +228,23 @@
     var tasklist = [];
 
     if(listTable!=null){
+<<<<<<< HEAD
       let listtableform = document.getElementById("addListForm");
       let formInput = listtableform.querySelector("#listnameID");
       formInput.oninput = function(){
           let str = formInput.value;
           str = XSS_Remove_Tags(str,formInput);
+=======
+      let listtableform = document.getElementById("ftForm").querySelector("form");
+
+      if(listtableform!=null){
+        let formInput = listtableform.querySelector("#listnameID");
+        formInput.oninput = function(){
+            let str = formInput.value;
+            console.log(listtableform.querySelector("#AuthToken").value);
+            str = XSS_Remove_Tags(str,formInput);
+        }
+>>>>>>> c87c863a1c7066fbbc53d119665d9fc648367340
       }
 
       listTable.onclick = function(ev){
@@ -258,6 +295,7 @@
               </tr>`;
                 for(let i=0;i<tasklist.length;++i)
               {
+                let taskRow = tasklist[i].id;
                 if(tasklist[i].completed == "true")
                 {
                   var checkMark = "&#10004";
@@ -266,10 +304,13 @@
                else
                 {
                   var checkMark = "";
-                  var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + 'list'+ currList + '" type="checkbox"';
+                  var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
                 }
 
+<<<<<<< HEAD
                   var taskRow = tasklist[i].id;
+=======
+>>>>>>> c87c863a1c7066fbbc53d119665d9fc648367340
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
@@ -302,7 +343,7 @@
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
+                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '/">X</a> ' + '</td>';
                   htmlString = htmlString + "\n" + "</tr>";
                 }
               };
@@ -343,7 +384,7 @@
       str = XSS_Remove_Tags(str,userNameInput);
     }
 
-    var taskTable = document.querySelector('#taskTable');
+   /* var taskTable = document.querySelector('#taskTable');
     if(taskTable!=null)
     {
       let foot = document.getElementById("addTaskForm");
@@ -359,7 +400,7 @@
           str = XSS_Remove_Tags(str,formDateInput);
       }
 
-     /* document.querySelector('#taskTable').onclick = function(ev)
+      document.querySelector('#taskTable').onclick = function(ev)
       {
         var index = ev.target.parentElement.rowIndex;
         var table = document.getElementById("taskTable");
@@ -391,6 +432,7 @@
             }
           }
         }
+<<<<<<< HEAD
       }*/
 
 
@@ -535,11 +577,13 @@
           }
           else
             statusButton.checked = false;
+=======
+>>>>>>> c87c863a1c7066fbbc53d119665d9fc648367340
       }
-
-
-    }
+    }*/
   </script>
+
+  <script src='../account/completeTask.js' type='text/javascript'> </script>
 
   </section>
         <?php else: ?>
