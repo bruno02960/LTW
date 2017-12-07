@@ -242,7 +242,7 @@ div#editProfileButton {
 
 #descriptionBox{
 	resize: none;
-	width: 100%;
+	width: 75%;
 	height: 30px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
@@ -337,10 +337,38 @@ input[name="user"] {
     color: black;
     font-weight: bold;
     border: 0;
-        border-bottom-width: 0px;
-        border-bottom-style: none;
-        border-bottom-color: currentcolor;
     border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+
+input[name="taskName"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    width: 50%;
+}
+
+input[name="taskDate"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    width: 23%;
+}
+
+textarea[name="taskDescription"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
     padding-bottom: 0.5em;
     padding-left: 1em;
 }
@@ -351,6 +379,11 @@ input[name="user"] {
 
 #registerForm input::placeholder {
     font-family: Calibri;
+}
+
+textarea[name="taskDescription"]::placeholder {
+  font-family: Calibri;
+  font-weight: bold;
 }
 
 #registerForm input {
@@ -398,10 +431,6 @@ input[name="addListButton"] {
     width: 100%;
 }
 
-input[name="addTaskButton"] {
-    width: 100%;
-}
-
 label#fileToUploadLabel {
     color: #f20069;
     padding-top: 0.5em;
@@ -440,7 +469,15 @@ input#submitPhoto {
     width: 6.8em;
 }
 
-.lists input[name="listName"] {
+#listsTable {
+    width: 50%;
+}
+
+form[action="addList.php"] {
+  width: 50%;
+}
+
+form input[name="listName"] {
     border: 0;
     padding: 0;
     margin: 0;

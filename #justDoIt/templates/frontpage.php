@@ -24,14 +24,12 @@
       }
     }
     ?>
-    <td class="list" id="ftForm">
-      <form action = "addList.php" method="POST">
+  </table>
+      <form id="addListForm" action = "addList.php" method="POST">
         <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
         <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
         <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
       </form>
-    </td>
-  </table>
   </aside>
 
   <?php
@@ -47,17 +45,18 @@
   <h1 id = "ListName" class = "<?= $toHide ?>"> <?= strip_tags($lists[$index]['name'])?> </h1>
   <table class="tasks <?= $toHide ?>" id="taskTable">
   <tbody>
-    <tr>
+
+        <?php
+          if($tasks != null)
+          {
+            echo '<tr>
       <th class="id">ID</th>
       <th class="status arrowCursor" >Status</th>
       <th class="task arrowCursor">Task</th>
       <th class="expDate arrowCursor">Expiration Date </th>
       <th id="descriptionHead" class="task arrowCursor">Description </th>
-    </tr>
+    </tr>';
 
-    <?php
-      if($tasks != null)
-      {
         $row = 0;
         foreach( $tasks as $task)
         {
@@ -71,12 +70,12 @@
           }
 
           if($task['completed'] == "true")
-           { 
+           {
              $checkMark = "&#10004";
              $htmlstring = '';
            }
           else
-           { 
+           {
              $checkMark = "";
              $htmlstring = '<input onclick="completeTask(this);" id="task' . $taskRow . 'list'. $index .'" type="checkbox">';
            }
@@ -99,7 +98,7 @@
         else
           echo '<td class="buttonCursor" id = "description" onclick="hello()"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
-          
+
           echo'
                 <td class="delete verticalTop">
                 <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '"> X </a>
@@ -111,19 +110,19 @@
         $taskRow = null;
     ?>
   </tbody>
-
-  <tfoot id="ft">
-    <tr class = "<?= $toHide ?> verticalTop">
-      <form action="addTask.php" method="POST">
-        <td><input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task"></td>
-        <td class="task"><input type="text" id="taskNameid" name="taskName" placeholder="task name"> </td>
-        <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <td class="task"><input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)"></td>
-        <td class="task"><textarea id= "descriptionBox" rows ="1" name="description" placeholder = "Description(optional)"></textarea></td>
-      </form>
-    </tr>
-  </tfoot>
   </table>
+
+  <br>
+    <div class = "<?= $toHide ?> verticalTop">
+      <form id="addTaskForm" action="addTask.php" method="POST">
+        <input type="text" id="taskNameid" name="taskName" placeholder="task name">
+        <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
+        <input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
+        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "Description(optional)"></textarea> <br>
+          <input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task">
+      </form>
+    </div>
+
   <br>
   <div class = "<?= $toHide; ?>">
   <form class = " form " action = "deleteList.php" method="POST">
@@ -152,25 +151,9 @@
 
 
     function XSS_Remove_Tags(string,elementToChange){
-      
+
       var val = string;
       elementToChange.value = val.replace(/<\/?[^>]+(>|$)/g,"");
-      /*var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function()
-      {
-        if (this.readyState == 4 && this.status == 200)
-        {
-          if(this.responseText==null){
-            elementToChange.value="";
-          }else{
-            elementToChange.value=this.responseText;
-          }
-        }
-      };
-
-      xhttp.open("POST", "../main/removeTags.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("str=" + string);*/
     }
 
     var searchForm = document.querySelector("#searchForm");
@@ -183,7 +166,7 @@
         }
       }
     }
-  
+
 
     var listTable = document.querySelector("#listsTable");
     var currList = 0;
@@ -220,7 +203,7 @@
     var tasklist = [];
 
     if(listTable!=null){
-      let listtableform = document.getElementById("ftForm").querySelector("form");
+      let listtableform = document.getElementById("addListForm");
       let formInput = listtableform.querySelector("#listnameID");
       formInput.oninput = function(){
           let str = formInput.value;
@@ -260,7 +243,12 @@
                 }
               }
               let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
-              let htmlString = `
+              var htmlString = '';
+
+
+              if(tasklist.length!=0)
+              {
+              htmlString = `
               <tr>
                 <th class="id">ID</th>
                 <th class="status">Status</th>
@@ -268,32 +256,29 @@
                 <th class="expDate">Expiration Date </th>
                 <th class="arrowCursor">Description </th>
               </tr>`;
-
-              if(tasklist.length!=0)
-              {
                 for(let i=0;i<tasklist.length;++i)
               {
                 if(tasklist[i].completed == "true")
-                { 
+                {
                   var checkMark = "&#10004";
                   var htmlstring = '';
                 }
                else
-                { 
+                {
                   var checkMark = "";
                   var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + 'list'+ currList + '" type="checkbox"';
                 }
 
-                  let taskRow = tasklist[i].id;
+                  var taskRow = tasklist[i].id;
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
 
-                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' + 
+                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
                                 '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998  </a> ' + htmlstring + checkMark + ' </td>';
 
                   htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
-                  
+
                   let data = ""
                   if(tasklist[i].expiring!=null){
                     data = tasklist[i].expiring;
@@ -361,15 +346,14 @@
     var taskTable = document.querySelector('#taskTable');
     if(taskTable!=null)
     {
-      let foot = taskTable.tFoot;
-      let form = foot.querySelector("tr").querySelector("form");
-      let formInput = form[1];
+      let foot = document.getElementById("addTaskForm");
+      let formInput = foot[1];
       formInput.oninput = function(){
           let str = formInput.value;
           str = XSS_Remove_Tags(str,formInput);
       }
 
-      let formDateInput = form[3];
+      let formDateInput = foot[3];
       formDateInput.oninput = function(){
           let str = formDateInput.value;
           str = XSS_Remove_Tags(str,formDateInput);
@@ -412,9 +396,9 @@
 
 
 
-     
 
-      function completeTask(task) 
+
+      function completeTask(task)
       {
         var statusButton = document.getElementById(task.id);
           if (confirm("Mark this task as completed?") == true)
@@ -425,7 +409,7 @@
               if (this.readyState == 4 && this.status == 200)
               {
                 if(this.responseText != 0)
-                { 
+                {
                   var message = "Error";
                   document.getElementById("message").innerHTML = message;
                   document.getElementById("message").classList.add('error');
@@ -468,26 +452,26 @@
               {
                 let taskRow = task.id.substr(4);
                 if(tasklist[i].completed == "true")
-                { 
+                {
                   var checkMark = "&#10004";
                   var htmlstring = '';
                 }
                else
-                { 
+                {
                   var checkMark = "";
                   var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '" type="checkbox"';
                 }
 
-                  
+
 
                   htmlString = htmlString + "\n" + "<tr>";
                   htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
 
-                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' + 
+                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
                                 '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998  </a> ' + htmlstring + checkMark + ' </td>';
 
                   htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
-                  
+
                   let data = ""
                   if(tasklist[i].expiring!=null){
                     data = tasklist[i].expiring;
@@ -519,7 +503,7 @@
               tableHTML.innerHTML = htmlString;
               tasklist.length = 0;
             }
-          
+
 
           xhttp.open("POST", "../main/getListData.php", true);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -544,7 +528,7 @@
                 }
               }
             }
-            
+
             xhttp.open("POST", "../account/changeTaskBool.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("completed=" + true + "&task_id=" + task.id.charAt(4));
