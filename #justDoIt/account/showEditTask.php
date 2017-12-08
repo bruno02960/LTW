@@ -26,13 +26,15 @@
           }
 
           if($task['completed'] == "true")
-              $checkMark = "checked";
+              $htmlstring = "&#10004";
           else
-              $checkMark = "";
+          {
++            $htmlstring = '<input onkeypress="return keyListener(event)" id="statusCheck" type="checkbox">';
++         }
 
           echo '<tr>
                   <td class="id">' . $task['id']. '</td>
-                  <td class="status"> <input onkeypress="return keyListener(event)" id="statusCheck" type="checkbox" ' . $checkMark . '></td>
+                  <td class="status">' . $htmlstring . ' </td>
                   <td class="expDate" ><input type="text" onkeypress="return keyListener(event)" id = "titleTable" value="' . $task['title']. '"> </td>';
 
 
