@@ -495,7 +495,9 @@ form input[name="listName"] {
     border: 0;
     padding: 0;
     margin: 1.5px;
+	margin-top: -1em;
     width: 98%;
+	height: 20px;
     background-color: #FCBFD9;
 }
 

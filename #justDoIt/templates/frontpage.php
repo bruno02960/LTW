@@ -77,18 +77,20 @@
           {
              $checkMark = "&#10004";
              $htmlstring = '';
+             $editTaskString='';
           }
           else
           {
              $checkMark = "";
-             $htmlstring = '<input onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'" type="checkbox">';
+             $htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'" type="checkbox">';
+             $editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ';
           }
 
         $title =  strip_tags($task['title']);
 
         echo '<tr>
                 <td class="id verticalTop">' . $task['id']. '</td>
-                <td class="status verticalTop"> <a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ' . $htmlstring . $checkMark . ' </td>
+                <td class="status verticalTop">' . $editTaskString . $htmlstring . $checkMark . ' </td>
                 <td class="task verticalTop">' . $title. '</td>';
 
         if($diffData > 259200 && $task['completed'] != "true"):
@@ -293,10 +295,11 @@
               {
               htmlString = `<tr>
                               <th class="id">ID</th>
-                              <th class="status">Status</th>
-                              <th class="task">Task</th>
-                              <th class="expDate">Expiration Date </th>
-                              <th class="arrowCursor">Description </th>
+                              <th class="status arrowCursor" ></th>
+                              <th class="task arrowCursor">Task</th>
+                              <th class="expDate arrowCursor">Expiration Date </th>
+                              <th id="descriptionHead" class="task arrowCursor">Description </th>
+                              <th class="deltete task"></th>
                             </tr>`;
                 for(let i=0;i<tasklist.length;++i)
                 {
@@ -306,11 +309,13 @@
                   {
                     var checkMark = "&#10004";
                     var htmlstring = '';
+                    var editTaskString='';
                   }
                   else
                   {
                     var checkMark = "";
-                    var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
+                    var htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
+                    var editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998;  </a> ';
                   }
 
 
@@ -318,7 +323,7 @@
                   htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
 
                   htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
-                                '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998  </a> ' + htmlstring + checkMark + ' </td>';
+                                editTaskString + htmlstring + checkMark + ' </td>';
 
                   htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
 
