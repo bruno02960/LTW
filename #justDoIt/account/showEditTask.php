@@ -29,8 +29,8 @@
               $htmlstring = "&#10004";
           else
           {
-+            $htmlstring = '<input onkeypress="return keyListener(event)" id="statusCheck" type="checkbox">';
-+         }
+            $htmlstring = '<input onkeypress="return keyListener(event)" id="statusCheck" type="checkbox">';
+          }
 
           echo '<tr>
                   <td class="id">' . $task['id']. '</td>
