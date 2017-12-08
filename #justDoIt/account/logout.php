@@ -1,5 +1,4 @@
 <?php
-
     include('../includes/session.php');
 
     if(isset($_COOKIE[session_name()])):
@@ -11,9 +10,7 @@
     endif;
 
     session_unset();
-
     session_destroy();
 
     header("Location: ../main");
-
 ?>

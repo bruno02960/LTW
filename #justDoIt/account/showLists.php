@@ -15,7 +15,7 @@
             $list = $list->fetchAll();
         }
         break;
-      case "to Complete":
+      case "incomplete":
         $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "false"');
         if($list != null)
         {

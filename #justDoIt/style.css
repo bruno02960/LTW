@@ -2,6 +2,10 @@ html {
   background-color: #222222;
 }
 
+#editTask h2 {
+    font-family: Montserrat;
+}
+
 header > a {
     text-decoration: none;
     color: black;
@@ -114,7 +118,7 @@ nav#menu {
     padding-bottom: 1em;
 }
 
-#list > h1 {
+#list > h2 {
   font-family: Montserrat, Arial;
 }
 
@@ -168,7 +172,20 @@ button {
 	cursor: pointer;
 }
 
-#editProfile h1 {
+.deltete.task {
+    background-color: white;
+}
+
+.delete.verticalTop {
+    background-color: white;
+    text-align: left;
+}
+
+.status.verticalTop {
+    background-color: white;
+}
+
+#editProfile h2 {
   font-family: Montserrat, Arial;
 }
 
@@ -242,7 +259,6 @@ div#editProfileButton {
 
 #descriptionBox{
 	resize: none;
-	width: 75%;
 	height: 30px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
@@ -350,7 +366,6 @@ input[name="taskName"] {
     border-bottom: 1px solid black;
     padding-bottom: 0.5em;
     padding-left: 1em;
-    width: 50%;
 }
 
 input[name="taskDate"] {
@@ -361,7 +376,6 @@ input[name="taskDate"] {
     border-bottom: 1px solid black;
     padding-bottom: 0.5em;
     padding-left: 1em;
-    width: 23%;
 }
 
 textarea[name="taskDescription"] {
@@ -423,7 +437,7 @@ input[type="submit"] {
     border: 0;
 }
 
-#lists > h1 {
+#lists > h2 {
   font-family: Montserrat, Arial;
 }
 

@@ -1,8 +1,8 @@
-
 var submitButton = document.getElementById("registerSubmit");
 var form = document.getElementById("registerForm");
 
-pressed = function(){
+pressed = function()
+{
     var a = document.getElementById('fileToUpload');
     if(a.value == "")
     {

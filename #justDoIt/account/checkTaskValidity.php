@@ -9,7 +9,7 @@
         $month = intval($date[1]);
         $year = intval($date[2]);
 
-        
+
         if($day > 31)
         {
             echo -2;
@@ -52,5 +52,4 @@
         echo -1;
         return;
     }
-
 ?>

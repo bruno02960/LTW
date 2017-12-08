@@ -1,11 +1,9 @@
 <?php
     include('../includes/session.php');
-
     include('../database/connection.php');
-
     include('passing.php');
 
-    if($_POST['listName']!="") 
+    if($_POST['listName']!="")
     {
       $records = $conn->prepare('INSERT INTO toDoList (name, userid) VALUES (:name, :userid)');
       if($records != null)

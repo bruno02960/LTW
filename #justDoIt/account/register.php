@@ -1,19 +1,16 @@
 <?php
     include('../includes/session.php');
-
     include('../includes/redirectLoggedIn.php');
-
     include('../database/connection.php');
+
     if(empty($_POST['location']))
         $_POST['location'] = null;
     if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
     {
-        //Enter the new user in the database
         $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
         $stmt = $conn->prepare($sql);
         if($stmt != null)
         {
-            
             $PW = $_POST['password'];
             $PWC = $_POST['confirm_password'];
             $UserName = $_POST['username'];
@@ -37,21 +34,20 @@
                 $imageFileType = pathinfo($PPicDirectory,PATHINFO_EXTENSION);
                 // Check if image file is a actual image or fake image
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                if($check !== false) 
+                if($check !== false)
                 {
                     $uploadOk = 1;
-                } 
-                else 
+                }
+                else
                 {
                     $uploadOk = 0;
                 }
-            
-                if ($uploadOk == 0) 
+
+                if ($uploadOk == 0)
                 {
                     echo "Sorry, your file was not uploaded.";
-                // if everything is ok, try to upload file
-                } 
-                else  
+                }
+                else
                     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $PPicDirectory);
             }
 
@@ -72,7 +68,6 @@
                 echo('Unexpected error');
             }
         }
-
     }
 
     include('../templates/header.php');

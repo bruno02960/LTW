@@ -3,34 +3,36 @@
     <ul>
       <li><form action="../account/showLists.php" id="searchForm"><input type="text" name="list" id="searchImp" placeholder="Search Tasks"></form></li>
       <li><a href="../account/showLists.php?list=completed">Completed</a></li>
-      <li><a href="../account/showLists.php?list=to&nbsp;Complete">To Complete</a></li>
+      <li><a href="../account/showLists.php?list=incomplete">Incomplete</a></li>
       <li><a href="../account/showLists.php?list=expiring">Expiring</a></li>
     </ul>
   </nav>
-    <p id = "message" class = "hidden"> </p>
+
+  <p id = "message" class = "hidden"> </p>
+
   <aside id="lists">
-  <h1> To-do lists </h1>
-  <table class="lists" id="listsTable">
-    <?php
-    if($lists!=NULL)
-    {
-      foreach( $lists as $list)
+    <h2> To-do lists </h2>
+    <table class="lists" id="listsTable">
+      <?php
+      if($lists!=NULL)
       {
-        $name = strip_tags($list['name']);
-        echo '<tr>
-              <td class="id">' . $list['id']. '</td>
-              <td class="name buttonCursor">' . $name. '</td>
-              </tr>';
+        foreach( $lists as $list)
+        {
+          $name = strip_tags($list['name']);
+          echo '<tr>
+                <td class="id">' . $list['id']. '</td>
+                <td class="name buttonCursor">' . $name. '</td>
+                </tr>';
+        }
       }
-    }
-    ?>
-  </table>
-      <form id="addListForm" action = "addList.php" method="POST">
-        <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
-        <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
-        <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <input id = "AuthToken" type="hidden" name="AuthenticationToken">
-      </form>
+      ?>
+    </table>
+        <form id="addListForm" action = "addList.php" method="POST">
+          <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
+          <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
+          <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+          <input id = "AuthToken" type="hidden" name="AuthenticationToken">
+        </form>
   </aside>
 
   <?php
@@ -43,20 +45,21 @@
   ?>
 
   <section id="list">
-  <h1 id = "ListName" class = "<?= $toHide ?>"> <?= strip_tags($lists[$index]['name'])?> </h1>
+  <h2 id = "ListName" class = "<?= $toHide ?>"> <?= strip_tags($lists[$index]['name'])?> </h2>
+  <div style="overflow-x:auto;" >
   <table class="tasks <?= $toHide ?>" id="taskTable">
   <tbody>
-
         <?php
           if($tasks != null)
           {
             echo '<tr>
-      <th class="id">ID</th>
-      <th class="status arrowCursor" >Status</th>
-      <th class="task arrowCursor">Task</th>
-      <th class="expDate arrowCursor">Expiration Date </th>
-      <th id="descriptionHead" class="task arrowCursor">Description </th>
-    </tr>';
+                    <th class="id">ID</th>
+                    <th class="status arrowCursor" ></th>
+                    <th class="task arrowCursor">Task</th>
+                    <th class="expDate arrowCursor">Expiration Date </th>
+                    <th id="descriptionHead" class="task arrowCursor">Description </th>
+                    <th class="deltete task"></th>
+                  </tr>';
 
         $row = 0;
         foreach( $tasks as $task)
@@ -71,22 +74,22 @@
           }
 
           if($task['completed'] == "true")
-           {
+          {
              $checkMark = "&#10004";
              $htmlstring = '';
-           }
+          }
           else
-           {
+          {
              $checkMark = "";
              $htmlstring = '<input onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'" type="checkbox">';
-           }
+          }
 
         $title =  strip_tags($task['title']);
 
-          echo '<tr>
-                  <td class="id verticalTop">' . $task['id']. '</td>
-                  <td class="status verticalTop"> <a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998  </a> ' . $htmlstring . $checkMark . ' </td>
-                  <td class="task verticalTop">' . $title. '</td>';
+        echo '<tr>
+                <td class="id verticalTop">' . $task['id']. '</td>
+                <td class="status verticalTop"> <a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ' . $htmlstring . $checkMark . ' </td>
+                <td class="task verticalTop">' . $title. '</td>';
 
         if($diffData > 259200 && $task['completed'] != "true"):
           echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
@@ -100,30 +103,28 @@
           echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
 
-          echo'
-                <td class="delete verticalTop">
+          echo' <td class="delete verticalTop">
                 <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
                 </td>
-                </tr>';
+              </tr>';
         }
       }
       else
         $taskRow = null;
-    ?>
+      ?>
   </tbody>
   </table>
-
+</div>
   <br>
-    <div class = "<?= $toHide ?> verticalTop">
+    <div style="overflow-x:auto;" class = "<?= $toHide ?> verticalTop">
       <form id="addTaskForm" action="addTask.php" method="POST">
         <input type="text" id="taskNameid" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
+        <input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)"> <br>
         <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "Description(optional)"></textarea> <br>
           <input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task">
       </form>
     </div>
-
   <br>
   <div class = "<?= $toHide; ?>">
   <form class = " form " action = "deleteList.php" method="POST">
@@ -134,7 +135,7 @@
       <input type="text" id="usernameInput" name="user" placeholder="Search users">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-      <input id ="inviteToken" type="hidden" name="Token" valie="">
+      <input id ="inviteToken" type="hidden" name="Token" value="">
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
   </div>
@@ -146,18 +147,23 @@
 
   <script>
 
-    function RequestAuthToken(tokenName,elementToChange,isHtml = true){
+    function RequestAuthToken(tokenName,elementToChange,isHtml = true)
+    {
       var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
         {
           if (this.readyState == 4 && this.status == 200)
           {
-            if(this.responseText!=-1){
-            if(isHtml){
-              elementToChange.value = this.responseText;
-            }else{
-              elementToChange = this.responseText;
-            }
+            if(this.responseText!=-1)
+            {
+              if(isHtml)
+              {
+                elementToChange.value = this.responseText;
+              }
+              else
+              {
+                elementToChange = this.responseText;
+              }
             }
           }
         };
@@ -171,23 +177,27 @@
     {
       let listtableform = document.getElementById("addListForm");
       let tokenVal = listtableform.querySelector("#AuthToken");
+
       if(tokenVal!=null)
       {
         RequestAuthToken("addListForm",tokenVal);
       }
     }
 
-    function XSS_Remove_Tags(string,elementToChange){
-
+    function XSS_Remove_Tags(string,elementToChange)
+    {
       var val = string;
       elementToChange.value = val.replace(/<\/?[^>]+(>|$)/g,"");
     }
 
     var searchForm = document.querySelector("#searchForm");
-    if(searchForm!=null){
+    if(searchForm!=null)
+    {
       var searchInput = searchForm.querySelector("#searchImp");
-      if(searchInput!=null){
-        searchInput.oninput = function(){
+      if(searchInput!=null)
+      {
+        searchInput.oninput = function()
+        {
           let str = searchInput.value;
           str = XSS_Remove_Tags(str,searchInput);
         }
@@ -229,7 +239,8 @@
 
     var tasklist = [];
 
-    if(listTable!=null){
+    if(listTable!=null)
+    {
       let listtableform = document.getElementById("addListForm");
       let formInput = listtableform.querySelector("#listnameID");
       formInput.oninput = function(){
@@ -237,7 +248,8 @@
           str = XSS_Remove_Tags(str,formInput);
       }
 
-      listTable.onclick = function(ev){
+      listTable.onclick = function(ev)
+      {
         if(ev.target.parentElement.querySelector('.id')!=null){
         var clickedID = ev.target.parentElement.querySelector('.id').innerText;
         document.getElementById('idList1').value = clickedID;
@@ -248,9 +260,12 @@
         document.getElementById('ListName').innerHTML = clickedName;
 
         var index = ev.target.parentElement.rowIndex;
-        if(index==null){
+        if(index==null)
+        {
           console.log("NULL row");
-        }else{
+        }
+        else
+        {
           currList = index;
 
           var xhttp = new XMLHttpRequest();
@@ -262,7 +277,9 @@
               {
                 document.getElementById("message").innerHTML = "Error";
                 document.getElementById("message").classList.remove('hidden');
-              }else{
+              }
+              else
+              {
                   var tasks = JSON.parse(this.responseText);
                   for(let i=0;i<tasks.length;++i){
                     tasklist.push(JSON.parse(tasks[i]));
@@ -272,30 +289,29 @@
               let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
               var htmlString = '';
 
-
               if(tasklist.length!=0)
               {
-              htmlString = `
-              <tr>
-                <th class="id">ID</th>
-                <th class="status">Status</th>
-                <th class="task">Task</th>
-                <th class="expDate">Expiration Date </th>
-                <th class="arrowCursor">Description </th>
-              </tr>`;
+              htmlString = `<tr>
+                              <th class="id">ID</th>
+                              <th class="status">Status</th>
+                              <th class="task">Task</th>
+                              <th class="expDate">Expiration Date </th>
+                              <th class="arrowCursor">Description </th>
+                            </tr>`;
                 for(let i=0;i<tasklist.length;++i)
-              {
-                var taskRow = tasklist[i].id;
-                if(tasklist[i].completed == "true")
                 {
-                  var checkMark = "&#10004";
-                  var htmlstring = '';
-                }
-               else
-                {
-                  var checkMark = "";
-                  var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
-                }
+                  var taskRow = tasklist[i].id;
+
+                  if(tasklist[i].completed == "true")
+                  {
+                    var checkMark = "&#10004";
+                    var htmlstring = '';
+                  }
+                  else
+                  {
+                    var checkMark = "";
+                    var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
+                  }
 
 
                   htmlString = htmlString + "\n" + "<tr>";
@@ -306,16 +322,22 @@
 
                   htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
 
-                  let data = ""
-                  if(tasklist[i].expiring!=null){
+                  let data = "";
+
+                  if(tasklist[i].expiring!=null)
+                  {
                     data = tasklist[i].expiring;
                   }
+
                   let taskDate = new Date(data* 1000);
                   let taskDateMonth = taskDate.getMonth() + 1;
                   let taskDateDay = taskDate.getDate() + 1;
-                  function pad(n) {
+
+                  function pad(n)
+                  {
                       return (n < 10) ? ("0" + n) : n;
                   }
+
                   let currentDate = new Date();
                   let diffData = (currentDate.getTime() - (taskDate.getTime()));
 
@@ -365,92 +387,43 @@
 
     var inviteUserForm = document.querySelector("#userInviteForm");
     var userNameInput = inviteUserForm.querySelector("#usernameInput");
-    userNameInput.oninput = function(){
+
+    userNameInput.oninput = function()
+    {
       let str = userNameInput.value;
       str = XSS_Remove_Tags(str,userNameInput);
     }
-
-   /* var taskTable = document.querySelector('#taskTable');
-    if(taskTable!=null)
-    {
-      let foot = document.getElementById("addTaskForm");
-      let formInput = foot[1];
-      formInput.oninput = function(){
-          let str = formInput.value;
-          str = XSS_Remove_Tags(str,formInput);
-      }
-
-      let formDateInput = foot[3];
-      formDateInput.oninput = function(){
-          let str = formDateInput.value;
-          str = XSS_Remove_Tags(str,formDateInput);
-      }
-
-      document.querySelector('#taskTable').onclick = function(ev)
-      {
-        var index = ev.target.parentElement.rowIndex;
-        var table = document.getElementById("taskTable");
-        items = table.getElementsByClassName("status");
-        console.log(index);
-        if(items[index]!=null)
-        {
-          if(items[index].innerHTML == "\u2718")
-          {
-            if (confirm("Mark this task as completed?") == true)
-            {
-              items[index].innerHTML = "\u2713";
-
-              var xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function()
-              {
-                if (this.readyState == 4 && this.status == 200)
-                {
-                  if(this.responseText == 0)
-                    console.log("good");
-                }
-              };
-
-              items = table.getElementsByClassName("id");
-
-              xhttp.open("POST", "../account/changeTaskBool.php", true);
-              xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
-            }
-          }
-        }
-      }
-    }*/
   </script>
 
-  <script src='../account/completeTask.js' type='text/javascript'> </script>
+  <script src='../account/completeTask.js'> </script>
 
   </section>
         <?php else: ?>
           <div id="welcome">
               <p>Do it <br>
-    Just do it<br>
+              Just do it<br>
 
-    Don't let your dreams be dreams<br>
-    Yesterday you said tomorrow<br>
-    So just do it<br>
-    Make your dreams come true<br>
-    Just do it<br>
+              Don't let your dreams be dreams<br>
+              Yesterday you said tomorrow<br>
+              So just do it<br>
+              Make your dreams come true<br>
+              Just do it<br>
 
-    Some people dream of success<br>
-    While you're gonna wake up and work hard at it<br>
-    Nothing is impossible<br>
+              Some people dream of success<br>
+              While you're gonna wake up and work hard at it<br>
+              Nothing is impossible<br>
 
-    You should get to the point<br>
-    Where anyone else would quit<br>
-    And you're not going to stop there<br>
-    No, what are you waiting for?<br>
+              You should get to the point<br>
+              Where anyone else would quit<br>
+              And you're not going to stop there<br>
+              No, what are you waiting for?<br>
 
-    Do it<br>
-    Just do it<br>
-    Yes you can<br>
-    Just do it<br>
-    If you're tired of starting over<br>
-    Stop giving up <br> <br>
-  - Shia LaBeouf</p>
-</div>
+              Do it<br>
+              Just do it<br>
+              Yes you can<br>
+              Just do it<br>
+              If you're tired of starting over<br>
+              Stop giving up <br> <br>
+            - Shia LaBeouf</p>
+          </div>
         <?php endif; ?>

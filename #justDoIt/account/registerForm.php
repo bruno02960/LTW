@@ -40,31 +40,26 @@
 
             var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z!$%^&*_@#~?\\d]{8,72}$");
 
-            if(regexPW.test(password)){
-
-                 //for each special character in the password 20 points are added to the password score
+            if(regexPW.test(password))
+            {
                 for(let i=0;i<password.length;++i){
                     if(specialChar.indexOf(password.charAt(i))>-1){
                         passwordScore += 20;
                     }
                 }
 
-                 //if the password has lower case letter 20 points are added to its score
                 if(/[a-z]/.test(password)){
                     passwordScore+=20;
                 }
 
-                 //if the password has upper case letter 20 points are added to its score
                 if(/[A-Z]/.test(password)){
                     passwordScore+=20;
                 }
 
-                 //if the password has a number 20 points are added to its score
                 if(/[\d]/.test(password)){
                     passwordScore+=20;
                 }
 
-                 //if the passwords lenghts is biger than 8 20 points are added to its score
                 if(password.length>=8){
                     passwordScore+=20;
                 }
@@ -72,17 +67,21 @@
                 if(passwordScore>=100){
                     return "High Security";
                 }
+
                 if(passwordScore>=80){
                     return "Medium Security";
                 }
+
                 if(passwordScore>=60){
                     return "Low Security";
-                }else{
+                }
+                else
+                {
                     return "Very Low Security";
                 }
-
-
-            }else{
+            }
+            else
+            {
                 return "Invalid Password";
             }
         }
@@ -101,8 +100,5 @@
                 }
             }
         }
-
-
     </script>
-
 <script src="registerForm.js"></script>

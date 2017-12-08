@@ -1,6 +1,5 @@
-function completeTask(task) 
+function completeTask(task)
 {
-  console.log(task.id);
   var statusButton = document.getElementById(task.id);
     if (confirm("Mark this task as completed?") == true)
     {
@@ -10,7 +9,7 @@ function completeTask(task)
         if (this.readyState == 4 && this.status == 200)
         {
           if(this.responseText != 0)
-          { 
+          {
             var message = "Error";
             document.getElementById("message").innerHTML = message;
             document.getElementById("message").classList.add('error');
@@ -38,41 +37,40 @@ function completeTask(task)
                 }
             }
         let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
-        let htmlString = `
-        <tr>
-          <th class="id">ID</th>
-          <th class="status">Status</th>
-          <th class="task">Task</th>
-          <th class="expDate">Expiration Date </th>
-          <th class="arrowCursor">Description </th>
-        </tr>`;
-           
+        let htmlString = `<tr>
+                            <th class="id">ID</th>
+                            <th class="status">Status</th>
+                            <th class="task">Task</th>
+                            <th class="expDate">Expiration Date </th>
+                            <th class="arrowCursor">Description </th>
+                          </tr>`;
+
         if(tasklist.length!=0)
         {
           for(let i=0;i<tasklist.length;++i)
         {
           let taskRow = task.id.substr(4);
           if(tasklist[i].completed == "true")
-          { 
+          {
             var checkMark = "&#10004";
             var htmlstring = '';
           }
          else
-          { 
+          {
             var checkMark = "";
             var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '" type="checkbox"';
           }
 
-            
+
 
             htmlString = htmlString + "\n" + "<tr>";
             htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
 
-            htmlString = htmlString + "\n" + '<td class="status verticalTop">' + 
+            htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
                           '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '-index' + currList + '"> &#9998  </a> ' + htmlstring + checkMark + ' </td>';
 
             htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
-            
+
             let data = ""
             if(tasklist[i].expiring!=null){
               data = tasklist[i].expiring;
@@ -104,9 +102,9 @@ function completeTask(task)
         tableHTML.innerHTML = htmlString;
         tasklist.length = 0;
       }
-   
+
     var listIndex = task.id.split('/')[1].substr(5);
-     
+
     xhttp.open("POST", "../main/getListData.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("index=" + listIndex);
@@ -114,7 +112,7 @@ function completeTask(task)
         }
       }
       var taskID = (task.id.substr(0,task.id.indexOf('/'))).substr(4);
-      
+
       xhttp.open("POST", "../account/changeTaskBool.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("completed=" + true + "&task_id=" + taskID);

@@ -1,5 +1,4 @@
 <?php
-
   include('../includes/session.php');
   include('../database/connection.php');
 
@@ -20,5 +19,4 @@
       }
     }
   }
-
 ?>

@@ -13,9 +13,8 @@
             $task = $task->fetch(PDO::FETCH_ASSOC);
         }
     }
-    
+
     include('../templates/header.php');
     include('../account/showEditTask.php');
     include('../templates/footer.php');
-
 ?>

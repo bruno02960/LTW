@@ -10,7 +10,8 @@ function keyListener(e)
     }
 }
 
-pressed = function(){
+pressed = function()
+{
     var a = document.getElementById('fileToUpload');
     if(a.value == "")
     {
@@ -87,9 +88,6 @@ submitButton.addEventListener("click", function(event)
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("username=" + username + "&email=" + email + "&location=" + location);
 });
-
-
-
 
 function checkImage()
 {
