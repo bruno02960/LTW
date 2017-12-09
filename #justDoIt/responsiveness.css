@@ -73,6 +73,11 @@
 }
 
 @media screen and (max-width: 480px) {
+	
+	#descriptionBox{
+		width: 220px;
+	}
+	
   #registerForm input {
     width: 40%;
   }

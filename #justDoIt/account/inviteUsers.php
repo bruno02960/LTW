@@ -4,7 +4,7 @@
   include('../templates/userinfo.php');
   include('../templates/header.php'); ?>
 
-  <h1> <?php echo $_POST['listName'] ?> </h1>
+  <h1 style="margin-left: 30px;"> <?php echo $_POST['listName'] ?> </h1>
 
   <?php
     $users = $conn->prepare('SELECT id, username, email FROM users WHERE id != :id AND username LIKE :username');
@@ -22,7 +22,7 @@
         {
   ?>
 
-  <table class = "tasks">
+  <table class = "tasks" style="margin-left: 30px;">
   <tbody>
     <tr>
       <th class="status arrowCursor">Username</th>
@@ -35,19 +35,19 @@
       foreach( $users as $user)
       {
           echo '
-          <tr>
-            <td class = "status">' . $user['username'] . '</td>
-            <td class="task">' . $user['email'] . '</td>
-            <td class="delete">
-                <a class = "buttonCursor" onclick="fillInviteForm(this);" id="userID' . $user['id'] . '/listID' . $_POST['listID'] . '">' . $checkMark . ' </a>
-            </td>
-          </tr>' ;
+            <tr>
+              <td class = "status">' . $user['username'] . '</td>
+              <td class="task">' . $user['email'] . '</td>
+              <td class="delete">
+                  <a class = "buttonCursor" onclick="fillInviteForm(this);" id="userID' . $user['id'] . '/listID' . $_POST['listID'] . '">' . $checkMark . ' </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>' ;
       }
       }
   }
   ?>
-  </tbody>
-  </table>
 
     <form id = "inviteUserForm" action="../account/shareListWithUser.php" method="POST">
         <input type = "hidden" id = "userID" name = "userID"> 

@@ -261,7 +261,7 @@ div#editProfileButton {
 #descriptionBox{
 	resize: none;
 	height: 23px;
-	width: 213px;
+	width: 290px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
     -webkit-transition:all 0.2s linear; /* Safari and Chrome */

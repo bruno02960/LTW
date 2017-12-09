@@ -44,8 +44,8 @@
           echo '<td class="expDate"><input onkeypress="return keyListener(event)" type="text" id = "expDateTable" value="' . $data . '"> </td>';
         endif;
 
-          echo '<td class="buttonCursor"><textarea onkeypress="return keyListener(event)" id="taskDescriptionTable" name="taskDescriptionTable" rows="5">' . $task['description'] . '</textarea></td>
-          <input type="hidden" id="completedText"  value="' . $task['completed'] . '"></tr>';
+          echo '<td class="buttonCursor"><textarea onkeypress="return keyListener(event)" id="taskDescriptionTable" name="taskDescriptionTable" rows="5">' . $task['description'] . '</textarea>
+          <input type="hidden" id="completedText"  value="' . $task['completed'] . '"></td></tr>';
       }
     ?>
   </tbody>
