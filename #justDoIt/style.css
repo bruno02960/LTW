@@ -356,7 +356,7 @@ input[name="user"] {
     border: 0;
     border-bottom: 1px solid black;
     padding-bottom: 0.5em;
-    padding-left: 1em;
+	text-align:center;
 }
 
 input[name="taskName"] {

@@ -130,7 +130,7 @@
         <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
-        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "Description(optional)"></textarea> <br>
+        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "         Description(optional)         "></textarea> <br>
       </form>
     </div>
   <br>
