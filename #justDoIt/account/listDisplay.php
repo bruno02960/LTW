@@ -36,9 +36,9 @@
             endif;
 
             if(!empty($task['description']) && strlen($task['description']) > 30)
-              echo '<td class="buttonCursor" id = "description"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+              echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div></td>';
             else
-              echo '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+              echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
             }
           }
@@ -46,4 +46,6 @@
       </tbody>
     </table>
   </div>
+  <br>
+  <button type ="submit" onclick = "window.location='../main';"> Go Back </button> 
 </section>

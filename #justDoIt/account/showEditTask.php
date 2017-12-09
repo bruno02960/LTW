@@ -56,6 +56,8 @@
           <input type="hidden" id = "editTaskID" name = "taskID" value="<?= $task['id']?>">
           <input id = "sendForm" type = "submit" class = "hidden"> <br>
       </form>
+
+      <button type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
 </section>
 
 <script>

@@ -105,7 +105,7 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div></td>';
+          echo '<td><a style="display:inline;"> X </a><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
         else
           echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
@@ -370,7 +370,7 @@
                     htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
 
                   if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
-                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + 'X </div></td>';
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
