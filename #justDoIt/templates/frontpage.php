@@ -105,9 +105,9 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td id = "description"><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+          echo '<td><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
         else
-          echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+          echo '<td><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
         if (($pos = strpos($lists[$index]['name'], "-")) !== FALSE)
         {
