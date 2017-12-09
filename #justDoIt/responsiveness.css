@@ -34,9 +34,6 @@
 	  font-size:16px;
   }
 
-  aside#lists {
-    width: 90%;
-  }
 
   #list {
     width: 90%;
@@ -73,6 +70,10 @@
 }
 
 @media screen and (max-width: 480px) {
+	
+	form input[name="listName"] {
+		margin-top: 0;
+	}
 	
 	#descriptionBox{
 		width: 220px;

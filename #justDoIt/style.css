@@ -64,7 +64,7 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    width: 24%;
+    width: 250px;
     display: inline-block;
     padding-bottom: 1em;
     padding-left: 1em;
@@ -497,7 +497,7 @@ form input[name="listName"] {
     padding: 0;
     margin: 1.5px;
 	margin-top: -1em;
-    width: 98%;
+    width: 121.5px;
 	height: 20px;
     background-color: #FCBFD9;
 }
