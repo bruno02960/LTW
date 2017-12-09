@@ -110,10 +110,10 @@
         else
           echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
-        if (($pos = strpos($lists[$index]['name'], "-")) !== FALSE) 
-        { 
+        if (($pos = strpos($lists[$index]['name'], "-")) !== FALSE)
+        {
           echo '</tr>';
-        }   
+        }
         else
         {
           echo' <td class="delete verticalTop">
@@ -133,11 +133,11 @@
   <br>
     <div style="overflow-x:auto;" class = "<?= $toHide ?>">
       <form id="addTaskForm" action="addTask.php" method="POST">
-        <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task">
         <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
-        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "         Description(optional)         "></textarea> <br>
+        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
+        <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
       </form>
     </div>
   <br>
@@ -373,16 +373,16 @@
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                   
-                    if (clickedName.indexOf('-') > -1) 
-                    { 
+
+                    if (clickedName.indexOf('-') > -1)
+                    {
                       htmlString = htmlString +  '</tr>';
-                    }   
+                    }
                     else
                     {
-                      htmlString = htmlString + 
-                      "\n" + 
-                      `<td class="delete verticalTop"> 
+                      htmlString = htmlString +
+                      "\n" +
+                      `<td class="delete verticalTop">
                         <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
                       </td>`;
                     }
