@@ -73,25 +73,31 @@
             $diffData = time() - $task['expiring'];
           }
 
+          $title =  strip_tags($task['title']);
+
+
           if($task['completed'] == "true")
           {
              $checkMark = "&#10004";
              $htmlstring = '';
              $editTaskString='';
+
+             echo '<tr>
+             <td class="id verticalTop">' . $task['id']. '</td>
+             <td class="status verticalTop">' . $editTaskString . $htmlstring . $checkMark . ' </td>
+             <td class="task verticalTop">' . $title. '</td>';
           }
           else
           {
              $checkMark = "";
-             $htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'" type="checkbox">';
+             $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'">';
              $editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ';
+
+             echo '<tr>
+             <td class="id verticalTop">' . $task['id']. '</td>
+             <td class="status verticalTop" style="text-align:right">' . $editTaskString . $htmlstring . $checkMark . ' </td>
+             <td class="task verticalTop">' . $title. '</td>';
           }
-
-        $title =  strip_tags($task['title']);
-
-        echo '<tr>
-                <td class="id verticalTop">' . $task['id']. '</td>
-                <td class="status verticalTop">' . $editTaskString . $htmlstring . $checkMark . ' </td>
-                <td class="task verticalTop">' . $title. '</td>';
 
         if($diffData > 259200 && $task['completed'] != "true"):
           echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
@@ -118,13 +124,13 @@
   </table>
 </div>
   <br>
-    <div style="overflow-x:auto;" class = "<?= $toHide ?> verticalTop">
+    <div style="overflow-x:auto;" class = "<?= $toHide ?>">
       <form id="addTaskForm" action="addTask.php" method="POST">
-        <input type="text" id="taskNameid" name="taskName" placeholder="task name">
+        <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task">
+        <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <input id = "taskExpDateInput" type="text" name="taskDate" placeholder="(mm/dd/yyyy)"> <br>
+        <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
         <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "Description(optional)"></textarea> <br>
-          <input class = "buttonCursor" type="submit" name = "addTaskButton" value="Add task">
       </form>
     </div>
   <br>
@@ -305,25 +311,29 @@
                 {
                   var taskRow = tasklist[i].id;
 
+                  htmlString = htmlString + "\n" + "<tr>";
+                  htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
+
                   if(tasklist[i].completed == "true")
                   {
                     var checkMark = "&#10004";
                     var htmlstring = '';
                     var editTaskString='';
+
+                    htmlString = htmlString + "\n" + '<td class="status verticalTop" >' +
+                                  editTaskString + htmlstring + checkMark + ' </td>';
+
                   }
                   else
                   {
                     var checkMark = "";
-                    var htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' + taskRow + '-index' + currList  + '" type="checkbox"';
+                    var htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' + taskRow + '/index' + currList  + '" type="checkbox"';
                     var editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998;  </a> ';
+
+
+                    htmlString = htmlString + "\n" + '<td class="status verticalTop" style="text-align:right;" >' +
+                                  editTaskString + htmlstring + checkMark + ' </td>';
                   }
-
-
-                  htmlString = htmlString + "\n" + "<tr>";
-                  htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
-
-                  htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
-                                editTaskString + htmlstring + checkMark + ' </td>';
 
                   htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
 
@@ -356,7 +366,12 @@
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                  htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '/">X</a> ' + '</td>';
+                  htmlString = htmlString + 
+                                    "\n" + 
+                                    `<td class="delete verticalTop"> 
+                                      <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
+                                    </td>`;
+
                   htmlString = htmlString + "\n" + "</tr>";
                 }
               };

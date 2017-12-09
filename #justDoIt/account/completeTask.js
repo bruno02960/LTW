@@ -39,10 +39,11 @@ function completeTask(task)
         let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
         let htmlString = `<tr>
                             <th class="id">ID</th>
-                            <th class="status">Status</th>
-                            <th class="task">Task</th>
-                            <th class="expDate">Expiration Date </th>
-                            <th class="arrowCursor">Description </th>
+                            <th class="status arrowCursor" ></th>
+                            <th class="task arrowCursor">Task</th>
+                            <th class="expDate arrowCursor">Expiration Date </th>
+                            <th id="descriptionHead" class="task arrowCursor">Description </th>
+                            <th class="deltete task"></th>
                           </tr>`;
 
         if(tasklist.length!=0)
@@ -50,26 +51,32 @@ function completeTask(task)
           for(let i=0;i<tasklist.length;++i)
         {
           let taskRow = task.id.substr(4);
+
+          htmlString = htmlString + "\n" + "<tr>";
+          htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
+
           if(tasklist[i].completed == "true")
           {
             var checkMark = "&#10004";
             var htmlstring = '';
+            var editTaskString='';
+
+            htmlString = htmlString + "\n" + '<td class="status verticalTop" >' +
+                          editTaskString + htmlstring + checkMark + ' </td>';
+
           }
-         else
+          else
           {
             var checkMark = "";
-            var htmlstring = '<input onclick="completeTask(this);" id="task' + taskRow + '" type="checkbox"';
+            var htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' + taskRow + '/index' + currList  + '" type="checkbox"';
+            var editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998;  </a> ';
+
+
+            htmlString = htmlString + "\n" + '<td class="status verticalTop" style="text-align:right;" >' +
+                          editTaskString + htmlstring + checkMark + ' </td>';
           }
 
-
-
-            htmlString = htmlString + "\n" + "<tr>";
-            htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
-
-            htmlString = htmlString + "\n" + '<td class="status verticalTop">' +
-                          '<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '-index' + currList + '"> &#9998  </a> ' + htmlstring + checkMark + ' </td>';
-
-            htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
+          htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
 
             let data = ""
             if(tasklist[i].expiring!=null){
@@ -94,7 +101,12 @@ function completeTask(task)
             else
               htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-            htmlString = htmlString + "\n" + '<td class="delete buttonCursor verticalTop">' + '<a onclick="deleteTask(this);" id="task' + taskRow + '">X</a> ' + '</td>';
+              htmlString = htmlString + 
+                    "\n" + 
+                    `<td class="delete verticalTop"> 
+                      <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
+                    </td>`;
+
             htmlString = htmlString + "\n" + "</tr>";
           }
         };
