@@ -12,6 +12,7 @@
         $records->bindParam(':userid', $_SESSION['user_id']);
         $records->bindParam(':name', $listname);
         $records->execute();
+        $_SESSION['index'] = 0;
         header("Location: ../main/index.php");
       }
     }

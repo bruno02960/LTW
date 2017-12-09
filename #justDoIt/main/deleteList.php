@@ -53,6 +53,9 @@
                     $sharedList = $conn->prepare('DELETE FROM sharedList WHERE listID = :id AND userID = :userID');
                     if($sharedList != null)
                     {
+                        if($_SESSION['index'] != 0)
+                            $_SESSION['index']--;
+
                         $userID = $results['userID'];
                         $sharedList->bindParam(':id', $_POST['listID']);
                         $sharedList->bindParam(':userID', $userID);
