@@ -30,7 +30,6 @@
         <form id="addListForm" action = "addList.php" method="POST">
           <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
-          <input id = "idList1" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
           <input id = "AuthToken" type="hidden" name="AuthenticationToken">
         </form>
   </aside>
@@ -78,7 +77,7 @@
 
           if($task['completed'] == "true")
           {
-             $checkMark = "&#10004";
+             $checkMark = "&#10004;";
              $htmlstring = '';
              $editTaskString='';
 
@@ -154,7 +153,6 @@
       <input class = "buttonCursor" type = "submit" value = "Invite">
     </form>
   </div>
-
 
   <form id = "editTaskForm" class = "id" action="../account/editTask.php" method = "POST">
       <input type="hidden" id = "editTaskID" name = "taskID">
@@ -267,9 +265,12 @@
       {
         if(ev.target.parentElement.querySelector('.id')!=null){
         var clickedID = ev.target.parentElement.querySelector('.id').innerText;
-        document.getElementById('idList1').value = clickedID;
+        var clickedName = ev.target.parentElement.querySelector('.name').innerText;
         document.getElementById('idList2').value = clickedID;
         document.getElementById('idList3').value = clickedID;
+        document.getElementById('idList4').value = clickedID;
+        
+        document.getElementById('idListName').value = clickedName;
 
         var clickedName = ev.target.parentElement.querySelector('.name').innerText;
         document.getElementById('ListName').innerHTML = clickedName;
@@ -323,7 +324,7 @@
 
                   if(tasklist[i].completed == "true")
                   {
-                    var checkMark = "&#10004";
+                    var checkMark = "&#10004;";
                     var htmlstring = '';
                     var editTaskString='';
 
