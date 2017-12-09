@@ -260,7 +260,7 @@ div#editProfileButton {
 
 #descriptionBox{
 	resize: none;
-	height: 23px;
+	height: 22px;
 	width: 295px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
@@ -270,7 +270,7 @@ div#editProfileButton {
 }
 
 #descriptionBox:focus{
-	height:100px;
+	height:60px;
 	resize: none;
 }
 
@@ -560,12 +560,12 @@ form input[name="listName"] {
 	width:80px;
 }
 
-#descriptionDivNotFilled{
+div.descriptionDivNotFilled{
 	width: 220px;
 	max-width:220px;
 }
 
-#descriptionDiv {
+div.descriptionDiv {
 	width: 213px;
 	max-width:220px;
 	height:20px;
@@ -580,8 +580,8 @@ form input[name="listName"] {
     -ms-transition:all 0.3s linear; /* Explorer 10 */
 }
 
-#descriptionDiv:Hover{
-	height:100px;
+div.descriptionDiv:Hover{
+	height:60px;
 	max-width:220px;
 	padding-left:5px;
 	text-align: left;

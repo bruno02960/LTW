@@ -105,9 +105,9 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td><div id = "descriptionDiv">' . $task['description'] . '</div></td>';
+          echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div></td>';
         else
-          echo '<td><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+          echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
         if (($pos = strpos($lists[$index]['name'], "-")) !== FALSE)
         {
@@ -135,7 +135,7 @@
         <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
-        <textarea id= "descriptionBox" rows ="1" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
+        <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
         <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
       </form>
     </div>
@@ -370,9 +370,9 @@
                     htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
 
                   if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
-                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div id = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + '</div></td>';
                   else
-                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
 
                     if (clickedName.indexOf('-') > -1)
