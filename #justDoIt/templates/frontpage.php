@@ -110,11 +110,18 @@
         else
           echo '<td id = "description"><div id = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
-
+        if (($pos = strpos($lists[$index]['name'], "-")) !== FALSE) 
+        { 
+          echo '</tr>';
+        }   
+        else
+        {
           echo' <td class="delete verticalTop">
                 <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
                 </td>
               </tr>';
+        }
+
         }
       }
       else
@@ -366,11 +373,19 @@
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                  htmlString = htmlString + 
-                                    "\n" + 
-                                    `<td class="delete verticalTop"> 
-                                      <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
-                                    </td>`;
+                   
+                    if (clickedName.indexOf('-') > -1) 
+                    { 
+                      htmlString = htmlString +  '</tr>';
+                    }   
+                    else
+                    {
+                      htmlString = htmlString + 
+                      "\n" + 
+                      `<td class="delete verticalTop"> 
+                        <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
+                      </td>`;
+                    }
 
                   htmlString = htmlString + "\n" + "</tr>";
                 }
