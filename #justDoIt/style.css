@@ -261,7 +261,7 @@ div#editProfileButton {
 #descriptionBox{
 	resize: none;
 	height: 23px;
-	width: 290px;
+	width: 295px;
 	transition:all 0.2s linear;
     -moz-transition:all 0.2s linear; /* Firefox 4 */
     -webkit-transition:all 0.2s linear; /* Safari and Chrome */
@@ -565,7 +565,7 @@ form input[name="listName"] {
 }
 
 #descriptionDiv {
-	width: 220px;
+	width: 213px;
 	max-width:220px;
 	height:20px;
 	padding-left:5px;
