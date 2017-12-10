@@ -105,7 +105,7 @@
         endif;
 
         if(!empty($task['description']) && strlen($task['description']) > 30)
-          echo '<td><a style="display:inline;"> X </a><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
+          echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
         else
           echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 

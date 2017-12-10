@@ -51,6 +51,7 @@
   </tbody>
   </table>
 </div>
+<div style = "display:inline;">
       <form id = "editorForm">
           <button id = "editTaskSubmit" type = "button"> Submit </button> <br>
           <input type="hidden" id = "editTaskID" name = "taskID" value="<?= $task['id']?>">
@@ -58,6 +59,7 @@
       </form>
 
       <button type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
+</div>
 </section>
 
 <script>
