@@ -50,14 +50,14 @@ function completeTask(task)
         {
           for(let i=0;i<tasklist.length;++i)
         {
-          let taskRow = task.id.substr(4);
+          let taskRow = (task.id.substr(0,task.id.indexOf('/'))).substr(4);
 
           htmlString = htmlString + "\n" + "<tr>";
           htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
 
           if(tasklist[i].completed == "true")
           {
-            var checkMark = "&#10004";
+            var checkMark = "&#10004;";
             var htmlstring = '';
             var editTaskString='';
 
@@ -83,31 +83,49 @@ function completeTask(task)
               data = tasklist[i].expiring;
             }
             let taskDate = new Date(data* 1000);
+            let taskDateYear = taskDate.getYear();
             let taskDateMonth = taskDate.getMonth() + 1;
             let taskDateDay = taskDate.getDate() + 1;
-            function pad(n) {
+
+            function pad(n)
+            {
                 return (n < 10) ? ("0" + n) : n;
             }
+
             let currentDate = new Date();
-            let diffData = (currentDate.getTime() - (taskDate.getTime()));
-
-            if(diffData > 259200 && tasklist[i].completed != "true")
-              htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+            let currentDay = currentDate.getDate() + 1;
+            let currentMonth = currentDate.getMonth() + 1;
+            let currentYear = currentDate.getYear();
+            
+            //let diffData = (currentDate.getTime() - (taskDate.getTime()));
+            let diffDay = pad(taskDateDay,2) - pad(currentDay,2);
+            let diffMonth = pad(taskDateMonth,2) - pad(currentMonth,2);
+            let diffYear = pad(taskDateYear,2) - pad(currentYear,2);
+            
+            if(((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay < 3)) && tasklist[i].completed != "true")
+              htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay,2) + "-" + pad(taskDateMonth,2) + "-"  + taskDate.getFullYear() +'</td>';
             else
-              htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+              htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay,2) + "-" +  pad(taskDateMonth,2) + "-" + taskDate.getFullYear() +'</td>';
 
-            if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
-              htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div id = "descriptionDiv">' + tasklist[i].description + '</div></td>';
+              if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
+              htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + ' </div></td>';
             else
-              htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div id = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
+              htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-              htmlString = htmlString + 
-                    "\n" + 
-                    `<td class="delete verticalTop"> 
-                      <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
-                    </td>`;
+              clickedName = task.id.split('-')[1].substr(4);
 
-            htmlString = htmlString + "\n" + "</tr>";
+              if (clickedName.indexOf('-') > -1)
+              {
+                htmlString = htmlString +  '</tr>';
+              }
+              else
+              {
+                htmlString = htmlString +
+                "\n" +
+                `<td class="delete verticalTop">
+                  <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
+                </td>`;
+              }
           }
         };
 
@@ -115,7 +133,9 @@ function completeTask(task)
         tasklist.length = 0;
       }
 
-    var listIndex = task.id.split('/')[1].substr(5);
+    var listIndex = (task.id.substr(0,task.id.indexOf('-'))).substr(task.id.indexOf('/')).substr(6);
+    console.log(listIndex);
+   
 
     xhttp.open("POST", "../main/getListData.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

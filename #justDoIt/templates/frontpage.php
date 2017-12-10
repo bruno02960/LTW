@@ -65,10 +65,27 @@
         {
           $taskRow = $task['id'];
           $data = "";
-          $diffData = 0;
+          $diffDay = 0;
+          $diffMonth = 0;
+          $diffYear = 0;
           if($task['expiring']!=NULL)
           {
-            $data = date('m/d/Y', $task['expiring']);
+            $data = date('d-m-Y', $task['expiring']);
+            $taskDay = date("d", $task['expiring']);
+            $taskMonth = date("m", $task['expiring']);
+            $taskYear = date("Y", $task['expiring']);
+
+            $taskInvertedDate = date('Y-d-m', $task['expiring']);
+            $currentDate = date('Y-d-m', time());
+
+            $currentDay = date("d", time());
+            $currentMonth = date("m", time());
+            $currentYear = date("Y", time());
+
+            $diffDay = $taskDay - $currentDay;
+            $diffMonth = $taskMonth - $currentMonth;
+            $diffYear = $taskYear - $currentYear;
+            
             $diffData = time() - $task['expiring'];
           }
 
@@ -89,7 +106,7 @@
           else
           {
              $checkMark = "";
-             $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'">';
+             $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index . '-name'. strip_tags($lists[$index]['name']) .'">';
              $editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ';
 
              echo '<tr>
@@ -98,7 +115,8 @@
              <td class="task verticalTop">' . $title. '</td>';
           }
 
-        if($diffData > 259200 && $task['completed'] != "true"):
+        if(($taskInvertedDate < $currentDate) && $task['completed'] != "true" || 
+            $diffYear == 0 && $diffMonth == 0 && $diffDay <= 3 && $task['completed'] != "true"):
           echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
         else:
           echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
@@ -134,7 +152,7 @@
       <form id="addTaskForm" action="addTask.php" method="POST">
         <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(mm/dd/yyyy)">
+        <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
         <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
         <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
       </form>
@@ -353,6 +371,7 @@
                   }
 
                   let taskDate = new Date(data* 1000);
+                  let taskDateYear = taskDate.getYear();
                   let taskDateMonth = taskDate.getMonth() + 1;
                   let taskDateDay = taskDate.getDate() + 1;
 
@@ -362,15 +381,22 @@
                   }
 
                   let currentDate = new Date();
-                  let diffData = (currentDate.getTime() - (taskDate.getTime()));
-
-                  if(diffData > 259200 && tasklist[i].completed != "true")
-                    htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                  let currentDay = currentDate.getDate() + 1;
+                  let currentMonth = currentDate.getMonth() + 1;
+                  let currentYear = currentDate.getYear();
+                  
+                  //let diffData = (currentDate.getTime() - (taskDate.getTime()));
+                  let diffDay = pad(taskDateDay,2) - pad(currentDay,2);
+                  let diffMonth = pad(taskDateMonth,2) - pad(currentMonth,2);
+                  let diffYear = pad(taskDateYear,2) - pad(currentYear,2);
+                  
+                  if(((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay < 3)) && tasklist[i].completed != "true")
+                    htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay,2) + "-" + pad(taskDateMonth,2) + "-"  + taskDate.getFullYear() +'</td>';
                   else
-                    htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
+                    htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay,2) + "-" +  pad(taskDateMonth,2) + "-" + taskDate.getFullYear() +'</td>';
 
                   if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
-                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + 'X </div></td>';
+                    htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + ' </div></td>';
                   else
                     htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
