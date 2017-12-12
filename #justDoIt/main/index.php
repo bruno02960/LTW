@@ -1,7 +1,6 @@
 <?php
   include('../includes/session.php');
   include('../database/connection.php');
-  include('passing.php');
 
   if(isset($_SESSION['user_id']))
   {
