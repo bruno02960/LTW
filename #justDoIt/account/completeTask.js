@@ -27,16 +27,16 @@ function completeTask(task)
             {
                 if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
                 {
-                document.getElementById("message").innerHTML = "Error";
+                document.getElementById("message").innerHTML = "Unexpected Error";
                 document.getElementById("message").classList.remove('hidden');
+                document.getElementById("message").classList.remove('error');
                 }else{
                     location.reload();
                 }
             }
           }
 
-    var listIndex = (task.id.substr(0,task.id.indexOf('-'))).substr(task.id.indexOf('/')).substr(6);
-    console.log(listIndex);
+    var listIndex = (task.id.substr(task.id.indexOf('/'))).substr(6);
    
 
     xhttp.open("POST", "../main/getListData.php", true);

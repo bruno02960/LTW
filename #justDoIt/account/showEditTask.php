@@ -3,8 +3,8 @@
   <h2> Edit Task </h2>
 
   <div style="overflow-x:auto;">
-  <table class="tasks <?= $toHide ?>" id="taskTable">
-  <tbody>
+  <table class="tasks" id="taskTable">
+  <tbody class = "verticalTop">
     <tr>
       <th class="id">ID</th>
       <th class="status arrowCursor">Status</th>

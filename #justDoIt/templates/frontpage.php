@@ -108,7 +108,7 @@
           else
           {
              $checkMark = "";
-             $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index . '-name'. strip_tags($lists[$index]['name']) .'">';
+             $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'">';
              $editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ';
 
              echo '<tr>
@@ -124,7 +124,7 @@
           echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
         endif;
 
-        if(!empty($task['description']) && strlen($task['description']) > 30)
+        if(!empty($task['description']) && strlen($task['description']) > 26)
           echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
         else
           echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
