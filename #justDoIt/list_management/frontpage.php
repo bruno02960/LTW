@@ -29,7 +29,7 @@
       }
       ?>
     </table>
-        <form id="addListForm" action = "addList.php" method="POST">
+        <form id="addListForm" action = "../list_management/addList.php" method="POST">
           <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name"><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
           <input id = "AuthToken" type="hidden" name="AuthenticationToken">
