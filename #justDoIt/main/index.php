@@ -1,5 +1,5 @@
 <?php
-  include('../includes/session.php');
+  include('../session/session.php');
   include('../database/connection.php');
 
   if(isset($_SESSION['user_id']))
@@ -28,8 +28,8 @@
     }
   }
 
-  include('updateList.php');
+  include('../list_management/updateList.php');
   include('../templates/header.php');
-  include('../templates/frontpage.php');
+  include('../list_management/frontpage.php');
   include('../templates/footer.php');
 ?>

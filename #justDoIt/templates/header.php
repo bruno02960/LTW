@@ -17,13 +17,13 @@
       <div class="header">
         <?php if(isset($user)): ?>
 
-        <a href = "../account/profile.php"> Profile </a>
-        <a href = "../account/logout.php"> Logout </a>
+        <a href = "../profile/profile.php"> Profile </a>
+        <a href = "../session/logout.php"> Logout </a>
 
         <?php else: ?>
 
-        <a href="../account/register.php">Register</a>
-        <a href="../account/login.php">Login</a>
+        <a href="../register/register.php">Register</a>
+        <a href="../session/login.php">Login</a>
 
         <?php endif; ?>
       </div>
