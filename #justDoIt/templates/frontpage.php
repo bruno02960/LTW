@@ -33,6 +33,7 @@
           <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name"><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
           <input id = "AuthToken" type="hidden" name="AuthenticationToken">
+          <input id = "reqID" type="hidden" name="RequestIdentifier">
         </form>
   </aside>
 
@@ -247,6 +248,10 @@
       if(tokenVal!=null)
       {
         RequestAuthToken("addListForm",tokenVal);
+        let id = listtableform.querySelector("#reqID");
+        if(id!=null){
+          id.value = "addListForm";
+        }
       }
     }
 
