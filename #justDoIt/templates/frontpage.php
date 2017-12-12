@@ -19,16 +19,18 @@
         foreach( $lists as $list)
         {
           $name = strip_tags($list['name']);
-          echo '<tr>
-                <td class="id">' . $list['id']. '</td>
-                <td class="name buttonCursor">' . $name. '</td>
-                </tr>';
+          echo '
+                  <tr>
+                  <td class="id">' . $list['id']. '</td>
+                  <td class="name buttonCursor">' . $name. '</td>
+                  </tr>
+               ';
         }
       }
       ?>
     </table>
         <form id="addListForm" action = "addList.php" method="POST">
-          <input type="text" id="listnameID" name="listName" placeholder="List name"><br>
+          <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name"><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
           <input id = "AuthToken" type="hidden" name="AuthenticationToken">
         </form>

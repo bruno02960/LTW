@@ -42,9 +42,12 @@
                   <a class = "buttonCursor" onclick="fillInviteForm(this);" id="userID' . $user['id'] . '/listID' . $_POST['listID'] . '">' . $checkMark . ' </a>
               </td>
             </tr>
-          </tbody>
-        </table>' ;
+         
+        ' ;
       }
+      echo ' </tbody>';
+      echo '</table>';
+      echo '<br>';
       }
   }
   ?>

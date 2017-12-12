@@ -64,7 +64,7 @@ header > div > a:nth-child(2) {
 }
 
 aside#lists {
-    width: 250px;
+    width: 24%;
     display: inline-block;
     padding-bottom: 1em;
     padding-left: 1em;
@@ -113,9 +113,10 @@ nav#menu {
 #list {
     display: inline-block;
     vertical-align: top;
-    padding-left: 1em;
+    padding-left: 10em;
     padding-right: 1em;
     padding-bottom: 1em;
+	
 }
 
 #list > h2 {
@@ -443,7 +444,7 @@ input[type="submit"] {
 }
 
 input[name="addListButton"] {
-    width: 121.5px;
+    width: 236px;
 	margin-left: 1.5px;
 }
 
@@ -498,7 +499,7 @@ form input[name="listName"] {
     padding: 0;
     margin: 1.5px;
 	margin-top: -1em;
-    width: 121.5px;
+    width: 235px;
 	height: 20px;
     background-color: #FCBFD9;
 }
@@ -624,4 +625,11 @@ section#editTask{
 
 #addTaskID{
 	height:32px;
+}
+
+td.task.verticalTop{
+
+	white-space: normal;
+    word-wrap: break-word;
+	overflow-y: scroll;
 }
