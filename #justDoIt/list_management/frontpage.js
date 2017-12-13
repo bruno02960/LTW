@@ -128,6 +128,13 @@ window.onload = function(e) {
         RequestAuthToken(id.value, inviteUserToken);
     }
 
+    let editTask = document.getElementById("editTaskAuthToken");
+    if (editTask != null) {
+        let id = document.getElementById("editTaskTokenName");
+        console.log(id.value);
+        RequestAuthToken(id.value, editTask);
+    }
+
 }
 
 function XSS_Remove_Tags(string, elementToChange) {

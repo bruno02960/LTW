@@ -4,6 +4,8 @@
   include('../profile/userinfo.php');
   include('../templates/header.php'); ?>
 
+  
+
   <?php if(!empty($_POST['user'])): ?>
     <h1 style="margin-left: 30px;"> Searching users with <?php echo $_POST['user'] ?> </h1>
   <?php else: ?>
@@ -11,6 +13,14 @@
   <?php endif; ?>
 
   <?php
+
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
+    {
+        echo "CSRF ATTEMPT";
+        return -1;
+    }
+
     $users = $conn->prepare('SELECT id, username, email FROM users WHERE id != :id AND username LIKE :username');
     $search = "%" . $_POST['user'] . "%";
     $users->bindParam(':id', $_SESSION['user_id']);

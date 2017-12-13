@@ -189,8 +189,9 @@
 </div>
 
 <form id = "editTaskForm" class = "id" action="../task_management/editTask.php" method = "POST">
-    <input type="hidden" id = "editTaskID" name = "taskID">
+    <input type="hidden" id ="editTaskID" name ="taskID">
     <input type="hidden" id="editTaskAuthToken" name="AuthToken">
+    <input type="hidden" id="editTaskTokenName" name="tokenName" value="editTaskForm">
 </form>
 
 <input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>

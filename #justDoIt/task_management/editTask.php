@@ -3,6 +3,13 @@
     include('../database/connection.php');
     include('../profile/userinfo.php');
 
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
+    {
+        echo "CSRF ATTEMPT".$_POST['AuthToken'].$_POST['tokenName'];
+        return -1;
+    }
+
     if(!empty($_POST['taskID']))
     {
         $task = $conn->prepare('SELECT id, title, completed, expiring,description FROM task where id = :id');
