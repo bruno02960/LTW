@@ -1,6 +1,6 @@
 <?php
 
-    include('../includes/session.php');
+    include('../session/session.php');
     //generates a paired key for the specified form,using shar 256 as the encryption algorithm
     //the list name as the message to encrypt and the User Authentication Token as the key
 

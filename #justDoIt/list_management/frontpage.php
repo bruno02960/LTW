@@ -170,6 +170,7 @@
       <input type="hidden" id = "editTaskID" name = "taskID">
   </form>
   
+  <input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>
 <script src='../list_management/frontpage.js'> </script>
 <script src='../task_management/completeTask.js'> </script>
 

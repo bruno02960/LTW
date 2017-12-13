@@ -145,17 +145,28 @@
     xhttp.send();
 
     let listName = document.getElementById("taskNameid");
+    if(taskExpDateInput!=null){
     listName.oninput = function() {
       let str = listName.value;
       str = XSS_Remove_Tags(str, listName);
     };
+    }
 
     let descBox = document.getElementById("descriptionBox");
+    if(descBox!=null){
     descBox.oninput = function(){
       let str = descBox.value;
       str = XSS_Remove_Tags(str, descBox);
     }
+    }
 
+    let dateBox = document .getElementById("taskExpDateInput");
+    if(dateBox!=null){
+      dateBox.oninput = function(){
+        let str = dateBox.value;
+        str = XSS_Remove_Tags(str, dateBox);
+      }
+    }
 
     let listtableform = document.getElementById("addListForm");
     let formInput = listtableform.querySelector("#listnameID");
