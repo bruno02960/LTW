@@ -2,20 +2,11 @@
     include('../database/connection.php');
     include('../session/session.php');
 
-    function object_to_array($data)
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
     {
-        if (is_array($data) || is_object($data))
-        {
-            $result = array();
-
-            foreach ($data as $key => $value) {
-                $result[$key] = $this->object_to_array($value);
-            }
-
-            return $result;
-        }
-
-        return $data;
+        echo "CSRF ATTEMPT".$_POST['AuthToken']." ".$_POST['tokenName'];
+        return -1;
     }
 
     $index = $_POST['index'];
