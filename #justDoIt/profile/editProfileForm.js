@@ -82,7 +82,10 @@ function checkImage() {
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
         return false;
-    } else if (fileExtension != 'png' && fileExtension != 'jpg' && fileExtension != 'jpeg') {
+    } else if (fileExtension != 'png' && fileExtension != 'PNG' 
+                && fileExtension != 'jpg' && fileExtension != 'jpeg' 
+                && fileExtension != 'JPG' && fileExtension != 'JPEG'
+                && fileExtension != 'bmp' && fileExtension != 'BMP') {
         let message = "File selected isn't a valid image file";
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
