@@ -9,7 +9,7 @@
     $AuthToken = hash_hmac('sha256', "AuthRequest" , $_SESSION['UserAuthToken']);
     if ($token!=null)
     {
-        if (hash_equals($token,$AuthToken))
+        if (!hash_equals($token,$AuthToken))
         {
             echo -3;
             return;
