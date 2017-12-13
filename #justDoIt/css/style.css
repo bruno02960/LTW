@@ -240,6 +240,7 @@ div#editProfileButton {
 }
 .tasks tbody tr {
     text-align: center;
+	vertical-align:top;
 }
 .tasks tbody tr:nth-child(2n+1) {
     background-color: #FDDFEC;
