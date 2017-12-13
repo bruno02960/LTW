@@ -4,14 +4,16 @@
     include('../profile/userinfo.php');
 
     include('../security/checkAuthHash.php');
-    if(checkAuthHash($_POST['EditAuthToken'],"pEdit")!=1)
-    {
-        //echo "CSRF ATTEMPT";
-        //return -1;
-    }
 
     if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']))
     {
+
+        if(checkAuthHash($_POST['EditAuthToken'],"pEdit")!=1)
+        {
+            echo "CSRF ATTEMPT";
+            return -1;
+        }
+
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
