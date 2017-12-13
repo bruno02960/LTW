@@ -14,15 +14,15 @@
         {
             $PW = $_POST['password'];
             $PWC = $_POST['confirm_password'];
-            $UserName = strip_trags($_POST['username']);
-            $email = strip_trags($_POST['email']);
+            $UserName = strip_tags($_POST['username']);
+            $email = strip_tags($_POST['email']);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $UserName);
             $PWHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $stmt->bindParam(':password', $PWHashed);
             $stmt->bindParam(':name', $_POST['name']);
             $stmt->bindParam(':location', $_POST['location']);
-            $birthday = strtotime(strip_trags($_POST['birthday']));
+            $birthday = strtotime(strip_tags($_POST['birthday']));
             $stmt->bindParam(':birthday', $birthday);
             $date = strtotime("now");
             $stmt->bindParam(':registerDate',  $date);
