@@ -20,7 +20,7 @@
     <h2> To-do lists </h2>
     <table class="lists" id="listsTable">
       <?php
-      function isMobile() 
+      function isMobile()
       {
         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
       }
@@ -128,82 +128,82 @@
              }
           }
 
-        if(!empty($task['title']) && strlen($task['title']) > 26)
-          echo '<td><div class = "taskDiv">' . $task['title'] . '</div> </td>';
-        else
-          echo '<td><div class = "taskDivNotFilled">' . $task['title'] . '</div></td>';
+          if(!empty($task['title']) && strlen($task['title']) > 26)
+            echo '<td><div class = "taskDiv">' . $task['title'] . '</div> </td>';
+          else
+            echo '<td><div class = "taskDivNotFilled">' . $task['title'] . '</div></td>';
 
-        if($task['expiring'] - time() <= 259200 && $task['completed'] == "false"):
-          echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
-        else:
-          echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
-        endif;
+          if($task['expiring'] - time() <= 259200 && $task['completed'] == "false"):
+            echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
+          else:
+            echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
+          endif;
 
           // If the user is on a mobile device, redirect them
           if(isMobile()){
               header("Location: www.google.pt");
           }
-        if(!empty($task['description']) && strlen($task['description']) > 26)
-          echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
-        else
-          echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
-        if ($lists[$index]['userID'] != $_SESSION['user_id'])
-        {
-          echo '</tr>';
-        }
-        else
-        {
-          echo' <td class="delete verticalTop">
-                <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
-                </td>
-              </tr>';
-        }
+          if(!empty($task['description']) && strlen($task['description']) > 26)
+            echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
+          else
+            echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
+          if ($lists[$index]['userID'] != $_SESSION['user_id'])
+          {
+            echo '</tr>';
+          }
+          else
+          {
+            echo' <td class="delete verticalTop">
+                  <a class = "buttonCursor" onclick="deleteTask(this);" id="task' . $taskRow . '/"> X </a>
+                  </td>
+                </tr>';
+          }
         }
       }
       else
         $taskRow = null;
       ?>
-  </tbody>
-  </table>
+</tbody>
+</table>
 </div>
-  <br>
-    <div style="overflow-x:auto;" class = "<?= $toHide ?>">
-      <form id="addTaskForm" action="../task_management/addTask.php" method="POST" onSubmit = "return input()" >
-        <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name" required>
-        <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-        <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
-        <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
-        <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
-        <input id="addTaskAuthToken" type="hidden">
-        <input id="addTaskID" type="hidden" value="addTaskForm">
-      </form>
-    </div>
-  <br>
-  <div class = "<?= $toHide; ?>">
-  <form class = " form " action = "../list_management/deleteList.php" method="POST">
-    <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
-    <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-    <input id="delListAuthToken" type="hidden">
-    <input id="delListID" type="hidden" value="delListForm">
-  </form>
-    <form id="userInviteForm" class = "form" action="../list_management/inviteUsers.php" method="POST">
-      <input type="text" id="usernameInput" name="user" placeholder="Search users">
-      <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
-      <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-      <input class = "buttonCursor" type = "submit" value = "Invite">
-      <input id ="inviteUserAuthToken" type="hidden">
-      <input id="inviteUserID" type="hidden" value="inviteUserForm">
+<br>
+  <div style="overflow-x:auto;" class = "<?= $toHide ?>">
+    <form id="addTaskForm" action="../task_management/addTask.php" method="POST" onSubmit = "return input()" >
+      <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name" required>
+      <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
+      <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
+      <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
+      <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
+      <input id="addTaskAuthToken" type="hidden">
+      <input id="addTaskID" type="hidden" value="addTaskForm">
     </form>
   </div>
-
-  <form id = "editTaskForm" class = "id" action="../task_management/editTask.php" method = "POST">
-      <input type="hidden" id = "editTaskID" name = "taskID">
-      <input type="hidden" id="editTaskAuthToken">
+<br>
+<div class = "<?= $toHide; ?>">
+<form class = " form " action = "../list_management/deleteList.php" method="POST">
+  <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
+  <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+  <input id="delListAuthToken" type="hidden">
+  <input id="delListID" type="hidden" value="delListForm">
+</form>
+  <form id="userInviteForm" class = "form" action="../list_management/inviteUsers.php" method="POST">
+    <input type="text" id="usernameInput" name="user" placeholder="Search users">
+    <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
+    <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+    <input class = "buttonCursor" type = "submit" value = "Invite">
+    <input id ="inviteUserAuthToken" type="hidden">
+    <input id="inviteUserID" type="hidden" value="inviteUserForm">
   </form>
-  
-  <input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>
+</div>
+
+<form id = "editTaskForm" class = "id" action="../task_management/editTask.php" method = "POST">
+    <input type="hidden" id = "editTaskID" name = "taskID">
+    <input type="hidden" id="editTaskAuthToken">
+</form>
+
+<input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>
 <script src='../list_management/frontpage.js'> </script>
 <script src='../task_management/completeTask.js'> </script>
 

@@ -2,14 +2,14 @@
     include('../session/session.php');
     include('../database/connection.php');
 
-    $records = $conn->prepare('SELECT id, name,userID FROM toDoList WHERE userID = :id 
+    $records = $conn->prepare(' SELECT id, name,userID FROM toDoList WHERE userID = :id 
                                 UNION
-                                SELECT toDoList.id, toDoList.name || " - " || users.username AS name, toDoList.userID 
-                                FROM toDoList 
+                                SELECT toDoList.id, toDoList.name || " - " || users.username AS name, toDoList.userID
+                                FROM toDoList
                                 JOIN sharedList ON sharedList.listID = toDoList.id AND sharedList.userID = :id
                                 JOIN users ON toDoList.userID = users.id
                                 ORDER BY toDoList.id DESC');
-                                
+
     if($records != null)
     {
         $records->bindParam(':id', $_SESSION['user_id']);

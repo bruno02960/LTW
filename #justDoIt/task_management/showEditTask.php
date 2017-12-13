@@ -74,13 +74,14 @@
 
     statusButton.addEventListener("click", function(event)
     {
-        if(document.getElementById("completedText").value == "true")
+        if (document.getElementById("completedText").value == "true")
         {
             event.preventDefault();
         }
         else
-           { statusCheck = "true";
-           }
+        {
+          statusCheck = "true";
+        }
     })
 
     function keyListener(e)
@@ -109,20 +110,21 @@
             document.getElementById("message").innerHTML = "Task title can't be empty";
             document.getElementById("message").classList.remove('hidden');
             document.getElementById("message").classList.add('error');
-            return false; 
+            return false;
         }
         else if(taskExpDate.length == 0)
         {
             document.getElementById("message").innerHTML = "Expiration date can't be empty";
             document.getElementById("message").classList.remove('hidden');
             document.getElementById("message").classList.add('error');
-            return false; 
+            return false;
         }
-        
+
         var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
         var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
         var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
-        if (!taskExpDate.match(verifyDateFormat)) 
+
+        if (!taskExpDate.match(verifyDateFormat))
         {
         document.getElementById("message").innerHTML = "Please enter a dd-mm-yyyy date";
         document.getElementById("message").classList.remove('hidden');

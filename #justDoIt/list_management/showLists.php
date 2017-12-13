@@ -5,7 +5,8 @@
 
     $list = NULL;
 
-    switch($_GET['list']){
+    switch ($_GET['list'])
+    {
       case "completed":
         $list = $conn->prepare('SELECT task.id, title, completed, expiring, description FROM task JOIN toDoList ON toDoListId = toDoList.id WHERE toDoList.userID = :id AND completed = "true"');
         if($list != null)

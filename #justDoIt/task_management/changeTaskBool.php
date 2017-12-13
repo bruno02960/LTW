@@ -27,8 +27,9 @@
             }
         }
     }
-    else {
+    else
+    {
         echo -1;
         return;
-      }
+    }
 ?>

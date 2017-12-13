@@ -22,6 +22,7 @@
                 $records->execute();
             }
         }
+
         header("Location: ../main");
     }
 ?>

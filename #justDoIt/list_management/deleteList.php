@@ -17,15 +17,17 @@
                 if($lists->execute())
                 {
                     if($_SESSION['index'] != 0)
+                    {
                         $_SESSION['index']--;
-        
+                    }
+
                     $tasksList = $conn->prepare('DELETE FROM task WHERE toDoListId = :id');
                     if($tasksList != null)
                     {
                         $tasksList->bindParam(':id', $_POST['listID']);
                         $tasksList->execute();
                     }
-            
+
                     $sharedList = $conn->prepare('DELETE FROM sharedList WHERE listID = :id');
                     if($sharedList != null)
                     {
@@ -43,18 +45,20 @@
             $records = $conn->prepare('SELECT userID FROM sharedList WHERE userID = :userID AND listID = :id');
             $records->bindParam(':userID', $_SESSION['user_id']);
             $records->bindParam(':id', $_POST['listID']);
-            
+
             if($records->execute())
             {
                 $results = $records->fetch(PDO::FETCH_ASSOC);
-               
+
                 if(count($results) > 0)
                 {
                     $sharedList = $conn->prepare('DELETE FROM sharedList WHERE listID = :id AND userID = :userID');
                     if($sharedList != null)
                     {
                         if($_SESSION['index'] != 0)
+                        {
                             $_SESSION['index']--;
+                        }
 
                         $userID = $results['userID'];
                         $sharedList->bindParam(':id', $_POST['listID']);

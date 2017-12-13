@@ -38,18 +38,15 @@
       $checkMark = "&#10010;";
       foreach( $users as $user)
       {
-          echo '
-            <tr>
-              <td class = "status">' . $user['username'] . '</td>
-              <td class="task">' . $user['email'] . '</td>
-              <td class="delete">
-                  <a class = "buttonCursor" onclick="fillInviteForm(this);" id="userID' . $user['id'] . '/listID' . $_POST['listID'] . '">' . $checkMark . ' </a>
-              </td>
-            </tr>
-         
-        ' ;
+          echo '<tr>
+                  <td class = "status">' . $user['username'] . '</td>
+                  <td class="task">' . $user['email'] . '</td>
+                  <td class="delete">
+                      <a class = "buttonCursor" onclick="fillInviteForm(this);" id="userID' . $user['id'] . '/listID' . $_POST['listID'] . '">' . $checkMark . ' </a>
+                  </td>
+                </tr>' ;
       }
-      echo ' </tbody>';
+      echo '</tbody>';
       echo '</table>';
       echo '<br>';
       }
@@ -59,7 +56,7 @@
   <button style= "margin-left: 2em;" type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
 
   <form id = "inviteUserForm" action="shareListWithUser.php" method="POST">
-      <input type = "hidden" id = "userID" name = "userID"> 
+      <input type = "hidden" id = "userID" name = "userID">
       <input type = "hidden" id = "listID" name = "listID">
   </form>
 

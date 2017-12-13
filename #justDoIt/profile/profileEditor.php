@@ -8,12 +8,14 @@
         $username = $_POST['username'];
         $email = $_POST['email'];
         $name = $_POST['name'];
+
         if(empty($_POST['location']))
             $location = null;
         else
             $location = $_POST['location'];
 
         $sql = "UPDATE users SET username = :username, email = :email, name = :name, location = :location WHERE id = :id";
+
         $stmt = $conn->prepare($sql);
         if($stmt != null)
         {

@@ -3,6 +3,7 @@ var form = document.getElementById("registerForm");
 
 pressed = function(){
     var a = document.getElementById('fileToUpload');
+
     if(a.value == "")
     {
         uploadLabel.innerHTML = "Choose file";
@@ -16,14 +17,13 @@ pressed = function(){
 
 function passwordStrengthCalc(password){
     var specialChar = "!$%^&*_@#~?";
-    var passwordScore =0;
-
+    var passwordScore = 0;
     var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z!$%^&*_@#~?\\d]{8,72}$");
 
     if(regexPW.test(password))
     {
         for(let i=0;i<password.length;++i){
-            if(specialChar.indexOf(password.charAt(i))>-1){
+            if(specialChar.indexOf(password.charAt(i)) > -1){
                 passwordScore += 20;
             }
         }
@@ -105,12 +105,12 @@ submitButton.addEventListener("click", function(event)
     var PW = document.getElementById("passwordInput").value;
     var CPW = document.getElementById("confirmPasswordInput").value;
     var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z!$%^&*_@#~?\\d]{8,72}$");
-    
+
     var inputDate = document.getElementById("dateInput").value;
     var verifyDateFormat = /^(\d{2})-(\d{2})-(\d{4})$/;
     var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
     var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
-    
+
     if (!inputDate.match(verifyDateFormat))
     {
         document.getElementById("errorMessage").innerHTML = "Please enter a dd-mm-yyyy date";

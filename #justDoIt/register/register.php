@@ -8,6 +8,7 @@
     if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['birthday']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])  && !empty($_POST['name']))
     {
         $sql = "INSERT INTO users (email,username, password, name, registerDate, birthday, location, profilePicture) VALUES (:email, :username, :password, :name, :registerDate, :birthday, :location, :profilePicture)";
+
         $stmt = $conn->prepare($sql);
         if($stmt != null)
         {
@@ -25,6 +26,7 @@
             $stmt->bindParam(':birthday', $birthday);
             $date = strtotime("now");
             $stmt->bindParam(':registerDate',  $date);
+
             if($_FILES["fileToUpload"]["name"] == null)
                 $PPicDirectory = '../profile/profilePictures/Default.PNG';
             else
@@ -33,6 +35,7 @@
                 $uploadOk = 1;
                 $imageFileType = pathinfo($PPicDirectory,PATHINFO_EXTENSION);
                 // Check if image file is a actual image or fake image
+
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                 if($check !== false)
                 {

@@ -2,17 +2,17 @@
     include('../session/session.php');
     include('../database/connection.php');
 
-    $Email = $_POST['email'];
-    $Username = $_POST['username'];
-    $ID = $_SESSION['user_id'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $id = $_SESSION['user_id'];
 
-    if(!empty($Email) && !empty($Username) && isset($ID))
+    if(!empty($email) && !empty($username) && isset($id))
     {
         $query = $conn->prepare('SELECT * FROM users WHERE username = :username AND id != :id');
         if($query != null)
         {
-            $query->bindParam(':username', $Username);
-            $query->bindParam(':id', $ID);
+            $query->bindParam(':username', $username);
+            $query->bindParam(':id', $id);
             $query->execute();
 
             $queryResults = $query->fetchAll();
@@ -24,8 +24,8 @@
             }
 
             $query = $conn->prepare('SELECT * FROM users WHERE email = :email AND id != :id');
-            $query->bindParam(':email', $Email);
-            $query->bindParam(':id', $ID);
+            $query->bindParam(':email', $email);
+            $query->bindParam(':id', $id);
             $query->execute();
 
             $queryResults = $query->fetchAll();
