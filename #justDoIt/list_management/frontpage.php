@@ -14,6 +14,11 @@
     <h2> To-do lists </h2>
     <table class="lists" id="listsTable">
       <?php
+      function isMobile() 
+      {
+        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+      }
+
       if($lists!=NULL)
       {
         foreach( $lists as $list)
@@ -126,6 +131,10 @@
           echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
         endif;
 
+          // If the user is on a mobile device, redirect them
+          if(isMobile()){
+              header("Location: www.google.pt");
+          }
         if(!empty($task['description']) && strlen($task['description']) > 26)
           echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div> </td>';
         else
