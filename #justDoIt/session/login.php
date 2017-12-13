@@ -8,7 +8,8 @@
         $records = $conn->prepare('SELECT id, username,password FROM users WHERE username = :username');
         if($records != null)
         {
-            $records->bindParam(':username', $_POST['username']);
+            $username = strip_trags($_POST['username']);
+            $records->bindParam(':username', $username);
             $records->execute();
             $results = $records->fetch(PDO::FETCH_ASSOC);
 
