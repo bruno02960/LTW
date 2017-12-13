@@ -12,7 +12,7 @@
         <input id = "nameInput" type = "text" placeholder = "Name" name = "name" value = "<?= $user['name'] ?>"> <br>
         <label for="locationInput">Location:</label> <br>
         <input id = "locationInput" type = "text" placeholder = "Location" name = "location" value = "<?= $user['location'] ?>"> <br>
-        <input id = "EditProfileAuthToken" type="hidden" name="AuthToken" value="<?=$_SESSION['EditAuthToken']?>">
+        <input id = "EditProfileAuthToken" type="hidden" name="EditAuthToken" value="<?=$_SESSION['EditAuthToken']?>">
         <input id = "sendForm" type = "submit" class = "hidden"> <br>
         <button id = "editProfileSubmit" type = "button"> Submit </button>
     </form>

@@ -4,7 +4,7 @@
     include('../profile/userinfo.php');
 
     include('../security/checkAuthHash.php');
-    if(checkAuthHash($_POST['AuthToken'],"pEdit")!=1)
+    if(checkAuthHash($_POST['EditAuthToken'],"pEdit")!=1)
     {
         //echo "CSRF ATTEMPT";
         //return -1;
