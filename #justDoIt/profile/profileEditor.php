@@ -14,6 +14,11 @@
         else
             $location = $_POST['location'];
 
+        $username = strip_tags($username);
+        $email = strip_tags($email);
+        $name = strip_tags($name);
+        $location = strip_tags($location);
+
         $sql = "UPDATE users SET username = :username, email = :email, name = :name, location = :location WHERE id = :id";
 
         $stmt = $conn->prepare($sql);

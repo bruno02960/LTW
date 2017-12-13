@@ -11,6 +11,8 @@
         $query = $conn->prepare('SELECT * FROM users WHERE username = :username AND id != :id');
         if($query != null)
         {
+            $username = strip_tags($username);
+            $email = strip_tags($email);
             $query->bindParam(':username', $username);
             $query->bindParam(':id', $id);
             $query->execute();
