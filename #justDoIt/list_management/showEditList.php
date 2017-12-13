@@ -21,7 +21,7 @@
     <div>
 
 
-      <button type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
+    <button type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
 
     </div>
 </section>
