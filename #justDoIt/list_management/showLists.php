@@ -3,6 +3,13 @@
     include('../database/connection.php');
     include('../profile/userinfo.php');
 
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_GET['AuthToken'],$_GET['tokenName'])!=1)
+    {
+        echo "CSRF ATTEMPT";
+        return -1;
+    }
+
     $list = NULL;
 
     switch ($_GET['list'])

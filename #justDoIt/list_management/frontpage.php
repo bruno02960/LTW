@@ -4,8 +4,8 @@
       <li>
         <form action="../list_management/showLists.php" id="searchForm">
           <input type="text" name="list" id="searchImp" placeholder="Search Tasks">
-          <input type="hidden" id="searchAuthToken">
-          <input type="hidden" id="searchID" value="searchForm">
+          <input type="hidden" id="searchAuthToken" name="AuthToken">
+          <input type="hidden" id="searchID" value="searchForm" name="tokenName">
         </form>
       </li>
       <li><a href="../list_management/showLists.php?list=completed">Completed</a></li>
