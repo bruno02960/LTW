@@ -40,6 +40,11 @@ function editList(list)
 
   function RequestAuthToken(tokenName,elementToChange,isHtml = true)
   {
+      let token = this.document.getElementById("ReqAuthToken");
+      if(token==null){
+        console.log("Failed to find auth token");
+        return;
+      }
       var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
         {
@@ -55,13 +60,17 @@ function editList(list)
               {
                 elementToChange = this.responseText;
               }
+            }else if(this.responseText==-2){
+              console.log("[ERROR]\tAuth Token Not Sent");
+            }else if(this.responseText==-3){
+              console.log("[ERROR]\tFailed to validate Auth Token");
             }
           }
         };
 
         xhttp.open("POST", "../main/requestsToken.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("&listName=" + tokenName);
+        xhttp.send("&listName=" + tokenName+"&AuthToken="+token.value);
     }
 
   window.onload = function(e)

@@ -5,6 +5,19 @@
     //the list name as the message to encrypt and the User Authentication Token as the key
 
     $listName = strip_tags($_POST['listName']);
+    $token = $_POST['AuthToken'];
+
+    $AuthToken = hash_hmac('sha256', "AuthRequest" , $_SESSION['UserAuthToken']);
+    if($token!=null){
+        if(hash_equals($token,$AuthToken)){
+            echo -3;
+            return;
+        }
+    }else{
+        echo -2;
+        return;
+    }
+    
     if(isset($_SESSION['UserAuthToken'])){
         echo hash_hmac('sha256', $listName, $_SESSION['UserAuthToken']);
     }else{
