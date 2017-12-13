@@ -119,7 +119,7 @@
              else
              {
                 $htmlstring = '<input type="checkbox" class="status verticalTop" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'">';
-                echo '<td class="status verticalTop" style="text-align:right">' . $editTaskString . $htmlstring . $checkMark . ' </td>';
+                echo '<td class="status verticalTop" style="text-align:right">' . $htmlstring . $checkMark . ' </td>';
              }
           }
 
