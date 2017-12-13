@@ -91,7 +91,7 @@
           $diffYear = 0;
           if($task['expiring']!=NULL)
           {
-            $data = date('d-m-Y', $task['expiring']);
+            $data = date('d-m-Y', $task['expiring']);   
           }
 
           $title =  strip_tags($task['title']);
@@ -163,7 +163,7 @@
     <form id="addTaskForm" action="../task_management/addTask.php" method="POST" onSubmit = "return input()" >
       <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name" required>
       <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
-      <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
+      <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)" required>
       <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
       <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
       <input id="addTaskAuthToken" type="hidden" name="AuthToken">

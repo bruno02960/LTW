@@ -317,16 +317,17 @@ if (listTable != null) {
                             }
 
                             let taskDate = new Date(data * 1000);
+                            
                             let taskDateYear = taskDate.getYear();
                             let taskDateMonth = taskDate.getMonth() + 1;
-                            let taskDateDay = taskDate.getDate() + 1;
+                            let taskDateDay = taskDate.getDate();
 
                             function pad(n) {
                                 return (n < 10) ? ("0" + n) : n;
                             }
 
                             let currentDate = new Date();
-                            let currentDay = currentDate.getDate() + 1;
+                            let currentDay = currentDate.getDate();
                             let currentMonth = currentDate.getMonth() + 1;
                             let currentYear = currentDate.getYear();
 
@@ -335,7 +336,7 @@ if (listTable != null) {
                             let diffMonth = pad(taskDateMonth, 2) - pad(currentMonth, 2);
                             let diffYear = pad(taskDateYear, 2) - pad(currentYear, 2);
 
-                            if (((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay <= 3)) && tasklist[i].completed != "true")
+                            if (((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay < 3)) && tasklist[i].completed != "true")
                                 htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay, 2) + "-" + pad(taskDateMonth, 2) + "-" + taskDate.getFullYear() + '</td>';
                             else
                                 htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay, 2) + "-" + pad(taskDateMonth, 2) + "-" + taskDate.getFullYear() + '</td>';

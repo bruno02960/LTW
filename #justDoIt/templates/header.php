@@ -10,6 +10,7 @@
     </head>
     <body>
     <header>
+      <?php date_default_timezone_set("UTC"); ?>
       <a href="../main">
         <h1>#justDoIt</h1>
       </a>

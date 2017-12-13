@@ -24,12 +24,13 @@
                 $records->bindParam(':title', $taskName);
                 $taskDesc = strip_tags($_POST['taskDescription']);
                 $records->bindParam(':description', $taskDesc);
-                $expiring = strtotime($_POST['taskDate']);
+                echo $_POST['taskDate'];
+                $expiring = strtotime(' +1 day', strtotime($_POST['taskDate']));
+                echo $expiring;
                 $records->bindParam(':expiring', $expiring);
                 $records->execute();
             }
         }
-
         header("Location: ../main");
     }
 ?>

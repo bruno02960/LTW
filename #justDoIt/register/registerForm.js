@@ -157,24 +157,20 @@ submitButton.addEventListener("click", function(event)
         return;
     }
 
-    let submitPhoto = document.getElementById("fileToUpload").files[0];
-    let fileExtension = submitPhoto.name.split('.').pop();
-
-    if(submitPhoto == null)
+    if(document.getElementById("fileToUpload").files[0] != null)
     {
-        let message = "No image selected";
-        document.getElementById("errorMessage").innerHTML = message;
-        document.getElementById("errorMessage").classList.remove('hidden');
-        return false;
-    }
-    else if (fileExtension != 'png' && fileExtension != 'PNG' 
-            && fileExtension != 'jpg' && fileExtension != 'jpeg' 
-            && fileExtension != 'JPG' && fileExtension != 'JPEG'
-            && fileExtension != 'bmp' && fileExtension != 'BMP'){
-        let message = "File selected isn't a valid image file";
-        document.getElementById("errorMessage").innerHTML = message;
-        document.getElementById("errorMessage").classList.remove('hidden');
-        return false;
+        let submitPhoto = document.getElementById("fileToUpload").files[0];
+        let fileExtension = submitPhoto.name.split('.').pop();
+
+        if (fileExtension != 'png' && fileExtension != 'PNG' 
+                && fileExtension != 'jpg' && fileExtension != 'jpeg' 
+                && fileExtension != 'JPG' && fileExtension != 'JPEG'
+                && fileExtension != 'bmp' && fileExtension != 'BMP'){
+            let message = "File selected isn't a valid image file";
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("errorMessage").classList.remove('hidden');
+            return false;
+        }
     }
 
     var xhttp = new XMLHttpRequest();
