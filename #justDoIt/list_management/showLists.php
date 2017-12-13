@@ -48,6 +48,6 @@
     }
 
     include('../templates/header.php');
-    include('../account/listDisplay.php');
+    include('../list_management/listDisplay.php');
     include('../templates/footer.php');
 ?>

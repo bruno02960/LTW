@@ -1,6 +1,17 @@
 <section id="listDisplay">
-  <h2> <?php echo $_GET['list'] ?> </h2>
+  <?php if(!empty($_GET['list'])): ?>
+    <h2> <?php echo $_GET['list']?> </h2>
+  <?php else: ?>
+    <h2> Showing All Tasks </h2>
+  <?php endif; ?>
+
+    
   <div style="overflow-x:auto;">
+
+  <?php 
+    if($list != null)
+    { 
+  ?>
     <table class="tasks <?= $toHide ?>" id="taskTable">
       <tbody>
         <tr>
@@ -9,8 +20,6 @@
           <th id="descriptionHead" class="task arrowCursor">Description </th>
         </tr>
         <?php
-          if($list != null)
-          {
             $row = 0;
             foreach( $list as $task)
             {
@@ -18,8 +27,7 @@
               $diffData = 0;
               if($task['expiring']!=NULL)
               {
-                $data = date('m/d/Y', $task['expiring']);
-                $diffData = time() - $task['expiring'];
+                $data = date('d-m-Y', $task['expiring']);
               }
 
           if($task['completed'] == "true")
@@ -27,13 +35,14 @@
           else
             $checkMark = '&#10008;';
 
-              echo '<tr>
-                      <td class="task">' . strip_tags($task['title']). '</td>';
-            if($diffData > 0 && $task['completed'] != "true"):
-              echo '<td class="expDate"> <b>' . $data . '</b> </td>';
-            else:
-              echo '<td class="expDate">' . $data . ' </td>';
-            endif;
+            echo '<tr>';
+
+            if(!empty($task['title']) && strlen($task['title']) > 26)
+              echo '<td><div class = "taskDiv">' . $task['title'] . '</div> </td>';
+            else
+              echo '<td><div class = "taskDivNotFilled">' .strip_tags($task['title']) . '</div></td>';
+    
+            echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
 
             if(!empty($task['description']) && strlen($task['description']) > 30)
               echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div></td>';
@@ -41,10 +50,13 @@
               echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
 
             }
-          }
         ?>
       </tbody>
     </table>
+  <?php 
+    } 
+    else echo '<p class = "error"> No tasks found</p>';
+  ?>
   </div>
   <br>
   <button type ="submit" onclick = "window.location='../main';"> Go Back </button> 

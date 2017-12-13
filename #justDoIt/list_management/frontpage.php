@@ -74,26 +74,12 @@
           if($task['expiring']!=NULL)
           {
             $data = date('d-m-Y', $task['expiring']);
-            $taskDay = date("d", $task['expiring']);
-            $taskMonth = date("m", $task['expiring']);
-            $taskYear = date("Y", $task['expiring']);
-
-            $taskInvertedDate = date('Y-d-m', $task['expiring']);
-            $currentDate = date('Y-d-m', time());
-
-            $currentDay = date("d", time());
-            $currentMonth = date("m", time());
-            $currentYear = date("Y", time());
-
-            $diffDay = $taskDay - $currentDay;
-            $diffMonth = $taskMonth - $currentMonth;
-            $diffYear = $taskYear - $currentYear;
-
-            $diffData = time() - $task['expiring'];
           }
 
           $title =  strip_tags($task['title']);
 
+          echo '<tr>
+          <td class="id verticalTop">' . $task['id']. '</td>';
 
           if($task['completed'] == "true")
           {
@@ -101,10 +87,7 @@
              $htmlstring = '';
              $editTaskString='';
 
-             echo '<tr>
-             <td class="id verticalTop">' . $task['id']. '</td>
-             <td class="status verticalTop">' . $editTaskString . $htmlstring . $checkMark . ' </td>
-             <td class="task verticalTop">' . $title. '</td>';
+             echo '<td class="status verticalTop">' . $editTaskString . $htmlstring . $checkMark . ' </td>';
           }
           else
           {
@@ -112,14 +95,15 @@
              $htmlstring = '<input type="checkbox" style=" margin-left: -13px; float:right;" onclick="completeTask(this);" id="task' . $taskRow . '/index' . $index .'">';
              $editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' . $taskRow . '"> &#9998;  </a> ';
 
-             echo '<tr>
-             <td class="id verticalTop">' . $task['id']. '</td>
-             <td class="status verticalTop" style="text-align:right">' . $editTaskString . $htmlstring . $checkMark . ' </td>
-             <td class="task verticalTop">' . $title. '</td>';
+             echo '<td class="status verticalTop" style="text-align:right">' . $editTaskString . $htmlstring . $checkMark . ' </td>';
           }
 
-        if(($taskInvertedDate < $currentDate) && $task['completed'] != "true" ||
-            $diffYear == 0 && $diffMonth == 0 && $diffDay <= 3 && $task['completed'] != "true"):
+          if(!empty($task['title']) && strlen($task['title']) > 26)
+            echo '<td><div class = "taskDiv">' . $task['title'] . '</div> </td>';
+          else
+            echo '<td><div class = "taskDivNotFilled">' . $task['title'] . '</div></td>';
+
+        if($task['expiring'] - time() <= 259200 && $task['completed'] == "false"):
           echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
         else:
           echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
@@ -162,7 +146,7 @@
     </div>
   <br>
   <div class = "<?= $toHide; ?>">
-  <form class = " form " action = "deleteList.php" method="POST">
+  <form class = " form " action = "../list_management/deleteList.php" method="POST">
     <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
   </form>
@@ -401,7 +385,10 @@
                                 editTaskString + htmlstring + checkMark + ' </td>';
                 }
 
-                htmlString = htmlString + "\n" + '<td class="task verticalTop">' +  tasklist[i].title + '</td>';
+                if((tasklist[i].title).length != 0 && (tasklist[i].title).length > 26)
+                  htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "taskDiv">' + tasklist[i].title + ' </div></td>';
+                else
+                  htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "taskDivNotFilled">' + tasklist[i].title + '</div></td>';
 
                 let data = "";
 
@@ -425,17 +412,17 @@
                 let currentMonth = currentDate.getMonth() + 1;
                 let currentYear = currentDate.getYear();
 
-                //let diffData = (currentDate.getTime() - (taskDate.getTime()));
+                let diffData = (currentDate.getTime() - (taskDate.getTime()));
                 let diffDay = pad(taskDateDay,2) - pad(currentDay,2);
                 let diffMonth = pad(taskDateMonth,2) - pad(currentMonth,2);
                 let diffYear = pad(taskDateYear,2) - pad(currentYear,2);
 
-                if(((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay < 3)) && tasklist[i].completed != "true")
+                if(((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay <= 3)) && tasklist[i].completed != "true")
                   htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay,2) + "-" + pad(taskDateMonth,2) + "-"  + taskDate.getFullYear() +'</td>';
                 else
                   htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay,2) + "-" +  pad(taskDateMonth,2) + "-" + taskDate.getFullYear() +'</td>';
 
-                if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 30)
+                if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 26)
                   htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + ' </div></td>';
                 else
                   htmlString = htmlString + "\n" + '<td class="buttonCursor" id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';

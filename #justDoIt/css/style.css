@@ -591,6 +591,36 @@ div.descriptionDiv:Hover{
 	overflow-y: scroll;
 }
 
+div.taskDivNotFilled{
+	width: 220px;
+	max-width:220px;
+}
+
+div.taskDiv {
+	width: 213px;
+	max-width:220px;
+	height:20px;
+	padding-left:5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition:all 0.3s linear;
+    -moz-transition:all 0.3s linear; /* Firefox 4 */
+    -webkit-transition:all 0.3s linear; /* Safari and Chrome */
+    -o-transition:all 0.3s linear; /* Opera */
+    -ms-transition:all 0.3s linear; /* Explorer 10 */
+}
+
+div.taskDiv:Hover{
+	height:60px;
+	max-width:220px;
+	padding-left:5px;
+	text-align: left;
+	white-space: normal;
+    word-wrap: break-word;
+	overflow-y: scroll;
+}
+
 input#taskNameid{
 	text-align: center;
 	width:159px;
@@ -627,9 +657,5 @@ section#editTask{
 	height:32px;
 }
 
-td.task.verticalTop{
 
-	white-space: normal;
-    word-wrap: break-word;
-	overflow-y: scroll;
-}
+
