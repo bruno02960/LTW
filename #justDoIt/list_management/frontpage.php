@@ -44,14 +44,14 @@
         <form id="addListForm" action = "../list_management/addList.php" method="POST">
           <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name" required><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
-          <input id = "addListAuthToken" type="hidden">
-          <input id = "addListID" type="hidden" value="addListForm">
+          <input id = "addListAuthToken" type="hidden" name="AuthToken">
+          <input id = "addListID" type="hidden" value="addListForm" name="tokenName">
         </form>
 
         <form id = "editListForm" class = "id" action="../list_management/editList.php" method = "POST">
           <input type="hidden" id = "editListID" name = "listID">
-          <input type="hidden" id="editListAuthToken">
-          <input type="hidden" id="editListFormID" value="editListForm">
+          <input type="hidden" id="editListAuthToken" name="AuthToken">
+          <input type="hidden" id="editListFormID" value="editListForm" name="tokenName">
         </form>
   </aside>
 

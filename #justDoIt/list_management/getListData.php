@@ -5,7 +5,7 @@
     include('../security/checkAuthHash.php');
     if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
     {
-        echo "CSRF ATTEMPT".$_POST['AuthToken']." ".$_POST['tokenName'];
+        echo "CSRF ATTEMPT";
         return -1;
     }
 
