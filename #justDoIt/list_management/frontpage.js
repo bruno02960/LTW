@@ -101,35 +101,30 @@ window.onload = function(e) {
     let addListToken = document.getElementById("addListAuthToken");
     if (addListToken != null) {
         let id = document.getElementById("addListID");
-        console.log(id.value);
         RequestAuthToken(id.value, addListToken);
     }
 
     let editListToken = document.getElementById("editListAuthToken");
     if (editListToken != null) {
         let id = document.getElementById("editListFormID");
-        console.log(id.value);
         RequestAuthToken(id.value, editListToken);
     }
 
     let addTaskToken = document.getElementById("addTaskAuthToken");
     if (addTaskToken != null) {
         let id = document.getElementById("addTaskFormID");
-        console.log(id.value);
         RequestAuthToken(id.value, addTaskToken);
     }
 
     let delListToken = document.getElementById("delListAuthToken");
     if (delListToken != null) {
         let id = document.getElementById("delListID");
-        console.log(id.value);
         RequestAuthToken(id.value, delListToken);
     }
 
     let inviteUserToken = document.getElementById("inviteUserAuthToken");
     if (inviteUserToken != null) {
         let id = document.getElementById("inviteUserID");
-        console.log(id.value);
         RequestAuthToken(id.value, inviteUserToken);
     }
 
