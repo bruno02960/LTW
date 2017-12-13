@@ -95,7 +95,6 @@ window.onload = function(e) {
     let searchToken = document.getElementById("searchAuthToken");
     if (searchToken != null) {
         let id = document.getElementById("searchID");
-        console.log(id.value);
         RequestAuthToken(id.value, searchToken);
     }
 
