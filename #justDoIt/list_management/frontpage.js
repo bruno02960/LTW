@@ -58,7 +58,7 @@ function editList(list)
               }
               else
               {
-                elementToChange = this.responseText;
+                elementToChange.val = this.responseText;
               }
             }else if(this.responseText==-2){
               console.log("[ERROR]\tAuth Token Not Sent");
@@ -70,23 +70,70 @@ function editList(list)
 
         xhttp.open("POST", "../main/requestsToken.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("&listName=" + tokenName+"&AuthToken="+token.value);
+        xhttp.send("&tokenName=" + tokenName+"&AuthToken="+token.value);
     }
+
+
+  var deleteTaskAJAXAuthToken = {val:0};
+  var deleteTaskAJAXTokenName = "deleteTaskAJAX";
+  var getListToScriptAJAXAuthToken = {val:0};
+  var getListToScriptAJAXTokenName = "getListToScriptAJAX";
+  var getListDataAJAXAuthToken = {val:0};
+  var getListDataAJAXTokenName = "getListDataAJAX";
+  var getListIndexAJAXAuthToken = {val:0};
+  var getListIndexAJAXTokenName = "getListIndexAJAX";
 
   window.onload = function(e)
   {
-      let listtableform = document.getElementById("addListForm");
-      let tokenVal = listtableform.querySelector("#AuthToken");
+    RequestAuthToken(deleteTaskAJAXTokenName,deleteTaskAJAXAuthToken,false);
+    RequestAuthToken(getListToScriptAJAXTokenName,getListToScriptAJAXAuthToken,false);
+    RequestAuthToken(getListDataAJAXTokenName,getListDataAJAXAuthToken,false);
+    RequestAuthToken(getListIndexAJAXTokenName,getListIndexAJAXAuthToken,false);
 
-      if(tokenVal!=null)
-      {
-        RequestAuthToken("addListForm",tokenVal);
-        let id = listtableform.querySelector("#reqID");
-        if(id!=null){
-          id.value = "addListForm";
-        }
-      }
+
+    let searchToken = document.getElementById("searchAuthToken");
+    if(searchToken!=null)
+    {
+      let id = document.getElementById("searchID");
+      RequestAuthToken(id.value,searchToken);
     }
+    
+    let addListToken = document.getElementById("addListAuthToken");
+    if(addListToken!=null)
+    {
+      let id = document.getElementById("addListID");
+      RequestAuthToken(id.value,addListToken);
+    }
+
+    let editListToken = document.getElementById("editListAuthToken");
+    if(editListToken!=null)
+    {
+      let id = document.getElementById("editListFormID");
+      RequestAuthToken(id.value,editListToken);
+    }
+
+    let addTaskToken = document.getElementById("addTaskAuthToken");
+    if(addTaskToken!=null)
+    {
+      let id = document.getElementById("addTaskID");
+      RequestAuthToken(id.value,addTaskToken);
+    }
+
+    let delListToken = document.getElementById("delListAuthToken");
+    if(delListToken!=null)
+    {
+      let id = document.getElementById("delListID");
+      RequestAuthToken(id.value,delListToken);
+    }
+
+    let inviteUserToken = document.getElementById("inviteUserAuthToken");
+    if(inviteUserToken!=null)
+    {
+      let id = document.getElementById("inviteUserID");
+      RequestAuthToken(id.value,inviteUserToken);
+    }
+
+  }
 
   function XSS_Remove_Tags(string,elementToChange)
   {
@@ -130,7 +177,7 @@ function editList(list)
 
       xhttp.open("POST", "../task_management/deleteTask.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("&task_id=" + taskID);
+      xhttp.send("&task_id=" + taskID+"&tokenName=" + deleteTaskAJAXTokenName+"&AuthToken="+deleteTaskAJAXAuthToken.val);
     }
   }
 
@@ -158,7 +205,7 @@ function editList(list)
 
     xhttp.open("POST", "../list_management/getListToScript.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
+    xhttp.send("&tokenName=" + getListToScriptAJAXTokenName+"&AuthToken="+getListToScriptAJAXAuthToken.val);
 
     let listName = document.getElementById("taskNameid");
     if(taskExpDateInput!=null){
@@ -347,7 +394,7 @@ function editList(list)
 
         xhttp.open("POST", "../list_management/getListData.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("index=" + currList);
+        xhttp.send("index=" + currList+"&tokenName=" + getListDataAJAXTokenName+"&AuthToken="+getListDataAJAXAuthToken.val);
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function()
@@ -364,7 +411,7 @@ function editList(list)
 
         xhttp.open("POST", "../list_management/getListIndex.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("listID=" + clickedID);
+        xhttp.send("listID=" + clickedID+"&tokenName=" + getListIndexAJAXTokenName+"&AuthToken="+getListIndexAJAXAuthToken.val);
         }
       }
     }

@@ -1,7 +1,13 @@
 <?php if(isset($user)): ?>
   <nav id="menu">
     <ul>
-      <li><form action="../list_management/showLists.php" id="searchForm"><input type="text" name="list" id="searchImp" placeholder="Search Tasks"></form></li>
+      <li>
+        <form action="../list_management/showLists.php" id="searchForm">
+          <input type="text" name="list" id="searchImp" placeholder="Search Tasks">
+          <input type="hidden" id="searchAuthToken">
+          <input type="hidden" id="searchID" value="searchForm">
+        </form>
+      </li>
       <li><a href="../list_management/showLists.php?list=completed">Completed</a></li>
       <li><a href="../list_management/showLists.php?list=incomplete">Incomplete</a></li>
       <li><a href="../list_management/showLists.php?list=expiring">Expiring</a></li>
@@ -38,12 +44,14 @@
         <form id="addListForm" action = "../list_management/addList.php" method="POST">
           <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name" required><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
-          <input id = "AuthToken" type="hidden" name="AuthenticationToken">
-          <input id = "reqID" type="hidden" name="RequestIdentifier">
+          <input id = "addListAuthToken" type="hidden">
+          <input id = "addListID" type="hidden" value="addListForm">
         </form>
 
         <form id = "editListForm" class = "id" action="../list_management/editList.php" method = "POST">
           <input type="hidden" id = "editListID" name = "listID">
+          <input type="hidden" id="editListAuthToken">
+          <input type="hidden" id="editListFormID" value="editListForm">
         </form>
   </aside>
 
@@ -159,6 +167,8 @@
         <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
         <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
         <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
+        <input id="addTaskAuthToken" type="hidden">
+        <input id="addTaskID" type="hidden" value="addTaskForm">
       </form>
     </div>
   <br>
@@ -166,18 +176,22 @@
   <form class = " form " action = "../list_management/deleteList.php" method="POST">
     <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
     <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
+    <input id="delListAuthToken" type="hidden">
+    <input id="delListID" type="hidden" value="delListForm">
   </form>
     <form id="userInviteForm" class = "form" action="../list_management/inviteUsers.php" method="POST">
       <input type="text" id="usernameInput" name="user" placeholder="Search users">
       <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
       <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-      <input id ="inviteToken" type="hidden" name="Token" value="">
       <input class = "buttonCursor" type = "submit" value = "Invite">
+      <input id ="inviteUserAuthToken" type="hidden">
+      <input id="inviteUserID" type="hidden" value="inviteUserForm">
     </form>
   </div>
 
   <form id = "editTaskForm" class = "id" action="../task_management/editTask.php" method = "POST">
       <input type="hidden" id = "editTaskID" name = "taskID">
+      <input type="hidden" id="editTaskAuthToken">
   </form>
   
   <input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>
