@@ -1,35 +1,42 @@
  function input()
+{
+  inputDate = document.getElementById("taskExpDateInput").value;
+  var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
+  var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
+  var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
+  if (!inputDate.match(verifyDateFormat))
   {
-    inputDate = document.getElementById("taskExpDateInput").value;
-    var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
-    var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
-    var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
-    if (!inputDate.match(verifyDateFormat))
-    {
-      document.getElementById("message").innerHTML = "Please enter a dd-mm-yyyy date";
-      document.getElementById("message").classList.remove('hidden');
-      document.getElementById("message").classList.add('error');
-      return false;
-    }
-    else if(!inputDate.match(validDateValue))
-    {
-      document.getElementById("message").innerHTML = "Please enter a valid date";
-      document.getElementById("message").classList.remove('hidden');
-      document.getElementById("message").classList.add('error');
-      return false;
-    }
-    else if(!inputDate.match(validYear))
-    {
-      document.getElementById("message").innerHTML = "Year must be at least 1970";
-      document.getElementById("message").classList.remove('hidden');
-      document.getElementById("message").classList.add('error');
-      return false;
-    }
-    else
-      return true;
-
+    document.getElementById("message").innerHTML = "Please enter a dd-mm-yyyy date";
+    document.getElementById("message").classList.remove('hidden');
+    document.getElementById("message").classList.add('error');
     return false;
   }
+  else if(!inputDate.match(validDateValue))
+  {
+    document.getElementById("message").innerHTML = "Please enter a valid date";
+    document.getElementById("message").classList.remove('hidden');
+    document.getElementById("message").classList.add('error');
+    return false;
+  }
+  else if(!inputDate.match(validYear))
+  {
+    document.getElementById("message").innerHTML = "Year must be at least 1970";
+    document.getElementById("message").classList.remove('hidden');
+    document.getElementById("message").classList.add('error');
+    return false;
+  }
+  else
+    return true;
+
+  return false;
+}
+
+function editList(list)
+{
+  let editform = document.getElementById("editListForm");
+  document.getElementById("editListID").value = list.id.substr(4);
+  editform.submit();
+}
 
   function RequestAuthToken(tokenName,elementToChange,isHtml = true)
   {

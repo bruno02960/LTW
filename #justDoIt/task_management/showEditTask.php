@@ -34,14 +34,17 @@
 
           echo '<tr>
                   <td class="id">' . $task['id']. '</td>
-                  <td class="status">' . $htmlstring . ' </td>
-                  <td class="expDate" ><input type="text" onkeypress="return keyListener(event)" id = "titleTable" value="' . $task['title']. '"> </td>';
+                  <td class="status">' . $htmlstring . ' </td>';
+                  if(!empty($task['title']) && strlen($task['title']) > 20)
+                    echo '<td class = "task"><textarea rows="5" onkeypress="return keyListener(event)" id = "titleTable">' . $task['title']. '</textarea> </td>';
+                  else
+                    echo '<td class = "expDate"><input type="text" onkeypress="return keyListener(event)" id = "titleTable" value="' . $task['title']. '"> </td>';
 
 
         if($diffData > 0 && $task['completed'] != "true"):
           echo '<td class="expDate"><input onkeypress="return keyListener(event)" type="text" id = "expDateTable" value="' . $data . '"> </td>';
         else:
-          echo '<td class="expDate"><input onkeypress="return keyListener(event)" type="text" id = "expDateTable" value="' . $data . '"> </td>';
+          echo '<td class="expDate closeDate"><input onkeypress="return keyListener(event)" type="text" id = "expDateTable" value="' . $data . '"> </td>';
         endif;
 
           echo '<td class="buttonCursor"><textarea onkeypress="return keyListener(event)" id="taskDescriptionTable" name="taskDescriptionTable" rows="5">' . $task['description'] . '</textarea>
@@ -51,6 +54,7 @@
   </tbody>
   </table>
 </div>
+<br>
 <div style = "display:inline;">
       <form id = "editorForm">
           <button id = "editTaskSubmit" type = "button"> Submit </button> <br>
@@ -99,6 +103,21 @@
         var taskID = document.getElementById('editTaskID').value;
         var taskTitle = document.getElementById('titleTable').value;
         var taskExpDate = document.getElementById('expDateTable').value;
+
+        if(taskTitle.length == 0)
+        {
+            document.getElementById("message").innerHTML = "Task title can't be empty";
+            document.getElementById("message").classList.remove('hidden');
+            document.getElementById("message").classList.add('error');
+            return false; 
+        }
+        else if(taskExpDate.length == 0)
+        {
+            document.getElementById("message").innerHTML = "Expiration date can't be empty";
+            document.getElementById("message").classList.remove('hidden');
+            document.getElementById("message").classList.add('error');
+            return false; 
+        }
         
         var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
         var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
@@ -134,35 +153,14 @@
             {
                 if(this.responseText == 0)
                 {
-                    window.location.href = "../main/index.php";
-                    return;
-                }
-
-                if(this.responseText == -2)
-                {
-                    var message = "Invalid day";
-                    document.getElementById("message").innerHTML = message;
-                    document.getElementById("message").classList.remove('success');
-                    document.getElementById("message").classList.add('error');
-                    document.getElementById("message").classList.remove('hidden');
-                    return;
-                }
-
-                if(this.responseText == -3)
-                {
-                    var message = "Invalid month";
-                    document.getElementById("message").innerHTML = message;
-                    document.getElementById("message").classList.remove('success');
-                    document.getElementById("message").classList.add('error');
-                    document.getElementById("message").classList.remove('hidden');
+                    window.location.href = "../main";
                     return;
                 }
 
                 else
                 {
-                    var message = "Error";
+                    var message = "Error inserting into database";
                     document.getElementById("message").innerHTML = message;
-                    document.getElementById("message").classList.remove('success');
                     document.getElementById("message").classList.add('error');
                     document.getElementById("message").classList.remove('hidden');
                     return;
