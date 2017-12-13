@@ -3,6 +3,13 @@
     include('../session/redirectLoggedOut.php');
     include('../profile/userinfo.php');
 
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],"pEdit")!=1)
+    {
+        //echo "CSRF ATTEMPT";
+        //return -1;
+    }
+
     if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['name']))
     {
         $username = $_POST['username'];

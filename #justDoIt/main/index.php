@@ -14,6 +14,7 @@
     }
 
     $_SESSION['AuthRequestToken'] = hash_hmac('sha256', "AuthRequest" , $_SESSION['UserAuthToken']);
+    $_SESSION['EditAuthToken'] = hash_hmac('sha256', "pEdit" , $_SESSION['UserAuthToken']);
     
     $records = $conn->prepare('SELECT id, username,password FROM users WHERE id = :id');
     if($records != null)
