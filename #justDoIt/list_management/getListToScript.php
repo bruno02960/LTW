@@ -17,25 +17,10 @@
         if($records->execute())
         {
             $results = $records->fetchAll();
-            $_SESSION['allLists'] = $results;
             $lists = $results;
-
-            if(count($lists) != 0)
-            {
-                $records = $conn->prepare('SELECT id, title, completed, expiring, toDoListId, description FROM task WHERE toDoListId = :id');
-                $records->bindParam(':id', $lists[$index]['id']);
-                $records->execute();
-                $results = $records->fetchAll();
-
-                $tasks = NULL;
-
-                if(count($results) > 0)
-                {
-                    $tasks = $results;
-                }
-            }
-            else
-                $tasks = null;
+            array_push($lists,$_SESSION['user_id']);
+            echo json_encode($lists);
+            return;
         }
     }
 ?>

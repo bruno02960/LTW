@@ -107,35 +107,35 @@ submitButton.addEventListener("click", function(event)
     var regexPW = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z!$%^&*_@#~?\\d]{8,72}$");
     
     var inputDate = document.getElementById("dateInput").value;
-    var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
+    var verifyDateFormat = /^(\d{2})-(\d{2})-(\d{4})$/;
     var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
     var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
     
     if (!inputDate.match(verifyDateFormat))
     {
-      document.getElementById("errorMessage").innerHTML = "Please enter a dd-mm-yyyy date";
-      document.getElementById("errorMessage").classList.remove('hidden');
-      document.getElementById("errorMessage").classList.add('error');
-      return;
+        document.getElementById("errorMessage").innerHTML = "Please enter a dd-mm-yyyy date";
+        document.getElementById("errorMessage").classList.remove('hidden');
+        document.getElementById("errorMessage").classList.add('error');
+        return;
     }
     else if(!inputDate.match(validDateValue))
     {
-      document.getElementById("errorMessage").innerHTML = "Please enter a valid date";
-      document.getElementById("errorMessage").classList.remove('hidden');
-      document.getElementById("errorMessage").classList.add('error');
-      return;
+        document.getElementById("errorMessage").innerHTML = "Please enter a valid date";
+        document.getElementById("errorMessage").classList.remove('hidden');
+        document.getElementById("errorMessage").classList.add('error');
+        return;
     }
     else if(!inputDate.match(validYear))
     {
-      document.getElementById("errorMessage").innerHTML = "Year must be at least 1970";
-      document.getElementById("errorMessage").classList.remove('hidden');
-      document.getElementById("errorMessage").classList.add('error');
-      return;
+        document.getElementById("errorMessage").innerHTML = "Year must be at least 1970 and lower than 2200";
+        document.getElementById("errorMessage").classList.remove('hidden');
+        document.getElementById("errorMessage").classList.add('error');
+        return;
     }
 
     if(username.length < '8')
     {
-        var message = "Your Username Must Contain At Least 8 Characters!";
+        let message = "Your Username Must Contain At Least 8 Characters!";
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
         return;
@@ -143,7 +143,7 @@ submitButton.addEventListener("click", function(event)
 
     if(!regexPW.test(PW))
     {
-        var message = "Your password must contain a minimum of 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 one number";
+        let message = "Your password must contain a minimum of 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 one number";
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
         return;
@@ -151,10 +151,28 @@ submitButton.addEventListener("click", function(event)
 
     if(PW != CPW)
     {
-        var message = "The passwords don't match";
+        let message = "The passwords don't match";
         document.getElementById("errorMessage").innerHTML = message;
         document.getElementById("errorMessage").classList.remove('hidden');
         return;
+    }
+
+    let submitPhoto = document.getElementById("fileToUpload").files[0];
+    let fileExtension = submitPhoto.name.split('.').pop();
+
+    if(submitPhoto == null)
+    {
+        let message = "No image selected";
+        document.getElementById("errorMessage").innerHTML = message;
+        document.getElementById("errorMessage").classList.remove('hidden');
+        return false;
+    }
+    else if(fileExtension != 'png' && fileExtension != 'jpg' && fileExtension != 'jpeg')
+    {
+        let message = "File selected isn't a valid image file";
+        document.getElementById("errorMessage").innerHTML = message;
+        document.getElementById("errorMessage").classList.remove('hidden');
+        return false;
     }
 
     var xhttp = new XMLHttpRequest();

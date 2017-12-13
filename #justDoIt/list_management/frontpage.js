@@ -1,104 +1,105 @@
-var currList = 0;
-var tasklist = [];
-var listTable = document.querySelector("#listsTable");
-
-if(listTable!=null)
-{
-  listTable.onclick = function(ev)
+ function input()
   {
-    if(ev.target.parentElement.querySelector('.id')!=null)
+    inputDate = document.getElementById("taskExpDateInput").value;
+    var verifyDateFormat = /^(\d{1,2})-(\d{1,2})-(\d{4})$/;
+    var validDateValue = /(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/;
+    var validYear = /(^(\d{1,2})-(\d{1,2})-(19[789]\d|20[01]\d)$)/;
+    if (!inputDate.match(verifyDateFormat))
     {
-    var clickedID = ev.target.parentElement.querySelector('.id').innerText;
-    document.getElementById('idList1').value = clickedID;
-    document.getElementById('idList2').value = clickedID;
-    document.getElementById('idList3').value = clickedID;
-
-    var clickedName = ev.target.parentElement.querySelector('.name').innerText;
-    document.getElementById('ListName').innerHTML = clickedName;
-    console.log(document.getElementById('ListName').value);
-
-    var index = ev.target.parentElement.rowIndex;
-    if(index==null)
+      document.getElementById("message").innerHTML = "Please enter a dd-mm-yyyy date";
+      document.getElementById("message").classList.remove('hidden');
+      document.getElementById("message").classList.add('error');
+      return false;
+    }
+    else if(!inputDate.match(validDateValue))
     {
-      console.log("NULL row");
+      document.getElementById("message").innerHTML = "Please enter a valid date";
+      document.getElementById("message").classList.remove('hidden');
+      document.getElementById("message").classList.add('error');
+      return false;
+    }
+    else if(!inputDate.match(validYear))
+    {
+      document.getElementById("message").innerHTML = "Year must be at least 1970";
+      document.getElementById("message").classList.remove('hidden');
+      document.getElementById("message").classList.add('error');
+      return false;
     }
     else
-    {
-      currList = index;
+      return true;
 
+    return false;
+  }
+
+  function RequestAuthToken(tokenName,elementToChange,isHtml = true)
+  {
       var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function()
-      {
-        if (this.readyState == 4 && this.status == 200)
+       xhttp.onreadystatechange = function()
         {
-          if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
+          if (this.readyState == 4 && this.status == 200)
           {
-            document.getElementById("message").innerHTML = "Error";
-            document.getElementById("message").classList.remove('hidden');
-          }
-          else
-          {
-              var tasks = JSON.parse(this.responseText);
-
-              for(let i=0;i<tasks.length;++i)
-              {
-                tasklist.push(JSON.parse(tasks[i]));
-              }
-          }
-        }
-
-          let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
-          let htmlString = `<tr>
-                              <th class="id">ID</th>
-                              <th class="status">Status</th>
-                              <th class="task">Task</th>
-                              <th class="expDate">Expiration Date </th>
-                            </tr>`;
-
-          if(tasklist.length!=0)
-          {
-            for(let i=0;i<tasklist.length;++i)
+            if(this.responseText!=-1)
             {
-              if (tasklist[i].completed == "true")
-                $checkMark = '&#10003;';
+              if(isHtml)
+              {
+                elementToChange.value = this.responseText;
+              }
               else
-                $checkMark = '&#10008;';
-
-                      htmlString = htmlString + "\n" + "<tr>";
-                      htmlString = htmlString + "\n" + '<td class="id">' + tasklist[i].id + '</td>';
-                      htmlString = htmlString + "\n" + '<td class="status">' +  $checkMark +'</td>';
-                      htmlString = htmlString + "\n" + '<td class="task">' +  tasklist[i].title + '</td>';
-
-                      let data = ""
-
-                      if(tasklist[i].expiring!=null)
-                      {
-                        data = tasklist[i].expiring;
-                      }
-
-                      var taskDate = new Date(data* 1000);
-                      var taskDateMonth = taskDate.getMonth() + 1;
-                      var taskDateDay = taskDate.getDate() + 1;
-
-                      function pad(n)
-                      {
-                          return (n < 10) ? ("0" + n) : n;
-                      }
-
-                      htmlString = htmlString + "\n" + '<td class="expDate">' +  pad(taskDateMonth,2) + "/" + pad(taskDateDay,2) + "/" + taskDate.getFullYear() +'</td>';
-                      htmlString = htmlString + "\n" + "</tr>";
+              {
+                elementToChange = this.responseText;
+              }
             }
-          };
+          }
+        };
 
-          tableHTML.innerHTML = htmlString;
-          tasklist.length = 0;
+        xhttp.open("POST", "../main/requestsToken.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("&listName=" + tokenName);
+    }
+
+  window.onload = function(e)
+  {
+      let listtableform = document.getElementById("addListForm");
+      let tokenVal = listtableform.querySelector("#AuthToken");
+
+      if(tokenVal!=null)
+      {
+        RequestAuthToken("addListForm",tokenVal);
+        let id = listtableform.querySelector("#reqID");
+        if(id!=null){
+          id.value = "addListForm";
         }
-      };
+      }
+    }
 
-      xhttp.open("POST", "../main/getListData.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("index=" + currList);
+  function XSS_Remove_Tags(string,elementToChange)
+  {
+    var val = string;
+    elementToChange.value = val.replace(/<\/?[^>]+(>|$)/g,"");
+  }
 
+  var searchForm = document.querySelector("#searchForm");
+  if(searchForm!=null)
+  {
+    var searchInput = searchForm.querySelector("#searchImp");
+    if(searchInput!=null)
+    {
+      searchInput.oninput = function()
+      {
+        let str = searchInput.value;
+        str = XSS_Remove_Tags(str,searchInput);
+      }
+    }
+  }
+
+
+  var listTable = document.querySelector("#listsTable");
+  var currList = 0;
+  function deleteTask(task)
+  {
+    if (confirm("Are you sure you want to delete this task?") == true)
+    {
+      var taskID = (task.id.substr(0,task.id.indexOf('/'))).substr(4);
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function()
       {
@@ -106,52 +107,234 @@ if(listTable!=null)
         {
           if(this.responseText == 0)
           {
-            document.getElementById("message").innerHTML = "Completed Task";
-            document.getElementById("message").classList.remove('hidden');
+              location.reload();
           }
         }
       };
 
-      xhttp.open("POST", "../main/getListIndex.php", true);
+      xhttp.open("POST", "../task_management/deleteTask.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("listID=" + clickedID);
-      }
+      xhttp.send("&task_id=" + taskID);
     }
   }
 
-var taskTable = document.querySelector('#taskTable');
-
-if(taskTable!=null)
-{
-  document.querySelector('#taskTable').onclick = function(ev)
+  function editTask(task)
   {
-    var index = ev.target.parentElement.rowIndex;
-    var table = document.getElementById("taskTable");
-    items = table.getElementsByClassName("status");
-    if(items[index]!=null)
+    let editform = document.getElementById("editTaskForm");
+    document.getElementById("editTaskID").value = task.id.substr(4);
+    editform.submit();
+  }
+
+  var tasklist = [];
+
+  if(listTable!=null)
+  {
+    var listOwnerArray = [];
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function()
     {
-      if(items[index].innerHTML == "\u2718")
+      if (this.readyState == 4 && this.status == 200)
       {
-        if (confirm("Mark this task as completed?") == true)
+        listOwnerArray = JSON.parse(this.responseText);
+      }
+    };
+
+    xhttp.open("POST", "../list_management/getListToScript.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+
+
+    let listtableform = document.getElementById("addListForm");
+    let formInput = listtableform.querySelector("#listnameID");
+    formInput.oninput = function(){
+        let str = formInput.value;
+        str = XSS_Remove_Tags(str,formInput);
+    }
+
+    listTable.onclick = function(ev)
+    {
+      if(ev.target.parentElement.querySelector('.id')!=null){
+      var clickedID = ev.target.parentElement.querySelector('.id').innerText;
+      var clickedName = ev.target.parentElement.querySelector('.name').innerText;
+      document.getElementById('idList2').value = clickedID;
+      document.getElementById('idList3').value = clickedID;
+      document.getElementById('idList4').value = clickedID;
+
+      document.getElementById('idListName').value = clickedName;
+
+      var clickedName = ev.target.parentElement.querySelector('.name').innerText;
+      document.getElementById('ListName').innerHTML = clickedName;
+
+      var index = ev.target.parentElement.rowIndex;
+      if(index==null)
+      {
+        console.log("NULL row");
+      }
+      else
+      {
+        currList = index;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
         {
-          items[index].innerHTML = "\u2713";
-
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function()
+          if (this.readyState == 4 && this.status == 200)
           {
-            if (this.readyState == 4 && this.status == 200)
+            if(this.responseText == -1 || this.responseText == -2 || this.responseText == -3)
             {
-                console.log("good");
+              document.getElementById("message").innerHTML = "Error";
+              document.getElementById("message").classList.remove('hidden');
             }
-          };
+            else
+            {
+                var tasks = JSON.parse(this.responseText);
+                for(let i=0;i<tasks.length;++i){
+                  tasklist.push(JSON.parse(tasks[i]));
+                }
+              }
+            }
+            let tableHTML = document.querySelector("#taskTable").querySelector("tbody");
+            var htmlString = '';
 
-          items = table.getElementsByClassName("id");
+            if(tasklist.length!=0)
+            {
+            htmlString = `<tr>
+                            <th class="id">ID</th>
+                            <th class="status arrowCursor" ></th>
+                            <th class="task arrowCursor">Task</th>
+                            <th class="expDate arrowCursor">Expiration Date </th>
+                            <th id="descriptionHead" class="task arrowCursor">Description </th>
+                            <th class="deltete task"></th>
+                          </tr>`;
+              for(let i=0;i<tasklist.length;++i)
+              {
+                var taskRow = tasklist[i].id;
 
-          xhttp.open("POST", "../account/changeTaskBool.php", true);
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.send("completed=" + true + "&task_id=" + items[index].innerHTML);
+                htmlString = htmlString + "\n" + "<tr>";
+                htmlString = htmlString + "\n" + '<td class="id verticalTop">' + tasklist[i].id + '</td>';
+
+                if(tasklist[i].completed == "true")
+                {
+                  var checkMark = "&#10004;";
+                  var htmlstring = '';
+                  var editTaskString='';
+
+                  htmlString = htmlString + "\n" + '<td class="status verticalTop" >' +
+                                editTaskString + htmlstring + checkMark + ' </td>';
+
+                }
+                else
+                {
+                  var checkMark = "";
+                  if(listOwnerArray[0].userID != listOwnerArray[1])
+                  {
+                    var htmlstring = '<input type="checkbox" class="status verticalTop" onclick="completeTask(this);" id="task' + taskRow + '/index' + currList  + '"';
+                    htmlString = htmlString + "\n" + '<td class="status verticalTop" style="text-align:right;" >' + htmlstring + checkMark + ' </td>';
+                  }
+                  else
+                  {
+                    let htmlstring = '<input style=" margin-left: -13px" onclick="completeTask(this);" id="task' + taskRow + '/index' + currList  + '" type="checkbox"';
+                    let editTaskString='<a class = "buttonCursor left_align" onclick="editTask(this);" id="task' + taskRow + '"> &#9998;  </a> ';
+
+
+                    htmlString = htmlString + "\n" + '<td class="status verticalTop" style="text-align:right;" >' +
+                                  editTaskString + htmlstring + checkMark + ' </td>';
+                  }
+
+                }
+
+                if((tasklist[i].title).length != 0 && (tasklist[i].title).length > 26)
+                  htmlString = htmlString + "\n" + '<td id = "description"> <div class = "taskDiv">' + tasklist[i].title + ' </div></td>';
+                else
+                  htmlString = htmlString + "\n" + '<td id = "description"><div class = "taskDivNotFilled">' + tasklist[i].title + '</div></td>';
+
+                let data = "";
+
+                if(tasklist[i].expiring!=null)
+                {
+                  data = tasklist[i].expiring;
+                }
+
+                let taskDate = new Date(data* 1000);
+                let taskDateYear = taskDate.getYear();
+                let taskDateMonth = taskDate.getMonth() + 1;
+                let taskDateDay = taskDate.getDate() + 1;
+
+                function pad(n)
+                {
+                    return (n < 10) ? ("0" + n) : n;
+                }
+
+                let currentDate = new Date();
+                let currentDay = currentDate.getDate() + 1;
+                let currentMonth = currentDate.getMonth() + 1;
+                let currentYear = currentDate.getYear();
+
+                let diffData = (currentDate.getTime() - (taskDate.getTime()));
+                let diffDay = pad(taskDateDay,2) - pad(currentDay,2);
+                let diffMonth = pad(taskDateMonth,2) - pad(currentMonth,2);
+                let diffYear = pad(taskDateYear,2) - pad(currentYear,2);
+
+                if(((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay <= 3)) && tasklist[i].completed != "true")
+                  htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay,2) + "-" + pad(taskDateMonth,2) + "-"  + taskDate.getFullYear() +'</td>';
+                else
+                  htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay,2) + "-" +  pad(taskDateMonth,2) + "-" + taskDate.getFullYear() +'</td>';
+
+                if((tasklist[i].description).length != 0 && (tasklist[i].description).length > 26)
+                  htmlString = htmlString + "\n" + '<td id = "description"> <div class = "descriptionDiv">' + tasklist[i].description + ' </div></td>';
+                else
+                  htmlString = htmlString + "\n" + '<td id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
+
+                  if (listOwnerArray[0].userID != listOwnerArray[1])
+                  {
+                    htmlString = htmlString + "\n" + '<td class="delete verticalTop"> </td></tr>';
+                  }
+                  else
+                  {
+                    htmlString = htmlString +
+                    "\n" +
+                    `<td class="delete verticalTop">
+                      <a class = "buttonCursor" onclick="deleteTask(this);" id="task` + taskRow + `/"> X </a>
+                    </td>
+                    </tr>`;
+                  }
+              }
+            };
+
+            tableHTML.innerHTML = htmlString;
+            tasklist.length = 0;
+          }
+        };
+
+        xhttp.open("POST", "../list_management/getListData.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("index=" + currList);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            if(this.responseText == 0)
+            {
+              document.getElementById("message").innerHTML = "Completed Task";
+              document.getElementById("message").classList.remove('hidden');
+            }
+          }
+        };
+
+        xhttp.open("POST", "../list_management/getListIndex.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("listID=" + clickedID);
         }
       }
     }
+
+  var inviteUserForm = document.querySelector("#userInviteForm");
+  var userNameInput = inviteUserForm.querySelector("#usernameInput");
+
+  userNameInput.oninput = function()
+  {
+    let str = userNameInput.value;
+    str = XSS_Remove_Tags(str,userNameInput);
   }
-}
