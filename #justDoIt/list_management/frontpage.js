@@ -144,6 +144,18 @@
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
 
+    let listName = document.getElementById("taskNameid");
+    listName.oninput = function() {
+      let str = listName.value;
+      str = XSS_Remove_Tags(str, listName);
+    };
+
+    let descBox = document.getElementById("descriptionBox");
+    descBox.oninput = function(){
+      let str = descBox.value;
+      str = XSS_Remove_Tags(str, descBox);
+    }
+
 
     let listtableform = document.getElementById("addListForm");
     let formInput = listtableform.querySelector("#listnameID");
