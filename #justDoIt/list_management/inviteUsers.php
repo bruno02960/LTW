@@ -4,7 +4,11 @@
   include('../profile/userinfo.php');
   include('../templates/header.php'); ?>
 
-  <h1 style="margin-left: 30px;"> <?php echo $_POST['listName'] ?> </h1>
+  <?php if(!empty($_POST['user'])): ?>
+    <h1 style="margin-left: 30px;"> Searching users with <?php echo $_POST['user'] ?> </h1>
+  <?php else: ?>
+    <h1 style="margin-left: 30px;"> Searching all users </h1>
+  <?php endif; ?>
 
   <?php
     $users = $conn->prepare('SELECT id, username, email FROM users WHERE id != :id AND username LIKE :username');
@@ -16,7 +20,7 @@
         $users = $users->fetchAll();
         if($users == null)
         {
-            echo '<p class = "error"> No users found </p>';
+            echo '<p style = "margin-left: 1em;" class = "error"> No users found </p>';
         }
         else
         {
@@ -52,10 +56,12 @@
   }
   ?>
 
-    <form id = "inviteUserForm" action="shareListWithUser.php" method="POST">
-        <input type = "hidden" id = "userID" name = "userID"> 
-        <input type = "hidden" id = "listID" name = "listID">
-    </form>
+  <button style= "margin-left: 2em;" type ="submit" onclick = "window.location='../main';"> Go Back </button> <br> <br>
+
+  <form id = "inviteUserForm" action="shareListWithUser.php" method="POST">
+      <input type = "hidden" id = "userID" name = "userID"> 
+      <input type = "hidden" id = "listID" name = "listID">
+  </form>
 
 <script>
 

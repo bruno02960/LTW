@@ -22,18 +22,28 @@
           echo '
                   <tr>
                   <td class="id">' . $list['id']. '</td>
-                  <td class="name buttonCursor">' . $name. '</td>
-                  </tr>
+                  <td class="name buttonCursor">' . $name. '</td>';
+                  if ($list['userID'] == $_SESSION['user_id'])
+                  {
+                    echo '<td class="deltete task"><a class = "buttonCursor left_align" onclick="editList(this);" id="list'. $list['id'] . '"> &#9998;  </a> </td>';
+                  }
+                  else
+                    echo '<td class="deltete task"> </td>';
+                  echo '</tr>
                ';
         }
       }
       ?>
     </table>
         <form id="addListForm" action = "../list_management/addList.php" method="POST">
-          <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name"><br>
+          <input type="text" maxlength="25" id="listnameID" name="listName" placeholder="List name" required><br>
           <input class = "buttonCursor" type="submit" name = "addListButton" value="Add list">
           <input id = "AuthToken" type="hidden" name="AuthenticationToken">
           <input id = "reqID" type="hidden" name="RequestIdentifier">
+        </form>
+
+        <form id = "editListForm" class = "id" action="../list_management/editList.php" method = "POST">
+          <input type="hidden" id = "editListID" name = "listID">
         </form>
   </aside>
 
@@ -144,7 +154,7 @@
   <br>
     <div style="overflow-x:auto;" class = "<?= $toHide ?>">
       <form id="addTaskForm" action="../task_management/addTask.php" method="POST" onSubmit = "return input()" >
-        <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name">
+        <input type="text" id="taskNameid" class = "verticalTop" name="taskName" placeholder="task name" required>
         <input id = "idList2" type="hidden" name = "listID" value = "<?= $lists[$index]['id'] ?>">
         <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
         <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
