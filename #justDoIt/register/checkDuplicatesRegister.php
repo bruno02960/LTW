@@ -1,8 +1,8 @@
 <?php
     include('../database/connection.php');
 
-    $email = $_POST['email'];
-    $username = $_POST['username'];
+    $email = strip_trags($_POST['email']);
+    $username = strip_trags($_POST['username']);
     if(!empty($email) && !empty($username))
     {
         $query = $conn->prepare('SELECT * FROM users WHERE username = :username');
