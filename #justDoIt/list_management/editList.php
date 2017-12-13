@@ -15,7 +15,8 @@
         $list = $conn->prepare('SELECT id, name FROM toDoList where id = :id');
         if($list != null)
         {
-            $list->bindParam(':id', $_POST['listID']);
+            $listID = strip_tags($_POST['listID']);
+            $list->bindParam(':id',  $listID);
             $list->execute();
             $list = $list->fetch(PDO::FETCH_ASSOC);
         }

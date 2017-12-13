@@ -38,16 +38,16 @@
             echo '<tr>';
 
             if(!empty($task['title']) && strlen($task['title']) > 26)
-              echo '<td><div class = "taskDiv">' . $task['title'] . '</div> </td>';
+              echo '<td><div class = "taskDiv">' . strip_tags($task['title']) . '</div> </td>';
             else
               echo '<td><div class = "taskDivNotFilled">' .strip_tags($task['title']) . '</div></td>';
     
             echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
 
             if(!empty($task['description']) && strlen($task['description']) > 30)
-              echo '<td><div class = "descriptionDiv">' . $task['description'] . '</div></td>';
+              echo '<td><div class = "descriptionDiv">' . strip_tags($task['description']) . '</div></td>';
             else
-              echo '<td><div class = "descriptionDivNotFilled">' . $task['description'] . '</div></td>';
+              echo '<td><div class = "descriptionDivNotFilled">' . strip_tags($task['description']) . '</div></td>';
 
             }
         ?>

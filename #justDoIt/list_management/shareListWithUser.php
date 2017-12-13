@@ -8,6 +8,8 @@
     if(!empty($_POST['userID']) && !empty($_POST['listID']))
     {
         $records = $conn->prepare('INSERT INTO sharedList(userID, listID) Values (:userID, :listID)');
+        $userID = strip_tags($_POST['userID']);
+        $listID = strip_tags($_POST['listID']);
         $records->bindParam(':userID', $_POST['userID']);
         $records->bindParam(':listID', $_POST['listID']);
         if($records->execute())
