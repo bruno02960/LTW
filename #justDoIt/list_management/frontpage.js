@@ -131,7 +131,6 @@ window.onload = function(e) {
     let editTask = document.getElementById("editTaskAuthToken");
     if (editTask != null) {
         let id = document.getElementById("editTaskTokenName");
-        console.log(id.value);
         RequestAuthToken(id.value, editTask);
     }
 
