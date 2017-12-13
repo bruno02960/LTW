@@ -115,7 +115,7 @@ window.onload = function(e) {
 
     let addTaskToken = document.getElementById("addTaskAuthToken");
     if (addTaskToken != null) {
-        let id = document.getElementById("addTaskID");
+        let id = document.getElementById("addTaskFormID");
         console.log(id.value);
         RequestAuthToken(id.value, addTaskToken);
     }

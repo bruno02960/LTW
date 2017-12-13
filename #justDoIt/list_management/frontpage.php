@@ -167,7 +167,7 @@
       <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
       <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
       <input id="addTaskAuthToken" type="hidden">
-      <input id="addTaskID" type="hidden" value="addTaskForm">
+      <input id="addTaskFormID" type="hidden" value="addTaskForm">
     </form>
   </div>
 <br>
