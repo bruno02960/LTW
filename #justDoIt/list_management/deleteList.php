@@ -2,6 +2,13 @@
     include('../session/session.php');
     include('../database/connection.php');
 
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
+    {
+        echo "CSRF ATTEMPT";
+        return -1;
+    }
+
     $records = $conn->prepare('SELECT userID FROM toDoList WHERE userID = :userID AND id = :id');
     $records->bindParam(':userID', $_SESSION['user_id']);
     $records->bindParam(':id', $_POST['listID']);

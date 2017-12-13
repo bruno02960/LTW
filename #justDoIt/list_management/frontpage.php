@@ -166,8 +166,8 @@
       <input id = "taskExpDateInput" class = "verticalTop" type="text" name="taskDate" placeholder="(dd-mm-yyyy)">
       <textarea id= "descriptionBox" rows ="5" name="taskDescription" placeholder = "description (optional)"></textarea> <br>
       <input class = "buttonCursor verticalTop" id="addTaskID" type="submit" name = "addTaskButton" value="Add task"> <br>
-      <input id="addTaskAuthToken" type="hidden">
-      <input id="addTaskFormID" type="hidden" value="addTaskForm">
+      <input id="addTaskAuthToken" type="hidden" name="AuthToken">
+      <input id="addTaskFormID" type="hidden" value="addTaskForm" name="tokenName">
     </form>
   </div>
 <br>
@@ -175,22 +175,22 @@
 <form class = " form " action = "../list_management/deleteList.php" method="POST">
   <input class = "buttonCursor" type="submit" name = "deleteListButton" value="Delete list">
   <input id = "idList3" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
-  <input id="delListAuthToken" type="hidden">
-  <input id="delListID" type="hidden" value="delListForm">
+  <input id="delListAuthToken" type="hidden" name="AuthToken">
+  <input id="delListID" type="hidden" value="delListForm" name="tokenName">
 </form>
   <form id="userInviteForm" class = "form" action="../list_management/inviteUsers.php" method="POST">
     <input type="text" id="usernameInput" name="user" placeholder="Search users">
     <input id = "idListName" type="hidden" name = "listName" value = "<?= $lists[$index]['name'] ?>">
     <input id = "idList4" type="hidden"  name = "listID" value = "<?= $lists[$index]['id'] ?>">
     <input class = "buttonCursor" type = "submit" value = "Invite">
-    <input id ="inviteUserAuthToken" type="hidden">
-    <input id="inviteUserID" type="hidden" value="inviteUserForm">
+    <input id ="inviteUserAuthToken" type="hidden" name="AuthToken">
+    <input id="inviteUserID" type="hidden" value="inviteUserForm" name="tokenName">
   </form>
 </div>
 
 <form id = "editTaskForm" class = "id" action="../task_management/editTask.php" method = "POST">
     <input type="hidden" id = "editTaskID" name = "taskID">
-    <input type="hidden" id="editTaskAuthToken">
+    <input type="hidden" id="editTaskAuthToken" name="AuthToken">
 </form>
 
 <input type="hidden" id="ReqAuthToken" value=<?=$_SESSION['AuthRequestToken']?>>

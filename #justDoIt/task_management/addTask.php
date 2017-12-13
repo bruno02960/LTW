@@ -3,6 +3,13 @@
     include('../database/connection.php');
     include('../list_management/updateList.php');
 
+    include('../security/checkAuthHash.php');
+    if(checkAuthHash($_POST['AuthToken'],$_POST['tokenName'])!=1)
+    {
+        echo "CSRF ATTEMPT";
+        return -1;
+    }
+
     if(!empty($_POST['listID']))
     {
         $ListID = $_POST['listID'];
