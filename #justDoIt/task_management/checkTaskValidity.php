@@ -4,7 +4,7 @@
 
     if(!empty($_POST['taskID']) && !empty($_POST['taskTitle']) && !empty($_POST['taskExpDate']))
     {
-        $expiring = strtotime(' +1 day', strtotime($_POST['taskExpDate']));
+        $expiring = strtotime($_POST['taskExpDate']);
 
         $task = $conn->prepare('UPDATE task SET title = :title, completed = :completed, expiring = :expiring, description = :description WHERE task.id = :id');
         if($task != null)

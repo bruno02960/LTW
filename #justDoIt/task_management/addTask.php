@@ -25,7 +25,7 @@
                 $taskDesc = strip_tags($_POST['taskDescription']);
                 $records->bindParam(':description', $taskDesc);
                 echo $_POST['taskDate'];
-                $expiring = strtotime(' +1 day', strtotime($_POST['taskDate']));
+                $expiring = strtotime($_POST['taskDate']);
                 echo $expiring;
                 $records->bindParam(':expiring', $expiring);
                 $records->execute();

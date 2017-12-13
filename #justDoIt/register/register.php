@@ -22,9 +22,9 @@
             $stmt->bindParam(':password', $PWHashed);
             $stmt->bindParam(':name', $_POST['name']);
             $stmt->bindParam(':location', $_POST['location']);
-            $birthday = strtotime(' +1 day', strtotime(strip_tags($_POST['birthday'])));
+            $birthday = strtotime(strip_tags($_POST['birthday']));
             $stmt->bindParam(':birthday', $birthday);
-            $date = strtotime(' +1 day', strtotime("now"));
+            $date = strtotime("now");
             $stmt->bindParam(':registerDate',  $date);
 
             if($_FILES["fileToUpload"]["name"] == null)
