@@ -265,7 +265,7 @@ function editList(list)
                 else
                 {
                   var checkMark = "";
-                  if(listOwnerArray[0].userID != listOwnerArray[1])
+                  if(listOwnerArray[index].userID !== listOwnerArray.slice(-1).pop())
                   {
                     var htmlstring = '<input type="checkbox" class="status verticalTop" onclick="completeTask(this);" id="task' + taskRow + '/index' + currList  + '"';
                     htmlString = htmlString + "\n" + '<td class="status verticalTop" style="text-align:right;" >' + htmlstring + checkMark + ' </td>';
@@ -324,7 +324,7 @@ function editList(list)
                 else
                   htmlString = htmlString + "\n" + '<td id = "description"><div class = "descriptionDivNotFilled">' + tasklist[i].description + '</div></td>';
 
-                  if (listOwnerArray[0].userID != listOwnerArray[1])
+                  if (listOwnerArray[index].userID !== listOwnerArray.slice(-1).pop())
                   {
                     htmlString = htmlString + "\n" + '<td class="delete verticalTop"> </td></tr>';
                   }

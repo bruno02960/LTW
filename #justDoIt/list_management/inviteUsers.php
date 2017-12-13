@@ -63,18 +63,6 @@
       <input type = "hidden" id = "listID" name = "listID">
   </form>
 
-<script>
-
-  function fillInviteForm(UserList)
-  {
-    var userID = (UserList.id.substr(0,UserList.id.indexOf('/'))).substr(6);
-    var listID = UserList.id.split('/')[1].substr(6);
-
-    document.getElementById("userID").value = userID;
-    document.getElementById("listID").value = listID;
-    document.getElementById("inviteUserForm").submit();
-  }
-
-</script>
+<script src='../list_management/inviteUsers.js'> </script>
 
 <?php include('../templates/footer.php'); ?>
