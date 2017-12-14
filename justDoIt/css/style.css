@@ -1,0 +1,577 @@
+html {
+    background-color: #222222;
+}
+#editTask h2 {
+    font-family: Montserrat;
+}
+header > a {
+    text-decoration: none;
+    color: black;
+}
+header {
+    text-align: center;
+}
+.header {
+    background-color: #1E000D;
+    color: white;
+}
+.name.buttonCursor:hover {
+    background-color: #F880B4;
+    color: white;
+}
+.header p {
+    margin: 0;
+}
+.header > p:last-of-type {
+    border-bottom: 1px solid white;
+}
+.header > a:first-of-type {
+    padding-right: 1em;
+    border-right: 1px solid white;
+}
+.header > a:last-of-type {
+    padding-left: 1em;
+}
+header h1 {
+    font-family: Montserrat, Arial Black;
+    text-transform: capitalize;
+    margin: 0;
+    background-color: #f20069;
+}
+.header > a {
+    text-decoration: none;
+    color: white;
+}
+header > div > a:nth-child(1) {
+    padding-right: 1em;
+    border-right: 1px solid white;
+}
+header > div > a:nth-child(2) {
+    padding-left: 1em;
+}
+aside#lists {
+    width: 24%;
+    display: inline-block;
+    padding-bottom: 1em;
+    padding-left: 1em;
+}
+html {
+    font-family: Calibri;
+}
+#menu > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+#menu > ul > li > a:hover {
+    text-decoration: none;
+    color: white;
+}
+#menu > ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    padding: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+nav#menu > ul >li {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.2em;
+    background-color: #f20069;
+}
+nav#menu > ul > li:nth-child(-n+3) {
+    border-right: 1px solid white;
+}
+nav#menu {
+    margin: auto;
+    background-color: #1E000D;
+}
+#list {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}
+#list > h2 {
+    font-family: Montserrat, Arial;
+}
+body {
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: white;
+}
+footer {
+    background-color: #1E000D;
+    color: white;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+#register h2 {
+    font-family: Montserrat, Arial;
+}
+#register {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+#login h2 {
+    font-family: Montserrat, Arial;
+}
+#login {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+button {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    font-family: Calibri;
+    font-size: 1em;
+    width: 6.8em;
+    cursor: pointer;
+}
+.deltete.task {
+    background-color: white;
+    width: 17px;
+}
+.delete.verticalTop {
+    background-color: white;
+    text-align: left;
+}
+.status.verticalTop {
+    background-color: white;
+}
+#editProfile h2 {
+    font-family: Montserrat, Arial;
+}
+#editProfile {
+    padding-bottom: 1em;
+    text-align: center;
+}
+#editProfile input {
+    width: 20%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+input:focus {
+    outline: none;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+#profile h2 {
+    font-family: Montserrat, Arial;
+}
+#profile {
+    padding-left: 1em;
+    padding-bottom: 1em;
+}
+div#info {
+    border-left: 1px solid black;
+    padding-left: 1em;
+    display: inline-block;
+}
+#pic p {
+    margin: 0;
+}
+#info p {
+    margin: 0;
+}
+div#pic {
+    width: 20%;
+    float: left;
+}
+#profile a {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    text-decoration: none;
+}
+div#editProfileButton {
+    margin-top: 2em;
+}
+#profile h4 {
+    margin: 0;
+}
+#descriptionBox {
+    resize: none;
+    height: 22px;
+    width: 295px;
+    transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    /* Firefox 4 */
+
+    -webkit-transition: all 0.2s linear;
+    /* Safari and Chrome */
+
+    -o-transition: all 0.2s linear;
+    /* Opera */
+
+    -ms-transition: all 0.2s linear;
+    /* Explorer 10 */
+}
+#descriptionBox:focus {
+    height: 60px;
+    resize: none;
+}
+#descriptionEditBox {
+    resize: none;
+}
+.tasks tbody th {
+    background-color: #1E000D;
+    color: white;
+}
+.tasks tbody tr {
+    text-align: center;
+	vertical-align:top;
+}
+.tasks tbody tr:nth-child(2n+1) {
+    background-color: #FDDFEC;
+}
+.lists tbody th {
+    background-color: #1E000D;
+    color: white;
+}
+.lists tbody tr {
+    background-color: #FCBFD9;
+    font-weight: bold;
+}
+#welcome {
+    padding: 1em;
+    font-weight: bold;
+    text-align: center;
+}
+.error {
+    padding-left: 1em;
+    color: #f20069;
+    font-weight: bold;
+}
+.success {
+    padding-left: 1em;
+    color: green;
+    font-weight: bold;
+}
+#errorMessage {
+    padding-left: 1em;
+    color: #f20069;
+    font-weight: bold;
+}
+.hidden {
+    display: none;
+}
+input[name="list"] {
+    background: none;
+    border: none;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+input[name="deleteListButton"] {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    float: right;
+}
+input[name="user"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    text-align: center;
+}
+input[name="taskName"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+input[name="taskDate"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+textarea[name="taskDescription"] {
+    background: none;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+#loginForm input::placeholder {
+    font-family: Calibri;
+}
+#registerForm input::placeholder {
+    font-family: Calibri;
+}
+textarea[name="taskDescription"]::placeholder {
+    font-family: Calibri;
+    font-weight: bold;
+}
+#registerForm input {
+    width: 20%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+    text-align: left;
+}
+input#passwordInput {
+    width: 10%;
+}
+#strLog {
+    width: 10%;
+    display: inline-block;
+}
+#loginForm input {
+    width: 20%;
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+input[type="submit"] {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+}
+#lists > h2 {
+    font-family: Montserrat, Arial;
+}
+input[name="addListButton"] {
+    width: 236px;
+    margin-left: 1.5px;
+}
+label#fileToUploadLabel {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+}
+#uploadLabel {
+    width: 20%;
+    border: 0;
+    border: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+    text-align: left;
+    display: inline-block;
+    font-size: 0.8em;
+    cursor: pointer;
+    font-weight: bold;
+}
+input#submitPhoto {
+    color: #f20069;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    font-weight: bold;
+    background-color: #1E000D;
+    border: 0;
+    font-family: Calibri;
+    font-size: 1em;
+    width: 6.8em;
+}
+#listsTable {
+    width: 55%;
+}
+form[action="addList.php"] {
+    width: 50%;
+}
+form input[name="listName"] {
+    border: 0;
+    padding: 0;
+    margin: 1.5px;
+    margin-top: -1em;
+    width: 235px;
+    height: 20px;
+    background-color: #FCBFD9;
+}
+.task {
+    width: 174px;
+}
+.expDate {
+    width: 174px;
+}
+.tasks .task input {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: transparent;
+}
+.id {
+    display: none;
+}
+.delete {
+    text-align: center;
+}
+.delete a {
+    color: white;
+    background: #1E000D;
+    padding: 1px 6px;
+}
+.centerAlign {
+    text-align: center;
+}
+.buttonCursor {
+    cursor: pointer;
+}
+.arrowCursor {
+    cursor: default;
+}
+#listDisplay h2 {
+    text-transform: capitalize;
+    font-family: Montserrat, Arial;
+}
+#listDisplay {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}
+.form {
+    display: inline;
+}
+.status {
+    width: 80px;
+}
+div.descriptionDivNotFilled {
+    width: 220px;
+    max-width: 220px;
+}
+div.descriptionDiv {
+    width: 213px;
+    max-width: 220px;
+    height: 20px;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    /* Firefox 4 */
+
+    -webkit-transition: all 0.3s linear;
+    /* Safari and Chrome */
+
+    -o-transition: all 0.3s linear;
+    /* Opera */
+
+    -ms-transition: all 0.3s linear;
+    /* Explorer 10 */
+}
+div.descriptionDiv:Hover {
+    height: 60px;
+    max-width: 220px;
+    padding-left: 5px;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+div.taskDivNotFilled {
+    width: 220px;
+    max-width: 220px;
+}
+div.taskDiv {
+    width: 213px;
+    max-width: 220px;
+    height: 20px;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    /* Firefox 4 */
+
+    -webkit-transition: all 0.3s linear;
+    /* Safari and Chrome */
+
+    -o-transition: all 0.3s linear;
+    /* Opera */
+
+    -ms-transition: all 0.3s linear;
+    /* Explorer 10 */
+}
+div.taskDiv:Hover {
+    height: 60px;
+    max-width: 220px;
+    padding-left: 5px;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+input#taskNameid {
+    text-align: center;
+    width: 159px;
+    height: 23px;
+}
+input#taskExpDateInput {
+    text-align: center;
+    width: 159px;
+    height: 23px;
+}
+.verticalTop {
+    vertical-align: top;
+}
+.closeDate {
+    color: red;
+}
+.left_align {
+    float: left;
+}
+.editTask {
+    width: 5px;
+}
+section#editTask {
+    padding-left: 2em;
+}
+#addTaskID {
+    height: 32px;
+}
+.rightAlign {
+    float: ´right;
+}
