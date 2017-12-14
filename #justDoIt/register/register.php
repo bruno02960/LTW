@@ -21,7 +21,7 @@
             $PWHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $stmt->bindParam(':password', $PWHashed);
             $name = strip_tags($_POST['name']);
-            $stmt->bindParam(':name', $_POST['name']);
+            $stmt->bindParam(':name', $name);
             $location = strip_tags($_POST['location']);
             $stmt->bindParam(':location', $location);
             $birthday = strtotime(strip_tags($_POST['birthday']));
