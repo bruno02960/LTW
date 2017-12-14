@@ -20,8 +20,10 @@
             $stmt->bindParam(':username', $UserName);
             $PWHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $stmt->bindParam(':password', $PWHashed);
+            $name = strip_tags($_POST['name']);
             $stmt->bindParam(':name', $_POST['name']);
-            $stmt->bindParam(':location', $_POST['location']);
+            $location = strip_tags($_POST['location']);
+            $stmt->bindParam(':location', $location);
             $birthday = strtotime(strip_tags($_POST['birthday']));
             $stmt->bindParam(':birthday', $birthday);
             $date = strtotime("now");
