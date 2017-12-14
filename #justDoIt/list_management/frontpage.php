@@ -91,7 +91,10 @@
           $diffYear = 0;
           if($task['expiring']!=NULL)
           {
-            $data = date('d-m-Y', $task['expiring']);   
+            $data = date('d-m-Y', $task['expiring']);
+            $day = date('d', $task['expiring']);
+            $currentDay = date('d',time());
+            $diffDay = $day - $currentDay;
           }
 
           $title =  strip_tags($task['title']);
@@ -128,7 +131,7 @@
           else
             echo '<td><div class = "taskDivNotFilled">' . $task['title'] . '</div></td>';
 
-          if($task['expiring'] - time() <= 259200 && $task['completed'] == "false"):
+          if($task['expiring'] - time() <= 259200 && $diffDay < 3 && $task['completed'] == "false"):
             echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
           else:
             echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
