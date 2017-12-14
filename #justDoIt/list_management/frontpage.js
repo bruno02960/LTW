@@ -332,7 +332,6 @@ if (listTable != null) {
                             let currentYear = currentDate.getYear();
 
                             let diffData = (taskDate - currentDate);
-							console.log(diffData);
                             let diffDay = taskDateDay - currentDay;
                             let diffMonth = taskDateMonth - currentMonth;
                             let diffYear = taskDateYear - currentYear;
