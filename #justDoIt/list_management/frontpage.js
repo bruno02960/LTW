@@ -331,12 +331,13 @@ if (listTable != null) {
                             let currentMonth = currentDate.getMonth() + 1;
                             let currentYear = currentDate.getYear();
 
-                            let diffData = (currentDate.getTime() - (taskDate.getTime()));
-                            let diffDay = pad(taskDateDay, 2) - pad(currentDay, 2);
-                            let diffMonth = pad(taskDateMonth, 2) - pad(currentMonth, 2);
-                            let diffYear = pad(taskDateYear, 2) - pad(currentYear, 2);
+                            let diffData = (taskDate - currentDate);
+							console.log(diffData);
+                            let diffDay = taskDateDay - currentDay;
+                            let diffMonth = taskDateMonth - currentMonth;
+                            let diffYear = taskDateYear - currentYear;
 
-                            if (((diffYear < 0 || diffMonth < 0) || (diffYear == 0 && diffMonth == 0 && diffDay < 3)) && tasklist[i].completed != "true")
+                            if (diffData <= 259200000 && diffDay <= 2 && tasklist[i].completed != "true" || diffData <= 259200000 && tasklist[i].completed != "true")
                                 htmlString = htmlString + "\n" + '<td class="expDate closeDate verticalTop"><b>' + pad(taskDateDay, 2) + "-" + pad(taskDateMonth, 2) + "-" + taskDate.getFullYear() + '</td>';
                             else
                                 htmlString = htmlString + "\n" + '<td class="expDate verticalTop"><b>' + pad(taskDateDay, 2) + "-" + pad(taskDateMonth, 2) + "-" + taskDate.getFullYear() + '</td>';

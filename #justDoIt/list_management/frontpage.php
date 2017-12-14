@@ -131,7 +131,7 @@
           else
             echo '<td><div class = "taskDivNotFilled">' . $task['title'] . '</div></td>';
 
-          if($task['expiring'] - time() <= 259200 && $diffDay < 3 && $task['completed'] == "false"):
+          if($task['expiring'] - time() <= 259200  && $task['completed'] == "false" || $task['expiring'] - time() <= 259200 && $diffDay < 3 && $task['completed'] == "false"):
             echo '<td class="expDate closeDate verticalTop"> <b>' . $data . '</b> </td>';
           else:
             echo '<td class="expDate verticalTop"> <b>' . $data . '</b> </td>';
