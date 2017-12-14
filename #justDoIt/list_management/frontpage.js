@@ -59,7 +59,7 @@ function RequestAuthToken(tokenName, elementToChange, isHtml = true) {
         }
     };
 
-    xhttp.open("POST", "../main/requestsToken.php", true);
+    xhttp.open("POST", "../security/requestsToken.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("&tokenName=" + tokenName + "&AuthToken=" + token.value);
 }
