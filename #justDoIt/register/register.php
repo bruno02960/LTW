@@ -28,10 +28,10 @@
             $stmt->bindParam(':registerDate',  $date);
 
             if($_FILES["fileToUpload"]["name"] == null)
-                $PPicDirectory = '../profile/ProfilePictures/Default.PNG';
+                $PPicDirectory = '../profile/profilePictures/Default.PNG';
             else
             {
-                $PPicDirectory = '../profile/ProfilePictures/' . basename($_FILES["fileToUpload"]["name"]);
+                $PPicDirectory = '../profile/profilePictures/' . basename($_FILES["fileToUpload"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = pathinfo($PPicDirectory,PATHINFO_EXTENSION);
                 // Check if image file is a actual image or fake image
